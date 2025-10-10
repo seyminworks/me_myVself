@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VSELF — Virtual Self Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="page--detail">
+    <header class="site-header">
+      <div class="site-header__brand">
+        <a href="index.html" class="brand-link">
+          <span class="brand-mark">V</span>
+          <span class="brand-title">VSELF</span>
+        </a>
+      </div>
+      <nav class="site-header__nav">
+        <a href="index.html#grid">Virtual Selves</a>
+        <a href="index.html#collections">Collections</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <div class="site-header__actions">
+        <a href="#login" class="link">Log in</a>
+        <a href="#signup" class="button button--primary">Sign up</a>
+      </div>
+    </header>
+
+    <main class="page-content" id="detailRoot" aria-live="polite"></main>
+
+    <footer class="site-footer">
+      <div>
+        <h2>Explore more selves</h2>
+        <p>
+          Return to the index to discover additional personas, or follow the
+          narrative threads that resonate with you the most.
+        </p>
+        <a class="button button--secondary" href="index.html">Back to all selves</a>
+      </div>
+      <div>
+        <h2>Need a custom persona?</h2>
+        <p class="footnote">
+          Commission a bespoke conversational self tuned for your next project.
+        </p>
+        <a class="link" href="mailto:hello@vself.world">hello@vself.world</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/personas.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        renderPersonaDetail();
+      });
+    </script>
+  </body>
+</html>
