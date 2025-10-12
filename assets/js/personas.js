@@ -3,8 +3,50 @@
 // 예: https://www.youtube.com/watch?v=dQw4w9WgXcQ 에서 'dQw4w9WgXcQ' 부분
 const personas = [];
 
-// All 50 personas start as unreleased
-for (let i = 1; i <= 50; i++) {
+// First 3 personas - Released (for testing)
+const releasedPersonas = [
+    {
+        id: 1,
+        name: "Kim Minsu",
+        tag: "AI Researcher",
+        youtubeId: "dQw4w9WgXcQ",
+        released: true,
+        conversations: [
+            "I want to talk about the future of artificial intelligence. How will our lives change as technology advances?",
+            "I believe ethical AI development is truly important."
+        ],
+        keywords: ["AI", "Future", "Ethics", "Technology"]
+    },
+    {
+        id: 2,
+        name: "Park Jieun",
+        tag: "Digital Artist",
+        youtubeId: "dQw4w9WgXcQ",
+        released: true,
+        conversations: [
+            "We live in an era where the boundaries between art and technology are blurring.",
+            "The possibilities of expression through digital media are infinite."
+        ],
+        keywords: ["Art", "Digital", "Creation", "Expression"]
+    },
+    {
+        id: 3,
+        name: "Lee Junho",
+        tag: "Environmental Activist",
+        youtubeId: "dQw4w9WgXcQ",
+        released: true,
+        conversations: [
+            "I think about what we can do for the future of our planet.",
+            "Small actions can come together to create big changes."
+        ],
+        keywords: ["Environment", "Sustainability", "Action", "Change"]
+    }
+];
+
+personas.push(...releasedPersonas);
+
+// Remaining 47 personas - Not released
+for (let i = 4; i <= 50; i++) {
     personas.push({
         id: i,
         name: "****",
