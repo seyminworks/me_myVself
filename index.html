@@ -1,65 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Personas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="logo">Virtual Personas</div>
-        <nav>
-            <a href="#" onclick="showIndex(); return false;">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VSELF – 50 Virtual Selves</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="page--index">
+    <header class="site-header">
+      <div class="site-header__brand">
+        <span class="brand-mark">V</span>
+        <span class="brand-title">VSELF</span>
+      </div>
+      <nav class="site-header__nav">
+        <a href="#grid">Virtual Selves</a>
+        <a href="#collections">Collections</a>
+        <a href="#journal">Journal</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="site-header__actions">
+        <a href="#login" class="link">Log in</a>
+        <a href="#signup" class="button button--primary">Sign up</a>
+      </div>
     </header>
 
-    <!-- Index Page -->
-    <div id="indexPage" class="container">
-        <h1 class="page-title">Personas</h1>
-        <div class="section-title">50 Virtual Personas</div>
-        <div class="personas-grid" id="personasGrid"></div>
-    </div>
+    <main class="page-content">
+      <section class="hero">
+        <p class="eyebrow">THE VIRTUAL SELF PROJECT</p>
+        <h1>Meet 50 perspectives of you.</h1>
+        <p class="lede">
+          Explore conversations, visual identities, and evolving narratives from
+          fifty speculative versions of your digital self. Each profile is a
+          portal into a different mode of thinking, feeling, and creating.
+        </p>
+      </section>
 
-    <!-- Detail Page -->
-    <div id="detailPage" class="detail-page container">
-        <a href="#" class="back-button" onclick="showIndex(); return false;">
-            ← Back
-        </a>
-        <div class="detail-header">
-            <h1 class="detail-title" id="detailName"></h1>
-            <p class="detail-subtitle" id="detailTag"></p>
-        </div>
+      <section class="filters" id="collections">
+        <button class="filter-button is-active" type="button">All</button>
+        <button class="filter-button" type="button">Dreamscapes</button>
+        <button class="filter-button" type="button">Analysts</button>
+        <button class="filter-button" type="button">Storytellers</button>
+        <button class="filter-button" type="button">Muses</button>
+        <button class="filter-button" type="button">Advisors</button>
+      </section>
 
-        <!-- Video Embedding Section -->
-        <div class="detail-video-section">
-            <div class="video-embed-label">Featured Video</div>
-            <div class="video-section" id="videoSection"></div>
-        </div>
+      <section class="persona-grid" id="grid" aria-label="Virtual selves">
+        <div class="persona-grid__inner" id="personaGrid"></div>
+      </section>
+    </main>
 
-        <div class="detail-content">
-            <div class="main-content">
-                <div class="info-section">
-                    <h3>Conversation</h3>
-                    <div id="conversationContent"></div>
-                </div>
-            </div>
-            
-            <div class="sidebar">
-                <div class="info-section">
-                    <h3>Keywords</h3>
-                    <div class="keywords" id="keywordsContent"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="site-footer" id="about">
+      <div>
+        <h2>About the project</h2>
+        <p>
+          VSELF is an experiment in fragmented identity. Each persona balances
+          visual storytelling with conversational depth, inviting you to explore
+          how algorithms reinterpret your inner worlds.
+        </p>
+      </div>
+      <div>
+        <h2>Stay connected</h2>
+        <p class="footnote">
+          Receive updates when new personas and conversations are released.
+        </p>
+        <form class="footer-form">
+          <label for="email" class="sr-only">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" />
+          <button type="submit" class="button button--secondary">Notify me</button>
+        </form>
+      </div>
+    </footer>
 
     <script src="assets/js/personas.js"></script>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        renderPersonaGrid();
+      });
+    </script>
+  </body>
 </html>
