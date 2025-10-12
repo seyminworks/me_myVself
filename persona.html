@@ -6,56 +6,81 @@
     <title>VSELF — Virtual Self Detail</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
-  <body class="page--detail">
-    <header class="site-header">
-      <div class="site-header__brand">
-        <a href="index.html" class="brand-link">
-          <span class="brand-mark">V</span>
-          <span class="brand-title">VSELF</span>
-        </a>
-      </div>
-      <nav class="site-header__nav">
-        <a href="index.html#grid">Virtual Selves</a>
-        <a href="index.html#collections">Collections</a>
-        <a href="index.html#journal">Journal</a>
-        <a href="index.html#about">About</a>
+  <body>
+    <header>
+      <div class="logo">Virtual Personas</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
       </nav>
-      <div class="site-header__actions">
-        <a href="#login" class="link">Log in</a>
-        <a href="#signup" class="button button--primary">Sign up</a>
-      </div>
     </header>
 
-    <main class="page-content" id="detailRoot" aria-live="polite"></main>
-
-    <footer class="site-footer">
-      <div>
-        <h2>Explore more selves</h2>
-        <p>
-          Return to the index to discover additional personas, or follow the
-          narrative threads that resonate with you the most.
-        </p>
-        <a class="button button--secondary" href="index.html">Back to all selves</a>
+    <div class="container">
+      <a href="index.html" class="back-button">
+        ← Back
+      </a>
+      <div class="detail-header">
+        <h1 class="detail-title" id="detailName">Persona Name</h1>
+        <p class="detail-subtitle" id="detailTag">Persona Tag</p>
       </div>
-      <div>
-        <h2>Need a custom persona?</h2>
-        <p class="footnote">
-          Commission a bespoke conversational self tuned for your next project.
-        </p>
-        <a class="link" href="mailto:hello@vself.world">hello@vself.world</a>
+      <div class="detail-content">
+        <div class="video-section">
+          [Video Area]
+        </div>
+        <div class="info-section">
+          <h3>Conversation</h3>
+          <div id="conversationContent"></div>
+          
+          <h3>Keywords</h3>
+          <div class="keywords" id="keywordsContent"></div>
+        </div>
       </div>
-    </footer>
+    </div>
 
-    <script src="assets/js/personas.js"></script>
     <script>
+      // URL에서 ID 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const personaId = urlParams.get('id') || 1;
+
+      // Sample data
+      const personas = [];
+      
+      for (let i = 1; i <= 50; i++) {
+        personas.push({
+          id: i,
+          name: "****",
+          tag: "Coming Soon",
+          youtubeId: null,
+          released: true,
+          conversations: [
+            "This persona will be revealed soon.",
+            "Stay tuned for updates."
+          ],
+          keywords: ["****", "****", "****"]
+        });
+      }
+
+      // 현재 페르소나 찾기
+      const currentPersona = personas.find(p => p.id == personaId) || personas[0];
+
+      // 페이지 로드 시 데이터 표시
       document.addEventListener("DOMContentLoaded", () => {
-        renderPersonaDetail();
+        document.getElementById('detailName').textContent = currentPersona.name;
+        document.getElementById('detailTag').textContent = currentPersona.tag;
+
+        const convContent = document.getElementById('conversationContent');
+        convContent.innerHTML = currentPersona.conversations
+          .map(conv => `<div class="conversation-box">${conv}</div>`)
+          .join('');
+
+        const keywordsContent = document.getElementById('keywordsContent');
+        keywordsContent.innerHTML = currentPersona.keywords
+          .map(keyword => `<span class="keyword-tag">${keyword}</span>`)
+          .join('');
       });
     </script>
   </body>
