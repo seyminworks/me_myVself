@@ -111,36 +111,8 @@ const videoEmbeds = [
   "https://www.youtube.com/embed/ScMzIvxBSi4"
 ];
 
-// Released personas (first 3 for testing)
-const releasedIds = [1, 2, 3];
-
 function createPersona(index) {
   const id = index + 1;
-  const isReleased = releasedIds.includes(id);
-  
-  if (!isReleased) {
-    return {
-      id,
-      slug: `virtual-self-${id}`,
-      name: "****",
-      role: "Coming Soon",
-      focus: "TBA",
-      keywords: ["****", "****", "****"],
-      narrative: {
-        prompt: "",
-        focusLine: "",
-        reminderLine: "",
-        closingLine: ""
-      },
-      videoUrl: null,
-      tagline: "This persona is coming soon.",
-      description: "Stay tuned for this virtual self to be revealed.",
-      thumbnail: `https://dummyimage.com/480x360/e4e9f2/999999.png&text=Coming+Soon`,
-      conversation: [],
-      released: false
-    };
-  }
-
   const role = roles[index % roles.length];
   const focus = focuses[index % focuses.length];
   const keywords = keywordsPool[index % keywordsPool.length];
@@ -166,8 +138,7 @@ function createPersona(index) {
       { speaker: "You", text: "What should I keep in mind as we go?" },
       { speaker: name, text: narrative.reminderLine },
       { speaker: name, text: narrative.closingLine }
-    ],
-    released: true
+    ]
   };
 }
 
@@ -179,12 +150,8 @@ function renderPersonaGrid() {
 
   const cards = personas
     .map((persona) => {
-      const disabledClass = !persona.released ? " persona-card--disabled" : "";
-      const href = persona.released ? `persona.html?id=${persona.id}` : "#";
-      const onClick = !persona.released ? ' onclick="return false;"' : "";
-      
       return `
-        <a class="persona-card${disabledClass}" href="${href}"${onClick}>
+        <a class="persona-card" href="persona.html?id=${persona.id}">
           <div class="persona-card__thumb">
             <img src="${persona.thumbnail}" alt="${persona.name} thumbnail" loading="lazy" />
           </div>
@@ -216,7 +183,7 @@ function renderPersonaDetail() {
     persona = personas.find((item) => item.slug === slug);
   }
 
-  if (!persona || !persona.released) {
+  if (!persona) {
     root.innerHTML = `
       <section class="detail-hero">
         <p class="eyebrow">VIRTUAL SELF NOT FOUND</p>
