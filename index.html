@@ -53,15 +53,32 @@
 
     <script>
       // Sample data
-      const personas = [];
+      const personas = [
+        // 첫 번째 페르소나 - @editor_kab (실제 데이터)
+        {
+          id: 1,
+          name: "@editor_kab",
+          tag: "기록하는 관찰자",
+          youtubeId: null,
+          released: true,
+          link: "personas/@editor_kab/persona.html",
+          conversations: [
+            "사색적, 정중, 서정적인 톤으로 세상을 관찰합니다.",
+            "건축, 디자인, 문화예술을 통해 시각적 세계를 구축합니다."
+          ],
+          keywords: ["관찰자", "사색적", "건축", "문화예술", "서정적"]
+        }
+      ];
       
-      for (let i = 1; i <= 50; i++) {
+      // 나머지 49개 페르소나 (Coming Soon)
+      for (let i = 2; i <= 50; i++) {
         personas.push({
           id: i,
           name: "****",
           tag: "Coming Soon",
           youtubeId: null,
-          released: true,
+          released: false,
+          link: null,
           conversations: [
             "This persona will be revealed soon.",
             "Stay tuned for updates."
@@ -72,33 +89,36 @@
 
       // 그리드 생성
       const grid = document.getElementById('personasGrid');
-      personas.forEach(persona => {
+      personas.forEach((persona, index) => {
         const card = document.createElement('a');
         card.className = 'persona-card';
-        card.href = '#';
-        card.onclick = (e) => {
-          e.preventDefault();
-          showDetail(persona.id);
-        };
+        
+        // 첫 번째 페르소나는 실제 링크, 나머지는 비활성화
+        if (persona.link) {
+          card.href = persona.link;
+        } else {
+          card.href = '#';
+          card.onclick = (e) => {
+            e.preventDefault();
+          };
+          card.style.cursor = 'default';
+        }
+        
+        // 모든 페르소나 투명도 100%
+        card.style.opacity = '1.0';
+        
+        // 첫 번째 페르소나는 특별한 색상, 나머지는 랜덤
+        const bgColor = index === 0 ? '2c2c2c' : Math.floor(Math.random()*16777215).toString(16);
         
         card.innerHTML = `
           <div class="persona-image">
-            <img src="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23${Math.floor(Math.random()*16777215).toString(16)}'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='24' font-family='Roboto Mono'%3E${persona.name}%3C/text%3E%3C/svg%3E" alt="${persona.name}">
+            <img src="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23${bgColor}'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='24' font-family='Roboto Mono'%3E${persona.name}%3C/text%3E%3C/svg%3E" alt="${persona.name}">
           </div>
           <div class="persona-name">${persona.name}</div>
           <div class="persona-tag">${persona.tag}</div>
         `;
         grid.appendChild(card);
       });
-
-      // 상세 페이지 표시
-      function showDetail(id) {
-        const persona = personas.find(p => p.id === id);
-        if (!persona) return;
-
-        // 상세 페이지로 이동
-        window.location.href = `persona.html?id=${id}`;
-      }
 
       // 인덱스 페이지로 돌아가기
       function showIndex() {
