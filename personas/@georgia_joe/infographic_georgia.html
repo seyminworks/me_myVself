@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@georgia_joe 페르소나 분석 리포트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .analysis-section {
+            margin-bottom: 80px;
+        }
+
+        .analysis-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .analysis-title {
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .analysis-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .three-selves-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .self-card {
+            border: 1px solid #e0e0e0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .self-card-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .self-card-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .self-section {
+            margin-bottom: 25px;
+        }
+
+        .self-section-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .self-section-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .self-section-list li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .self-section-list li:before {
+            content: "·";
+            position: absolute;
+            left: 5px;
+            font-weight: bold;
+        }
+
+        .self-section-list li strong {
+            color: #000;
+        }
+
+        .evidence-box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-top: auto;
+            border-top: 1px solid #e0e0e0;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .evidence-box p {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .evidence-quote {
+            color: #666;
+            font-style: italic;
+            padding-left: 15px;
+            border-left: 2px solid #ccc;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .large-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            height: 500px;
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .info-box-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .info-box-value {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .info-box-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .strengths-weaknesses-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .sw-card {
+            border: 1px solid #e0e0e0;
+            padding: 40px;
+        }
+
+        .sw-card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .sw-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sw-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .sw-icon {
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .sw-content h4 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .sw-content p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 60px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .analysis-title {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 30px 20px;
+            }
+
+            .three-selves-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .strengths-weaknesses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .large-chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Virtual Personas</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back to Persona</a>
+        
+        <div class="analysis-header">
+            <h1 class="analysis-title">@georgia_joe 페르소나 분석 리포트</h1>
+            <p class="analysis-description">럭셔리 마케팅 전문가의 가상자아 탐구</p>
+        </div>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">6D 전략적 가치 평가 지수</h2>
+                <p class="analysis-description">
+                    @georgia_joe 페르소나의 가치는 6D 모델을 통해 분석됩니다. 전문적 권위(DAIC)와 고도화된 큐레이션(HCEK)에 강점이 집중되어 있으며, 이는 럭셔리 마케팅 분야의 지식 기반 권위자로서 최적화되어 있음을 의미합니다.
+                </p>
+                <div class="chart-container">
+                    <canvas id="personaTraitChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">데이터 기반 정량 분석</h2>
+                <div class="three-selves-grid">
+                    <div class="self-card">
+                        <h3 class="self-card-title">시각적 자아 (Visual Self)</h3>
+                        <p class="self-card-subtitle">럭셔리 브랜드의 고급스러운 시각적 표현을 통해 프리미엄 이미지를 구축합니다.</p>
+                        <div class="self-section">
+                            <h4 class="self-section-title">핵심 특성</h4>
+                            <ul class="self-section-list">
+                                <li><strong>고급스러운 디자인:</strong> 최상급 브랜드의 시각적 언어를 구사</li>
+                                <li><strong>프리미엄 컬러 팔레트:</strong> 금색, 검은색, 크림색 등 럭셔리 컬러 활용</li>
+                                <li><strong>정교한 타이포그래피:</strong> 세련된 폰트와 레이아웃으로 브랜드 가치 전달</li>
+                            </ul>
+                        </div>
+                        <div class="evidence-box">
+                            <p>근거 자료</p>
+                            <div class="evidence-quote">
+                                "럭셔리 브랜드의 시각적 정체성을 디지털 공간에서 구현하는 전문성"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="self-card">
+                        <h3 class="self-card-title">개념적 자아 (Conceptual Self)</h3>
+                        <p class="self-card-subtitle">마케팅 전략의 철학적 기반을 바탕으로 브랜드 가치를 재정의합니다.</p>
+                        <div class="self-section">
+                            <h4 class="self-section-title">핵심 특성</h4>
+                            <ul class="self-section-list">
+                                <li><strong>전략적 사고:</strong> 브랜드의 장기적 비전을 수립하는 능력</li>
+                                <li><strong>시장 분석:</strong> 럭셔리 시장의 트렌드와 소비자 심리 파악</li>
+                                <li><strong>가치 창조:</strong> 브랜드의 고유한 가치를 시장에 전달</li>
+                            </ul>
+                        </div>
+                        <div class="evidence-box">
+                            <p>근거 자료</p>
+                            <div class="evidence-quote">
+                                "20년 경력의 기관적 신뢰를 디지털 채널로 전환한 전문성"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="self-card">
+                        <h3 class="self-card-title">사회적 자아 (Social Self)</h3>
+                        <p class="self-card-subtitle">VIP 고객층과의 관계를 통해 프리미엄 네트워크를 구축합니다.</p>
+                        <div class="self-section">
+                            <h4 class="self-section-title">핵심 특성</h4>
+                            <ul class="self-section-list">
+                                <li><strong>VIP 관계 관리:</strong> 고급 고객층과의 신뢰 관계 구축</li>
+                                <li><strong>네트워킹:</strong> 럭셔리 업계의 핵심 인물들과의 연결</li>
+                                <li><strong>이벤트 기획:</strong> 연간 30회 이상의 VIP 행사 기획/실행</li>
+                            </ul>
+                        </div>
+                        <div class="evidence-box">
+                            <p>근거 자료</p>
+                            <div class="evidence-quote">
+                                "파트너사와의 수평적, 생태계적 관계를 가장 주요한 자산으로 간주"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">핵심 역량 분석</h2>
+                <div class="two-column-layout">
+                    <div class="info-box">
+                        <div class="info-box-title">전문적 권위</div>
+                        <div class="info-box-value">9.5/10</div>
+                        <div class="info-box-desc">20년 경력의 기관적 신뢰</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-box-title">경험 큐레이션</div>
+                        <div class="info-box-value">9.0/10</div>
+                        <div class="info-box-desc">VIP 세그먼트 만족도</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">강점 및 고려사항</h2>
+                <div class="strengths-weaknesses-grid">
+                    <div class="sw-card">
+                        <h3 class="sw-card-title">강점</h3>
+                        <ul class="sw-list">
+                            <li>
+                                <span class="sw-icon">✓</span>
+                                <div class="sw-content">
+                                    <h4>전문적 권위</h4>
+                                    <p>20년 경력의 기관적 신뢰를 디지털 채널로 전환하여 독보적인 권위를 구축</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="sw-icon">✓</span>
+                                <div class="sw-content">
+                                    <h4>고도화된 큐레이션</h4>
+                                    <p>VIP 세그먼트를 만족시키는 아트, 미식, 리빙 분야의 치열한 학습 기반 큐레이션 능력</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sw-card">
+                        <h3 class="sw-card-title">고려사항</h3>
+                        <ul class="sw-list">
+                            <li>
+                                <span class="sw-icon">⚠</span>
+                                <div class="sw-content">
+                                    <h4>시장 의존성</h4>
+                                    <p>럭셔리 시장의 변동성에 대한 의존도가 높을 수 있음</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="sw-icon">⚠</span>
+                                <div class="sw-content">
+                                    <h4>고객층 제한</h4>
+                                    <p>VIP 고객층에 특화된 서비스로 인한 시장 확장의 한계</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 공통 툴팁 콜백 함수
+        const commonTooltipCallback = {
+            title: function(context) {
+                return context[0].label;
+            },
+            label: function(context) {
+                return context.dataset.label + ': ' + context.parsed.y + '%';
+            }
+        };
+
+        // 6D 전략적 가치 평가 차트 생성
+        const createPersonaTraitChart = () => {
+            const ctx = document.getElementById('personaTraitChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['전문적 권위', '경험 큐레이션', '관계 자본', '운영 우수성', '브랜드 가치', '시장 영향력'],
+                    datasets: [{
+                        label: '6D 전략적 가치',
+                        data: [9.5, 9.0, 9.0, 8.8, 8.5, 8.2],
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        borderColor: 'rgba(0, 0, 0, 0.8)',
+                        pointBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(0, 0, 0, 0.8)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            angleLines: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: { 
+                                font: { 
+                                    family: 'Roboto Mono',
+                                    size: 13
+                                },
+                                color: '#000000'
+                            },
+                            ticks: {
+                                stepSize: 2,
+                                font: {
+                                    family: 'Roboto Mono',
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: commonTooltipCallback }
+                    }
+                }
+            });
+        };
+
+        // 차트 초기화
+        createPersonaTraitChart();
+    </script>
+
+    <footer>
+        <p>© 2024 Virtual Personas. All rights reserved.</p>
+    </footer>
+</body>
+</html>
