@@ -16,6 +16,7 @@
         <a href="#" onclick="showIndex(); return false;">Home</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
+        <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
       </nav>
     </header>
 
@@ -27,7 +28,7 @@
       <div class="main-video-section">
         <div class="video-container">
           <iframe 
-            src="https://www.youtube.com/embed/gH7coSQH2Kw" 
+            src="https://www.youtube.com/embed/_LIRiftQlzU" 
             title="Main Video" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -54,19 +55,19 @@
     <script>
       // Sample data
       const personas = [
-        // 첫 번째 페르소나 - @editor_kab (실제 데이터)
+        // 첫 번째 페르소나 - @sey.min (실제 데이터)
         {
           id: 1,
-          name: "@editor_kab",
-          tag: "기록하는 관찰자",
+          name: "@sey.min",
+          tag: "데이터 기반 기술-예술 융합가",
           youtubeId: null,
           released: true,
-          link: "personas/@editor_kab/persona.html",
+          link: "personas/@sey.min/persona.html",
           conversations: [
-            "사색적, 정중, 서정적인 톤으로 세상을 관찰합니다.",
-            "건축, 디자인, 문화예술을 통해 시각적 세계를 구축합니다."
+            "AI 기술과 예술을 융합하여 독창적인 시각적 결과물을 창조합니다.",
+            "데이터를 예술적 표현의 재료로 활용하며 기술과 인문학의 경계를 탐구합니다."
           ],
-          keywords: ["관찰자", "사색적", "건축", "문화예술", "서정적"]
+          keywords: ["AI아트", "데이터시각화", "기술융합", "인문학적성찰", "창작자"]
         }
       ];
       
@@ -110,13 +111,147 @@
         // 첫 번째 페르소나는 특별한 색상, 나머지는 랜덤
         const bgColor = index === 0 ? '2c2c2c' : Math.floor(Math.random()*16777215).toString(16);
         
-        card.innerHTML = `
-          <div class="persona-image">
-            <img src="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23${bgColor}'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='24' font-family='Roboto Mono'%3E${persona.name}%3C/text%3E%3C/svg%3E" alt="${persona.name}">
-          </div>
-          <div class="persona-name">${persona.name}</div>
-          <div class="persona-tag">${persona.tag}</div>
-        `;
+        // 1번: 컬러박스 + 마우스 오버 시 GIF, 2번: YouTube 영상, 나머지: 컬러박스
+        if (index === 0) {
+          // 1번 썸네일: 컬러박스 + 마우스 오버 시 GIF
+          const randomColor = Math.floor(Math.random()*16777215).toString(16);
+          card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${randomColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-gif" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@sey_main.gif" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+          
+          // 마우스 오버 이벤트 추가
+          const personaImage = card.querySelector('.persona-image');
+          const hoverGif = card.querySelector('.hover-gif');
+          const defaultContent = card.querySelector('.default-content');
+          
+          personaImage.addEventListener('mouseenter', function() {
+            hoverGif.style.opacity = '1';
+            defaultContent.style.opacity = '0';
+          });
+          
+          personaImage.addEventListener('mouseleave', function() {
+            hoverGif.style.opacity = '0';
+            defaultContent.style.opacity = '1';
+          });
+        } else if (index === 1) {
+          // 2번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <iframe
+                  src="https://www.youtube.com/embed/Q5WXqzGtZ7M"
+                  title="YouTube video player"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+          
+          // 마우스 오버 이벤트 추가
+          const personaImage = card.querySelector('.persona-image');
+          const hoverVideo = card.querySelector('.hover-video');
+          const defaultContent = card.querySelector('.default-content');
+          
+          personaImage.addEventListener('mouseenter', function() {
+            hoverVideo.style.opacity = '1';
+            defaultContent.style.opacity = '0';
+          });
+          
+          personaImage.addEventListener('mouseleave', function() {
+            hoverVideo.style.opacity = '0';
+            defaultContent.style.opacity = '1';
+          });
+        } else if (index === 2) {
+          // 3번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <iframe
+                  src="https://www.youtube.com/embed/op59t7NRvqg"
+                  title="YouTube video player"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+          
+          // 마우스 오버 이벤트 추가
+          const personaImage = card.querySelector('.persona-image');
+          const hoverVideo = card.querySelector('.hover-video');
+          const defaultContent = card.querySelector('.default-content');
+          
+          personaImage.addEventListener('mouseenter', function() {
+            hoverVideo.style.opacity = '1';
+            defaultContent.style.opacity = '0';
+          });
+          
+          personaImage.addEventListener('mouseleave', function() {
+            hoverVideo.style.opacity = '0';
+            defaultContent.style.opacity = '1';
+          });
+        } else if (index === 3) {
+          // 4번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <iframe
+                  src="https://www.youtube.com/embed/aYMjFpXck7g"
+                  title="YouTube video player"
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+          
+          // 마우스 오버 이벤트 추가
+          const personaImage = card.querySelector('.persona-image');
+          const hoverVideo = card.querySelector('.hover-video');
+          const defaultContent = card.querySelector('.default-content');
+          
+          personaImage.addEventListener('mouseenter', function() {
+            hoverVideo.style.opacity = '1';
+            defaultContent.style.opacity = '0';
+          });
+          
+          personaImage.addEventListener('mouseleave', function() {
+            hoverVideo.style.opacity = '0';
+            defaultContent.style.opacity = '1';
+          });
+        } else {
+          // 나머지: 기존 컬러박스
+          card.innerHTML = `
+            <div class="persona-image">
+              <img src="data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='300' fill='%23${bgColor}'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='24' font-family='Roboto Mono'%3E${persona.name}%3C/text%3E%3C/svg%3E" alt="${persona.name}">
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+        }
         grid.appendChild(card);
       });
 
