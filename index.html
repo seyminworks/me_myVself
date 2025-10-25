@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <div class="logo">생성된 자아들 / Generated Selves</div>
+      <a href="index.html" style="text-decoration: none; color: inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
       <nav>
         <a href="#" onclick="showIndex(); return false;">Home</a>
         <a href="#">About</a>
@@ -206,39 +206,14 @@ This site documents the first encounters and conversations between invited parti
             <div class="persona-tag">${persona.tag}</div>
           `;
         } else if (index === 3) {
-          // 4번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          // 4번 썸네일: 기본 컬러박스
           card.innerHTML = `
             <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
-              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                <iframe
-                  src="https://www.youtube.com/embed/aYMjFpXck7g"
-                  title="YouTube video player"
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                ></iframe>
-              </div>
               <div class="default-content">${persona.name}</div>
             </div>
             <div class="persona-name">${persona.name}</div>
             <div class="persona-tag">${persona.tag}</div>
           `;
-          
-          // 마우스 오버 이벤트 추가
-          const personaImage = card.querySelector('.persona-image');
-          const hoverVideo = card.querySelector('.hover-video');
-          const defaultContent = card.querySelector('.default-content');
-          
-          personaImage.addEventListener('mouseenter', function() {
-            hoverVideo.style.opacity = '1';
-            defaultContent.style.opacity = '0';
-          });
-          
-          personaImage.addEventListener('mouseleave', function() {
-            hoverVideo.style.opacity = '0';
-            defaultContent.style.opacity = '1';
-          });
         } else {
           // 나머지: 기존 컬러박스
           card.innerHTML = `
