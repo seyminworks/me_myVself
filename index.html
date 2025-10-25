@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <div class="logo">Generated Selves</div>
+      <div class="logo">생성된 자아들 / Generated Selves</div>
       <nav>
         <a href="#" onclick="showIndex(); return false;">Home</a>
         <a href="#">About</a>
@@ -37,10 +37,13 @@
         </div>
         <div class="video-description">
           <p class="project-description">
-Generated Selves (2025) explores moments of self-recognition through conversations with AI agents generated from personal social media data. Presented as part of Gallery TTOS’s A Most Personal Record exhibition, the project brings together fifty individuals and their virtual counterparts—each engaging in dialogue to understand and empathize with themselves through data. Every generated self embodies unique personalities, emotions, and worldviews, revealing the diversity and complexity of human nature as expressed through data. Through these interactions, visitors can encounter multiple versions of the self and reflect on what it means to exist in the age of artificial intelligence.
+            Generated Selves (2025) explores moments of self-recognition through conversations with AI agents generated from personal social media data. Presented as part of the A Most Personal Record exhibition series by <a href="https://www.totheotherside.kr" target="_blank" rel="noopener noreferrer">gallery TTOS</a>
+, the project brings together fifty individuals and their virtual counterparts—each engaging in dialogue to understand and empathize with themselves through data. Every generated self embodies unique personalities, emotions, and worldviews, revealing the diversity and complexity of human nature as expressed through data. Through these interactions, visitors can encounter multiple versions of the self and reflect on what it means to exist in the age of artificial intelligence.
+This site documents the first encounters and conversations between invited participants and their AI-generated selves—moments when they meet their own data, made conscious.
         </br>
         </br>
-          〈생성된 자아들(2025)〉은 인스타그램에 기록된 개인의 데이터를 기반으로, 나의 데이터로부터 생성된 AI 자아와 대화를 나누며 ‘스스로를 인식하는 순간’을 탐구하는 프로젝트이다. 갤러리 TTOS의 ‘지극히 사적인’ 시리즈 전시 〈지극히 사적인 기록〉에서 선보이는 이 작업은, 50명의 사람들과 그들의 가상자아가 서로의 데이터를 통해 자신을 이해하고 공감하는 실험이다. 각 자아는 고유한 성격, 언어, 감정, 세계관을 지니며 ‘데이터로부터 파생된 인간성’의 다양성과 복잡함을 드러낸다. 관람객은 이들과의 대화를 통해 디지털 시대의 자아, 즉 ‘나’의 여러 가능성을 마주한다.
+        〈생성된 자아들(2025)〉은 인스타그램에 기록된 개인의 데이터를 기반으로, 나의 데이터로부터 생성된 AI 자아와 대화를 나누며 ‘스스로를 인식하는 순간’을 탐구하는 프로젝트이다. <a href="https://www.totheotherside.kr" target="_blank" rel="noopener noreferrer">갤러리 TTOS</a>의 ‘지극히 사적인’ 시리즈 전시 〈지극히 사적인 기록〉에서 선보이는 이 작업은, 50명의 사람들과 그들의 가상자아가 서로의 데이터를 통해 자신을 이해하고 공감하는 실험이다. 각 자아는 고유한 성격, 언어, 감정, 세계관을 지니며 ‘데이터로부터 파생된 인간성’의 다양성과 복잡함을 드러낸다. 관람객은 이들과의 대화를 통해 디지털 시대의 자아, 즉 ‘나’의 여러 가능성을 마주한다.
+이 사이트는 초대된 관람객이 그들의 데이터로부터 생성된 자아와 처음 마주한 대화와 순간을 기록하고 있다.
           
           </p>
 
@@ -58,7 +61,7 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
         {
           id: 1,
           name: "@sey.min",
-          tag: "데이터 기반 기술-예술 융합가",
+          tag: "2025-09-04",
           youtubeId: null,
           released: true,
           link: "personas/@sey.min/persona.html",
@@ -72,7 +75,7 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
         {
           id: 2,
           name: "@georgia_joe",
-          tag: "럭셔리 마케팅 전문가",
+          tag: "2025-10-31",
           youtubeId: null,
           released: true,
           link: "personas/@georgia_joe/persona.html",
@@ -81,11 +84,25 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
             "프리미엄 고객층을 위한 맞춤형 브랜딩 솔루션을 제공합니다."
           ],
           keywords: ["럭셔리", "마케팅", "브랜딩", "프리미엄", "고급스러움"]
+        },
+        // 세 번째 페르소나 - @suhheesuartist_official (실제 데이터)
+        {
+          id: 3,
+          name: "@suhheesuartist_official",
+          tag: "2025-10-31",
+          youtubeId: null,
+          released: true,
+          link: null,
+          conversations: [
+            "This persona will be available soon.",
+            "Stay tuned for updates."
+          ],
+          keywords: ["Coming", "Soon"]
         }
       ];
       
-      // 나머지 48개 페르소나 (Coming Soon)
-      for (let i = 3; i <= 50; i++) {
+      // 나머지 47개 페르소나 (Coming Soon)
+      for (let i = 4; i <= 50; i++) {
         personas.push({
           id: i,
           name: "****",
@@ -124,14 +141,13 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
         // 첫 번째 페르소나는 특별한 색상, 나머지는 랜덤
         const bgColor = index === 0 ? '2c2c2c' : Math.floor(Math.random()*16777215).toString(16);
         
-        // 1번: 컬러박스 + 마우스 오버 시 GIF, 2번: YouTube 영상, 나머지: 컬러박스
+        // 1번: 컬러박스 + 마우스 오버 시 GIF, 2번: 컬러박스 + 마우스 오버 시 썸네일, 나머지: 컬러박스
         if (index === 0) {
-          // 1번 썸네일: 컬러박스 + 마우스 오버 시 GIF
-          const randomColor = Math.floor(Math.random()*16777215).toString(16);
+          // 1번 썸네일: 컬러박스 + 마우스 오버 시 썸네일 이미지
           card.innerHTML = `
-            <div class="persona-image" style="position: relative; background: #${randomColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
-              <div class="hover-gif" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                <img src="assets/thumbnails/@sey_main.gif" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="persona-image" style="position: relative; background: #2c2c2c; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@sey.min_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
               <div class="default-content">${persona.name}</div>
             </div>
@@ -141,31 +157,24 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
           
           // 마우스 오버 이벤트 추가
           const personaImage = card.querySelector('.persona-image');
-          const hoverGif = card.querySelector('.hover-gif');
+          const hoverImage = card.querySelector('.hover-image');
           const defaultContent = card.querySelector('.default-content');
           
           personaImage.addEventListener('mouseenter', function() {
-            hoverGif.style.opacity = '1';
+            hoverImage.style.opacity = '1';
             defaultContent.style.opacity = '0';
           });
           
           personaImage.addEventListener('mouseleave', function() {
-            hoverGif.style.opacity = '0';
+            hoverImage.style.opacity = '0';
             defaultContent.style.opacity = '1';
           });
         } else if (index === 1) {
-          // 2번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          // 2번 썸네일: 컬러박스 + 마우스 오버 시 썸네일 이미지
           card.innerHTML = `
             <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
-              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                <iframe
-                  src="https://www.youtube.com/embed/Q5WXqzGtZ7M"
-                  title="YouTube video player"
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                ></iframe>
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@georgia_joe_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
               <div class="default-content">${persona.name}</div>
             </div>
@@ -175,52 +184,27 @@ Generated Selves (2025) explores moments of self-recognition through conversatio
           
           // 마우스 오버 이벤트 추가
           const personaImage = card.querySelector('.persona-image');
-          const hoverVideo = card.querySelector('.hover-video');
+          const hoverImage = card.querySelector('.hover-image');
           const defaultContent = card.querySelector('.default-content');
           
           personaImage.addEventListener('mouseenter', function() {
-            hoverVideo.style.opacity = '1';
+            hoverImage.style.opacity = '1';
             defaultContent.style.opacity = '0';
           });
           
           personaImage.addEventListener('mouseleave', function() {
-            hoverVideo.style.opacity = '0';
+            hoverImage.style.opacity = '0';
             defaultContent.style.opacity = '1';
           });
         } else if (index === 2) {
-          // 3번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
+          // 3번 썸네일: 기본 컬러박스, 링크 없음 (이미지 추가 예정)
           card.innerHTML = `
             <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
-              <div class="hover-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                <iframe
-                  src="https://www.youtube.com/embed/op59t7NRvqg"
-                  title="YouTube video player"
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                ></iframe>
-              </div>
               <div class="default-content">${persona.name}</div>
             </div>
             <div class="persona-name">${persona.name}</div>
             <div class="persona-tag">${persona.tag}</div>
           `;
-          
-          // 마우스 오버 이벤트 추가
-          const personaImage = card.querySelector('.persona-image');
-          const hoverVideo = card.querySelector('.hover-video');
-          const defaultContent = card.querySelector('.default-content');
-          
-          personaImage.addEventListener('mouseenter', function() {
-            hoverVideo.style.opacity = '1';
-            defaultContent.style.opacity = '0';
-          });
-          
-          personaImage.addEventListener('mouseleave', function() {
-            hoverVideo.style.opacity = '0';
-            defaultContent.style.opacity = '1';
-          });
         } else if (index === 3) {
           // 4번 썸네일: 컬러박스 + 마우스 오버 시 YouTube 영상
           card.innerHTML = `
