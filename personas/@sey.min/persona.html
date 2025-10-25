@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="stylesheet" href="persona.css" />
     <script src="elevenlabs-config.js"></script>
+    <!-- ElevenLabs ConvAI Widget Script -->
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
   </head>
   <body>
     <header>
@@ -105,27 +107,11 @@
             <!-- 에이전트 섹션 (오른쪽) -->
             <div class="agent-section">
               <h3>대화형 에이전트 (AI Agent)</h3>
-              <div class="agent-container">
-                <div class="agent-info">
-                  <div class="agent-avatar">
-                    <div class="avatar-placeholder">@sey.min</div>
-                  </div>
-                  <div class="agent-details">
-                    <h4>Virtual @sey.min</h4>
-                    <p>실시간 대화형 AI 에이전트</p>
-                    <div class="agent-status" id="agentStatus">대기 중</div>
-                  </div>
-                </div>
-                <div class="agent-controls">
-                  <button id="loadAgentBtn" class="load-btn">에이전트 불러오기</button>
-                  <button id="startConversationBtn" class="start-btn" style="display: none;">대화 시작</button>
-                  <button id="stopConversationBtn" class="stop-btn" style="display: none;">대화 종료</button>
-                </div>
-                <div class="agent-response" id="agentResponse" style="display: none;">
-                  <div class="response-content">
-                    <p>에이전트 응답이 여기에 표시됩니다...</p>
-                  </div>
-                </div>
+              <!-- ElevenLabs ConvAI Widget -->
+              <div id="widgetContainer" class="widget-container">
+                <elevenlabs-convai 
+                  agent-id="agent_1901k42pgdadfzhbp6w88r22tpq3"
+                ></elevenlabs-convai>
               </div>
             </div>
           </div>
@@ -210,7 +196,6 @@
       // 전역 변수
       let currentAudioUrl = null;
       let currentTranscript = null;
-      let agentData = null;
       
       // DOM 요소들
       const loadConversationBtn = document.getElementById('loadConversationBtn');
@@ -222,24 +207,41 @@
       const transcriptContent = document.getElementById('transcriptContent');
       const transcriptText = document.getElementById('transcriptText');
       const transcriptLoading = document.getElementById('transcriptLoading');
+      const widgetContainer = document.getElementById('widgetContainer');
       
-      // 에이전트 관련 DOM 요소들
-      const loadAgentBtn = document.getElementById('loadAgentBtn');
-      const startConversationBtn = document.getElementById('startConversationBtn');
-      const stopConversationBtn = document.getElementById('stopConversationBtn');
-      const agentStatus = document.getElementById('agentStatus');
-      const agentResponse = document.getElementById('agentResponse');
+      // 위젯 확대 상태
+      let isWidgetExpanded = false;
       
+      // 위젯 확대 함수
+      function expandWidget() {
+        if (widgetContainer && !isWidgetExpanded) {
+          widgetContainer.classList.add('expanded');
+          isWidgetExpanded = true;
+          console.log('위젯 확대됨');
+        }
+      }
+      
+      // 위젯 클릭 시 한 번만 확대하고 계속 유지
+      if (widgetContainer) {
+        widgetContainer.addEventListener('click', function(e) {
+          // iframe 내부 클릭은 제외
+          if (e.target.tagName === 'IFRAME' || e.target.closest('iframe')) {
+            return;
+          }
+          
+          // 아직 확대되지 않았으면 한 번만 확대
+          if (!isWidgetExpanded) {
+            expandWidget();
+          }
+          // 이미 확대되었으면 아무 동작도 하지 않음
+        });
+      }
+
       // 이벤트 리스너 설정
       loadConversationBtn.addEventListener('click', loadConversationAudio);
       loadTranscriptBtn.addEventListener('click', loadTranscript);
       downloadAudioBtn.addEventListener('click', downloadAudio);
       toggleTranscriptBtn.addEventListener('click', toggleTranscript);
-      
-      // 에이전트 이벤트 리스너
-      loadAgentBtn.addEventListener('click', loadAgent);
-      startConversationBtn.addEventListener('click', startConversation);
-      stopConversationBtn.addEventListener('click', stopConversation);
       
       // 오디오 메타데이터 로드 이벤트
       conversationAudio.addEventListener('loadedmetadata', function() {
@@ -302,6 +304,8 @@
             toggleTranscriptBtn.style.display = 'inline-block';
             loadTranscriptBtn.textContent = '트랜스크립트 불러오기 완료';
             loadTranscriptBtn.style.background = '#28a745';
+            // 트랜스크립트 로드 시 위젯 확대
+            expandWidget();
           }
         } catch (error) {
           console.error('트랜스크립트 로드 실패:', error);
@@ -318,20 +322,43 @@
       function displayTranscript(transcript) {
         transcriptText.innerHTML = '';
         
-        transcript.forEach(entry => {
+        // transcript가 배열인지 확인
+        let messages = [];
+        if (Array.isArray(transcript)) {
+          messages = transcript;
+        } else if (transcript.messages && Array.isArray(transcript.messages)) {
+          messages = transcript.messages;
+        } else if (transcript.conversation && Array.isArray(transcript.conversation)) {
+          messages = transcript.conversation;
+        }
+        
+        console.log('트랜스크립트 표시:', messages.length, '개 메시지');
+        
+        messages.forEach(entry => {
           const messageDiv = document.createElement('div');
           messageDiv.className = 'message';
           
+          // role과 message 필드 사용
+          const role = entry.role || 'unknown';
+          const message = entry.message || entry.text || '';
+          const timestamp = entry.timestamp || entry.created_at || '';
+          
+          // role을 한국어로 변환
+          let roleDisplay = role;
+          if (role === 'user') roleDisplay = '사용자';
+          else if (role === 'assistant' || role === 'agent') roleDisplay = '@sey.min';
+          else if (role === 'system') roleDisplay = '시스템';
+          
           const timestampSpan = document.createElement('span');
           timestampSpan.className = 'timestamp';
-          timestampSpan.textContent = entry.timestamp;
+          timestampSpan.textContent = timestamp ? formatTimestamp(timestamp) : '';
           
           const speakerSpan = document.createElement('span');
           speakerSpan.className = 'speaker';
-          speakerSpan.textContent = entry.speaker;
+          speakerSpan.textContent = roleDisplay;
           
           const textSpan = document.createElement('span');
-          textSpan.textContent = entry.text;
+          textSpan.textContent = message;
           
           messageDiv.appendChild(timestampSpan);
           messageDiv.appendChild(speakerSpan);
@@ -348,6 +375,20 @@
         }
       }
       
+      // 타임스탬프 포맷팅
+      function formatTimestamp(timestamp) {
+        if (!timestamp) return '';
+        try {
+          const date = new Date(timestamp);
+          const hours = date.getHours().toString().padStart(2, '0');
+          const minutes = date.getMinutes().toString().padStart(2, '0');
+          const seconds = date.getSeconds().toString().padStart(2, '0');
+          return `${hours}:${minutes}:${seconds}`;
+        } catch (e) {
+          return timestamp;
+        }
+      }
+      
       // 트랜스크립트 토글
       function toggleTranscript() {
         const isVisible = transcriptText.style.display !== 'none';
@@ -360,86 +401,11 @@
         if (currentAudioUrl) {
           const a = document.createElement('a');
           a.href = currentAudioUrl;
-          a.download = 'editor_kab_conversation.mp3';
+          a.download = 'sey_min_conversation.mp3';
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
         }
-      }
-      
-      // 에이전트 불러오기
-      async function loadAgent() {
-        try {
-          loadAgentBtn.textContent = '불러오는 중...';
-          loadAgentBtn.disabled = true;
-          updateAgentStatus('로딩 중...', 'loading');
-          
-          console.log('에이전트 로드 시작...', {
-            agentId: config.AGENT_ID
-          });
-          
-          const agent = await fetchAgent();
-          
-          if (agent) {
-            agentData = agent;
-            loadAgentBtn.textContent = '에이전트 로드 완료';
-            loadAgentBtn.style.background = '#28a745';
-            startConversationBtn.style.display = 'inline-block';
-            updateAgentStatus('준비 완료', 'active');
-            displayAgentInfo(agent);
-            console.log('에이전트 로드 성공:', agent);
-          }
-        } catch (error) {
-          console.error('에이전트 로드 실패:', error);
-          alert(`에이전트를 불러오는 중 오류가 발생했습니다: ${error.message}`);
-          loadAgentBtn.textContent = '에이전트 불러오기';
-          loadAgentBtn.style.background = '#000';
-          updateAgentStatus('오류', 'error');
-        } finally {
-          loadAgentBtn.disabled = false;
-        }
-      }
-      
-      // 대화 시작
-      function startConversation() {
-        if (!agentData) {
-          alert('먼저 에이전트를 불러와주세요.');
-          return;
-        }
-        
-        updateAgentStatus('대화 중...', 'active');
-        startConversationBtn.style.display = 'none';
-        stopConversationBtn.style.display = 'inline-block';
-        agentResponse.style.display = 'block';
-        
-        setTimeout(() => {
-          displayAgentMessage('안녕하세요! 저는 @editor_kab입니다. 어떤 이야기를 나누고 싶으신가요?');
-        }, 1000);
-      }
-      
-      // 대화 종료
-      function stopConversation() {
-        updateAgentStatus('대기 중', '');
-        startConversationBtn.style.display = 'inline-block';
-        stopConversationBtn.style.display = 'none';
-        agentResponse.style.display = 'none';
-      }
-      
-      // 에이전트 상태 업데이트
-      function updateAgentStatus(status, className) {
-        agentStatus.textContent = status;
-        agentStatus.className = `agent-status ${className}`;
-      }
-      
-      // 에이전트 정보 표시
-      function displayAgentInfo(agent) {
-        console.log('에이전트 정보:', agent);
-      }
-      
-      // 에이전트 메시지 표시
-      function displayAgentMessage(message) {
-        const responseContent = agentResponse.querySelector('.response-content p');
-        responseContent.textContent = message;
       }
       
       // ElevenLabs API 호출 함수들
@@ -492,13 +458,11 @@
       }
       
       async function fetchTranscript() {
-        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID') {
-          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
-          return getDemoTranscript();
-        }
-        
         try {
-          const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}/transcript`, {
+          console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+          
+          // conversation 정보를 먼저 가져옴
+          const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
             method: 'GET',
             headers: {
               'xi-api-key': config.API_KEY,
@@ -506,21 +470,32 @@
             }
           });
           
+          console.log('API 응답 상태:', response.status);
+          
           if (!response.ok) {
             if (response.status === 401) {
               throw new Error('API 키가 유효하지 않습니다.');
             } else if (response.status === 404) {
               throw new Error('대화를 찾을 수 없습니다.');
-            } else if (response.status === 501) {
-              console.warn('트랜스크립트 API가 아직 지원되지 않습니다. 데모 데이터를 사용합니다.');
-              return getDemoTranscript();
             } else {
+              const errorText = await response.text();
+              console.error('API 응답 오류:', errorText);
               throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
             }
           }
           
           const data = await response.json();
-          return formatTranscript(data);
+          console.log('API 응답 데이터:', data);
+          
+          // transcript 배열을 찾아서 반환
+          if (data.transcript && Array.isArray(data.transcript)) {
+            console.log('트랜스크립트 메시지 개수:', data.transcript.length);
+            return data.transcript;
+          }
+          
+          // transcript가 없는 경우 경고
+          console.warn('트랜스크립트 배열을 찾을 수 없습니다:', data);
+          return getDemoTranscript();
         } catch (error) {
           console.error('트랜스크립트 로드 실패:', error);
           console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
@@ -535,109 +510,36 @@
       function getDemoTranscript() {
         return [
           {
-            timestamp: '00:00',
-            speaker: '사용자',
-            text: '안녕하세요, @editor_kab님. 오늘 어떤 이야기를 나누고 싶으신가요?'
+            role: 'user',
+            message: '안녕하세요, @sey.min님. 오늘 어떤 이야기를 나누고 싶으신가요?',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:05',
-            speaker: '@editor_kab',
-            text: '안녕하세요. 오늘은 도시의 건축물들 사이를 걷다가 느낀 생각들을 이야기해보고 싶습니다.'
+            role: 'assistant',
+            message: '안녕하세요. 오늘은 AI 기술과 예술을 융합한 프로젝트에 대해 이야기해보고 싶습니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:15',
-            speaker: '사용자',
-            text: '흥미롭네요. 어떤 생각들이 드셨나요?'
+            role: 'user',
+            message: '흥미롭네요. 어떤 프로젝트인가요?',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:20',
-            speaker: '@editor_kab',
-            text: '각각의 건물이 고유한 이야기를 담고 있다는 생각이 들었습니다. 오래된 건물은 시간의 무게를, 새로운 건물은 미래에 대한 기대를 표현하는 것 같아요.'
+            role: 'assistant',
+            message: '데이터를 예술적 표현의 재료로 활용하는 작업입니다. 기술적 전문성과 예술적 감성을 융합하여 독창적인 시각적 결과물을 창조합니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:35',
-            speaker: '사용자',
-            text: '정말 깊이 있는 관찰이네요. 건축물을 보는 시각이 특별하신 것 같아요.'
+            role: 'user',
+            message: '정말 멋진 프로젝트네요. 기술과 인문학의 경계를 탐구하는 것이 흥미롭습니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:40',
-            speaker: '@editor_kab',
-            text: '감사합니다. 저는 단순히 건물을 보는 것이 아니라, 그 안에 담긴 시간과 이야기를 읽어내려고 노력합니다.'
+            role: 'assistant',
+            message: '감사합니다. 저는 단순히 기술을 사용하는 것이 아니라, 그 기술 이면의 의미를 탐구하려고 노력합니다.',
+            timestamp: new Date().toISOString()
           }
         ];
-      }
-      
-      function formatTranscript(apiResponse) {
-        if (apiResponse.messages && Array.isArray(apiResponse.messages)) {
-          return apiResponse.messages;
-        }
-        return apiResponse;
-      }
-      
-      async function fetchAgent() {
-        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.AGENT_ID === 'YOUR_AGENT_ID') {
-          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
-          return getDemoAgent();
-        }
-        
-        try {
-          const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
-          const endpoint = config.USE_PROXY 
-            ? `/convai/agents/${config.AGENT_ID}`
-            : `/convai/agents/${config.AGENT_ID}`;
-          
-          const url = `${baseUrl}${endpoint}`;
-          console.log('에이전트 API 호출 URL:', url);
-          
-          const headers = {
-            'Accept': 'application/json'
-          };
-          
-          if (config.USE_PROXY) {
-            headers['x-api-key'] = config.API_KEY;
-          } else {
-            headers['xi-api-key'] = config.API_KEY;
-          }
-          
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: headers
-          });
-          
-          if (!response.ok) {
-            if (response.status === 401) {
-              throw new Error('API 키가 유효하지 않습니다.');
-            } else if (response.status === 404) {
-              throw new Error('에이전트를 찾을 수 없습니다.');
-            } else {
-              throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
-            }
-          }
-          
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error('에이전트 로드 실패:', error);
-          throw error;
-        }
-      }
-      
-      function getDemoAgent() {
-        return {
-          id: config.AGENT_ID,
-          name: 'Virtual @editor_kab',
-          description: '사색적이고 서정적인 관찰자',
-          voice: {
-            name: 'Korean Female',
-            stability: 0.5,
-            similarity_boost: 0.8
-          },
-          personality: {
-            traits: ['관찰자', '사색적', '서정적'],
-            communication_style: '정중하고 깊이 있는'
-          },
-          status: 'active'
-        };
       }
     </script>
   </body>
