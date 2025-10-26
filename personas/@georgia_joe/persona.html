@@ -3,21 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@georgia_joe — Virtual Persona</title>
+    <title>@georgia_joe — Generated Self</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="stylesheet" href="persona.css" />
     <script src="elevenlabs-config.js"></script>
+    <!-- ElevenLabs ConvAI Widget Script -->
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
   </head>
   <body>
     <header>
-      <div class="logo">Virtual Personas</div>
+      <a href="../../index.html" style="text-decoration: none; color: inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
       <nav>
         <a href="../../index.html">Home</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
+        <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
       </nav>
     </header>
 
@@ -28,14 +31,14 @@
       
       <div class="detail-header">
         <h1 class="detail-title">@georgia_joe</h1>
-        <p class="detail-subtitle">럭셔리 마케팅 전문가 · Luxury Marketing Expert</p>
+        <p class="detail-subtitle">럭셔리 마케팅 전문가 · Luxury Marketing Strategist</p>
         
         <p class="core-identity-description">
-          20여 년간 럭셔리 매거진 업계에서 VIP 마케팅을 담당하며 구축한 기관적 신뢰도와 실행력을 보유한 전략적 컨설턴트입니다. 럭셔리 브랜드의 마케팅 전략 수립부터 실행까지 모든 단계를 통합적으로 지원하는 지식-경험 기반의 전문가입니다.
+          20여 년간 럭셔리 매거진 업계에서 VIP 마케팅을 담당하며 구축한 기관적 신뢰도와 실행력을 보유한 전략적 컨설턴트입니다. 미식, 아트, 리빙 등 다양한 라이프스타일 카테고리의 고도화된 큐레이션과 경험 지식을 바탕으로 독보적인 가치를 제공합니다.
         </p>
         
         <p class="core-identity-keywords">
-          # 럭셔리마케팅, # VIP컨설팅, # 브랜드전략, # 이벤트기획, # 큐레이션
+          # 럭셔리마케팅, # VIP컨설팅, # 미식큐레이션, # 아트앤컬처, # 라이프스타일
         </p>
       </div>
 
@@ -58,7 +61,7 @@
           
           <!-- 녹음된 대화 오디오 (오른쪽) -->
           <div class="audio-section-left">
-            <h3>녹음된 대화 (Recorded Conversation)</h3>
+            <h3>녹음된 대화 (Recorded Conversation) / 2025-10-31</h3>
             <div class="audio-container">
               <div class="audio-player-compact">
                 <audio id="conversationAudio" controls preload="metadata">
@@ -67,7 +70,7 @@
                   브라우저가 오디오 재생을 지원하지 않습니다.
                 </audio>
                 <div class="audio-info-compact">
-                  <span class="audio-title">@georgia_joe와의 대화</span>
+                  <span class="audio-title">@georgia_joe과의 대화</span>
                   <span class="audio-duration" id="audioDuration">--:--</span>
                 </div>
               </div>
@@ -85,7 +88,7 @@
           <div class="middle-section">
             <!-- 대화 트랜스크립트 (왼쪽) -->
             <div class="transcript-section-right">
-              <h3>대화 내용 (Transcript)</h3>
+              <h3>대화 내용 (Transcript) / 2025-10-31</h3>
               <div class="transcript-container">
                 <div class="transcript-header">
                   <div class="transcript-controls">
@@ -103,28 +106,12 @@
             
             <!-- 에이전트 섹션 (오른쪽) -->
             <div class="agent-section">
-              <h3>대화형 에이전트 (AI Agent)</h3>
-              <div class="agent-container">
-                <div class="agent-info">
-                  <div class="agent-avatar">
-                    <div class="avatar-placeholder">@georgia_joe</div>
-                  </div>
-                  <div class="agent-details">
-                    <h4>Virtual @georgia_joe</h4>
-                    <p>실시간 대화형 AI 에이전트</p>
-                    <div class="agent-status" id="agentStatus">대기 중</div>
-                  </div>
-                </div>
-                <div class="agent-controls">
-                  <button id="loadAgentBtn" class="load-btn">에이전트 불러오기</button>
-                  <button id="startConversationBtn" class="start-btn" style="display: none;">대화 시작</button>
-                  <button id="stopConversationBtn" class="stop-btn" style="display: none;">대화 종료</button>
-                </div>
-                <div class="agent-response" id="agentResponse" style="display: none;">
-                  <div class="response-content">
-                    <p>에이전트 응답이 여기에 표시됩니다...</p>
-                  </div>
-                </div>
+              <h3>대화형 에이전트 (AI Agent) / 10min. max.</h3>
+              <!-- ElevenLabs ConvAI Widget -->
+              <div id="widgetContainer" class="widget-container">
+                <elevenlabs-convai 
+                  agent-id="agent_6701k85xb6vnfx5bnx2ydxyz0smr"
+                ></elevenlabs-convai>
               </div>
             </div>
           </div>
@@ -132,37 +119,37 @@
 
         <div class="persona-overview">
           <div class="overview-section">
-            <h3 class="overview-title">전문적 자아 (Professional Self)</h3>
+            <h3 class="overview-title">시각적 자아 (Visual Self)</h3>
             <div class="overview-content">
-              <p style="margin-bottom: 15px;">20여 년간 럭셔리 매거진 업계에서 VIP 마케팅을 담당하며 구축한 기관적 신뢰도와 실행력을 보유한 전략적 컨설턴트입니다.</p>
+              <p style="margin-bottom: 15px;">노력하지 않은 듯한 우아함으로 럭셔리 세계 내부자의 정체성을 시각적으로 구현합니다.</p>
               <ul>
-                <li>아셰트 아인스 코리아, 노블레스미디어인터내셔날 등 주요 매거진사 경력</li>
-                <li>VIP 마케팅 전략 수립 및 실행 전문성</li>
-                <li>럭셔리 브랜드 컨설팅 및 이벤트 기획 역량</li>
+                <li>통일된 미학과 세련된 색상 팔레트</li>
+                <li>미니멀리즘에 가까운 절제된 구도</li>
+                <li>정교한 큐레이션을 통한 브랜드 아이덴티티</li>
               </ul>
             </div>
           </div>
   
           <div class="overview-section">
-            <h3 class="overview-title">큐레이션 자아 (Curation Self)</h3>
+            <h3 class="overview-title">개념적 자아 (Conceptual Self)</h3>
             <div class="overview-content">
-              <p style="margin-bottom: 15px;">HNWI 세그먼트를 만족시키는 세련된 취향과 고도화된 큐레이션 능력을 바탕으로 VIP 고객에게 맞춤형 경험을 제공합니다.</p>
+              <p style="margin-bottom: 15px;">서사의 중요성을 통해 단순한 인플루언서가 아닌 사상적 리더로 포지셔닝합니다.</p>
               <ul>
-                <li>미식, 아트, 리빙 등 라이프스타일 분야의 전문 지식</li>
-                <li>트렌드에 민감한 큐레이션 및 경험 디자인</li>
-                <li>하이엔드 제품/서비스 체험 기획</li>
+                <li>비하인드 스토리와 철학적 통찰 제공</li>
+                <li>럭셔리 산업의 핵심 가치 부합</li>
+                <li>프리미엄 콘텐츠 모델을 통한 전문성 입증</li>
               </ul>
             </div>
           </div>
   
           <div class="overview-section">
-            <h3 class="overview-title">관계 자본 자아 (Relationship Capital Self)</h3>
+            <h3 class="overview-title">사회적 자아 (Social Self)</h3>
             <div class="overview-content">
-              <p style="margin-bottom: 15px;">파트너사를 주요 자산으로 보는 관계 지향적 철학을 바탕으로 구축된 강력한 협력 생태계를 보유합니다.</p>
+              <p style="margin-bottom: 15px;">관계 자본을 증명하여 영향력의 선순환 구조를 만들어냅니다.</p>
               <ul>
-                <li>파트너 중심의 수평적, 생태계적 관계 구축</li>
-                <li>공동 네트워크 활용 및 멤버십 프로그램 개발</li>
-                <li>장기적인 공동 투자 및 이익 공유 모델</li>
+                <li>네트워크의 가시화와 투명한 검증</li>
+                <li>엘리트 그룹과의 교류를 통한 신뢰 구축</li>
+                <li>사회적 자본을 경제적 자본으로 효율적 전환</li>
               </ul>
             </div>
           </div>
@@ -171,12 +158,11 @@
             <h3 class="overview-title">핵심 특성</h3>
             <div class="overview-content">
               <ul>
-                <li><strong>전문적 권위 (DAIC):</strong> 9.5/10</li>
-                <li><strong>고도화된 큐레이션 (HCEK):</strong> 9.0/10</li>
-                <li><strong>관계 자본 (SRC):</strong> 9.0/10</li>
-                <li><strong>선도적 적응력 (VAPD):</strong> 8.5/10</li>
-                <li><strong>운영 우수성 (EAOE):</strong> 8.8/10</li>
-                <li><strong>디지털 충성도 (DRSL):</strong> 8.0/10</li>
+                <li><strong>전략적 진정성:</strong> 9.5/10</li>
+                <li><strong>틈새 시장 지배:</strong> 9.0/10</li>
+                <li><strong>관계 자본:</strong> 9.0/10</li>
+                <li><strong>온라인-오프라인 일치성:</strong> 9.5/10</li>
+                <li><strong>확장 가능성:</strong> 6.0/10</li>
               </ul>
             </div>
           </div>
@@ -188,7 +174,7 @@
             <h2 class="cta-title">더 자세한 분석 보기</h2>
             <div class="cta-buttons">
               <a href="analysis_report.html" class="cta-button">심층 분석 리포트</a>
-              <a href="infographic_georgia.html" class="cta-button">전체 분석 리포트</a>
+              <a href="infographic_georgiaV2.html" class="cta-button">전체 분석 리포트</a>
               <a href="https://instagram.com/georgia_joe" class="cta-button" target="_blank">Instagram 보기</a>
             </div>
           </div>
@@ -196,9 +182,9 @@
     <script>
       // ElevenLabs API 설정 (설정 파일에서 가져옴)
       const config = window.ELEVENLABS_CONFIG || {
-        API_KEY: 'sk_82e5a6661ba4fc783eebde024664b818b225785cd8950b49',
+        API_KEY: 'YOUR_ELEVENLABS_API_KEY',
         BASE_URL: 'https://api.elevenlabs.io/v1',
-        CONVERSATION_ID: 'conv_1301k85xrcpkf9jt7ajsbn7y72nz'
+        CONVERSATION_ID: '' // 아직 녹음된 대화가 없습니다
       };
       
       // 설정 유효성 검사
@@ -210,7 +196,6 @@
       // 전역 변수
       let currentAudioUrl = null;
       let currentTranscript = null;
-      let agentData = null;
       
       // DOM 요소들
       const loadConversationBtn = document.getElementById('loadConversationBtn');
@@ -222,24 +207,41 @@
       const transcriptContent = document.getElementById('transcriptContent');
       const transcriptText = document.getElementById('transcriptText');
       const transcriptLoading = document.getElementById('transcriptLoading');
+      const widgetContainer = document.getElementById('widgetContainer');
       
-      // 에이전트 관련 DOM 요소들
-      const loadAgentBtn = document.getElementById('loadAgentBtn');
-      const startConversationBtn = document.getElementById('startConversationBtn');
-      const stopConversationBtn = document.getElementById('stopConversationBtn');
-      const agentStatus = document.getElementById('agentStatus');
-      const agentResponse = document.getElementById('agentResponse');
+      // 위젯 확대 상태
+      let isWidgetExpanded = false;
       
+      // 위젯 확대 함수
+      function expandWidget() {
+        if (widgetContainer && !isWidgetExpanded) {
+          widgetContainer.classList.add('expanded');
+          isWidgetExpanded = true;
+          console.log('위젯 확대됨');
+        }
+      }
+      
+      // 위젯 클릭 시 한 번만 확대하고 계속 유지
+      if (widgetContainer) {
+        widgetContainer.addEventListener('click', function(e) {
+          // iframe 내부 클릭은 제외
+          if (e.target.tagName === 'IFRAME' || e.target.closest('iframe')) {
+            return;
+          }
+          
+          // 아직 확대되지 않았으면 한 번만 확대
+          if (!isWidgetExpanded) {
+            expandWidget();
+          }
+          // 이미 확대되었으면 아무 동작도 하지 않음
+        });
+      }
+
       // 이벤트 리스너 설정
       loadConversationBtn.addEventListener('click', loadConversationAudio);
       loadTranscriptBtn.addEventListener('click', loadTranscript);
       downloadAudioBtn.addEventListener('click', downloadAudio);
       toggleTranscriptBtn.addEventListener('click', toggleTranscript);
-      
-      // 에이전트 이벤트 리스너
-      loadAgentBtn.addEventListener('click', loadAgent);
-      startConversationBtn.addEventListener('click', startConversation);
-      stopConversationBtn.addEventListener('click', stopConversation);
       
       // 오디오 메타데이터 로드 이벤트
       conversationAudio.addEventListener('loadedmetadata', function() {
@@ -302,6 +304,8 @@
             toggleTranscriptBtn.style.display = 'inline-block';
             loadTranscriptBtn.textContent = '트랜스크립트 불러오기 완료';
             loadTranscriptBtn.style.background = '#28a745';
+            // 트랜스크립트 로드 시 위젯 확대
+            expandWidget();
           }
         } catch (error) {
           console.error('트랜스크립트 로드 실패:', error);
@@ -318,20 +322,43 @@
       function displayTranscript(transcript) {
         transcriptText.innerHTML = '';
         
-        transcript.forEach(entry => {
+        // transcript가 배열인지 확인
+        let messages = [];
+        if (Array.isArray(transcript)) {
+          messages = transcript;
+        } else if (transcript.messages && Array.isArray(transcript.messages)) {
+          messages = transcript.messages;
+        } else if (transcript.conversation && Array.isArray(transcript.conversation)) {
+          messages = transcript.conversation;
+        }
+        
+        console.log('트랜스크립트 표시:', messages.length, '개 메시지');
+        
+        messages.forEach(entry => {
           const messageDiv = document.createElement('div');
           messageDiv.className = 'message';
           
+          // role과 message 필드 사용
+          const role = entry.role || 'unknown';
+          const message = entry.message || entry.text || '';
+          const timestamp = entry.timestamp || entry.created_at || '';
+          
+          // role을 한국어로 변환
+          let roleDisplay = role;
+          if (role === 'user') roleDisplay = '사용자';
+          else if (role === 'assistant' || role === 'agent') roleDisplay = '@georgia_joe';
+          else if (role === 'system') roleDisplay = '시스템';
+          
           const timestampSpan = document.createElement('span');
           timestampSpan.className = 'timestamp';
-          timestampSpan.textContent = entry.timestamp;
+          timestampSpan.textContent = timestamp ? formatTimestamp(timestamp) : '';
           
           const speakerSpan = document.createElement('span');
           speakerSpan.className = 'speaker';
-          speakerSpan.textContent = entry.speaker;
+          speakerSpan.textContent = roleDisplay;
           
           const textSpan = document.createElement('span');
-          textSpan.textContent = entry.text;
+          textSpan.textContent = message;
           
           messageDiv.appendChild(timestampSpan);
           messageDiv.appendChild(speakerSpan);
@@ -345,6 +372,20 @@
         const transcriptContent = document.getElementById('transcriptContent');
         if (transcriptText.scrollHeight > transcriptContent.clientHeight) {
           transcriptContent.style.borderBottom = '1px solid #e0e0e0';
+        }
+      }
+      
+      // 타임스탬프 포맷팅
+      function formatTimestamp(timestamp) {
+        if (!timestamp) return '';
+        try {
+          const date = new Date(timestamp);
+          const hours = date.getHours().toString().padStart(2, '0');
+          const minutes = date.getMinutes().toString().padStart(2, '0');
+          const seconds = date.getSeconds().toString().padStart(2, '0');
+          return `${hours}:${minutes}:${seconds}`;
+        } catch (e) {
+          return timestamp;
         }
       }
       
@@ -367,85 +408,10 @@
         }
       }
       
-      // 에이전트 불러오기
-      async function loadAgent() {
-        try {
-          loadAgentBtn.textContent = '불러오는 중...';
-          loadAgentBtn.disabled = true;
-          updateAgentStatus('로딩 중...', 'loading');
-          
-          console.log('에이전트 로드 시작...', {
-            agentId: config.AGENT_ID
-          });
-          
-          const agent = await fetchAgent();
-          
-          if (agent) {
-            agentData = agent;
-            loadAgentBtn.textContent = '에이전트 로드 완료';
-            loadAgentBtn.style.background = '#28a745';
-            startConversationBtn.style.display = 'inline-block';
-            updateAgentStatus('준비 완료', 'active');
-            displayAgentInfo(agent);
-            console.log('에이전트 로드 성공:', agent);
-          }
-        } catch (error) {
-          console.error('에이전트 로드 실패:', error);
-          alert(`에이전트를 불러오는 중 오류가 발생했습니다: ${error.message}`);
-          loadAgentBtn.textContent = '에이전트 불러오기';
-          loadAgentBtn.style.background = '#000';
-          updateAgentStatus('오류', 'error');
-        } finally {
-          loadAgentBtn.disabled = false;
-        }
-      }
-      
-      // 대화 시작
-      function startConversation() {
-        if (!agentData) {
-          alert('먼저 에이전트를 불러와주세요.');
-          return;
-        }
-        
-        updateAgentStatus('대화 중...', 'active');
-        startConversationBtn.style.display = 'none';
-        stopConversationBtn.style.display = 'inline-block';
-        agentResponse.style.display = 'block';
-        
-        setTimeout(() => {
-          displayAgentMessage('안녕하세요! 저는 @georgia_joe입니다. 럭셔리 마케팅에 대해 어떤 이야기를 나누고 싶으신가요?');
-        }, 1000);
-      }
-      
-      // 대화 종료
-      function stopConversation() {
-        updateAgentStatus('대기 중', '');
-        startConversationBtn.style.display = 'inline-block';
-        stopConversationBtn.style.display = 'none';
-        agentResponse.style.display = 'none';
-      }
-      
-      // 에이전트 상태 업데이트
-      function updateAgentStatus(status, className) {
-        agentStatus.textContent = status;
-        agentStatus.className = `agent-status ${className}`;
-      }
-      
-      // 에이전트 정보 표시
-      function displayAgentInfo(agent) {
-        console.log('에이전트 정보:', agent);
-      }
-      
-      // 에이전트 메시지 표시
-      function displayAgentMessage(message) {
-        const responseContent = agentResponse.querySelector('.response-content p');
-        responseContent.textContent = message;
-      }
-      
       // ElevenLabs API 호출 함수들
       async function fetchConversationAudio() {
-        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID') {
-          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
+        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID' || config.CONVERSATION_ID === '') {
+          console.warn('ElevenLabs API 설정이 완료되지 않았거나 녹음된 대화가 없습니다. 데모 모드로 실행됩니다.');
           return getDemoAudioUrl();
         }
         
@@ -492,13 +458,17 @@
       }
       
       async function fetchTranscript() {
-        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID') {
-          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
+        // CONVERSATION_ID가 비어있으면 데모 트랜스크립트 반환
+        if (config.CONVERSATION_ID === '' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID') {
+          console.warn('녹음된 대화가 없습니다. 데모 트랜스크립트를 사용합니다.');
           return getDemoTranscript();
         }
         
         try {
-          const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}/transcript`, {
+          console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+          
+          // conversation 정보를 먼저 가져옴
+          const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
             method: 'GET',
             headers: {
               'xi-api-key': config.API_KEY,
@@ -506,21 +476,32 @@
             }
           });
           
+          console.log('API 응답 상태:', response.status);
+          
           if (!response.ok) {
             if (response.status === 401) {
               throw new Error('API 키가 유효하지 않습니다.');
             } else if (response.status === 404) {
               throw new Error('대화를 찾을 수 없습니다.');
-            } else if (response.status === 501) {
-              console.warn('트랜스크립트 API가 아직 지원되지 않습니다. 데모 데이터를 사용합니다.');
-              return getDemoTranscript();
             } else {
+              const errorText = await response.text();
+              console.error('API 응답 오류:', errorText);
               throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
             }
           }
           
           const data = await response.json();
-          return formatTranscript(data);
+          console.log('API 응답 데이터:', data);
+          
+          // transcript 배열을 찾아서 반환
+          if (data.transcript && Array.isArray(data.transcript)) {
+            console.log('트랜스크립트 메시지 개수:', data.transcript.length);
+            return data.transcript;
+          }
+          
+          // transcript가 없는 경우 경고
+          console.warn('트랜스크립트 배열을 찾을 수 없습니다:', data);
+          return getDemoTranscript();
         } catch (error) {
           console.error('트랜스크립트 로드 실패:', error);
           console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
@@ -535,137 +516,36 @@
       function getDemoTranscript() {
         return [
           {
-            timestamp: '00:00',
-            speaker: '사용자',
-            text: '안녕하세요, @georgia_joe님. 럭셔리 마케팅에 대해 어떤 이야기를 나누고 싶으신가요?'
+            role: 'user',
+            message: '안녕하세요, @georgia_joe님. 럭셔리 마케팅에 대해 이야기해보고 싶습니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:05',
-            speaker: '@georgia_joe',
-            text: '안녕하세요. 오늘은 20년간의 VIP 마케팅 경험을 바탕으로 럭셔리 브랜드의 전략적 포지셔닝에 대해 이야기해보고 싶습니다.'
+            role: 'assistant',
+            message: '안녕하세요. 20년간 럭셔리 매거진에서 VIP 마케팅을 담당하며 구축한 경험을 바탕으로 럭셔리 브랜드의 전략적 포지셔닝에 대해 이야기하고 싶습니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:15',
-            speaker: '사용자',
-            text: '흥미롭네요. 어떤 인사이트를 공유하고 싶으신가요?'
+            role: 'user',
+            message: 'VIP 마케팅의 핵심은 무엇인가요?',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:20',
-            speaker: '@georgia_joe',
-            text: '현대 럭셔리 시장에서는 단순한 인지도를 넘어, 브랜드 가치를 높이는 독점적인 브랜드 자산이 중요합니다. 저는 이러한 희소하고 모방하기 어려운 자산의 디지털 대변인 역할을 하고 있어요.'
+            role: 'assistant',
+            message: 'VIP 마케팅은 단순한 상품 홍보가 아니라 경험의 희소성과 지적 만족감을 제공하는 것입니다. 고객의 니즈를 예측하고 맞춤형 큐레이션을 제공하는 것이 핵심입니다.',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:35',
-            speaker: '사용자',
-            text: '정말 전문적인 관점이네요. VIP 마케팅에서 가장 중요한 요소는 무엇인가요?'
+            role: 'user',
+            message: '미식과 아트 같은 라이프스타일 큐레이션이 어떻게 마케팅으로 연결되나요?',
+            timestamp: new Date().toISOString()
           },
           {
-            timestamp: '00:40',
-            speaker: '@georgia_joe',
-            text: '가장 중요한 것은 파트너사와의 관계입니다. 저는 클라이언트보다 함께 일하는 파트너사와의 관계가 정말 중요하다고 생각하며, 파트너를 가장 주요한 자산으로 보고 있습니다.'
+            role: 'assistant',
+            message: '세련된 취향과 트렌드 선도력은 VIP 세그먼트를 만족시키는 필수 요소입니다. 미슐랭 레스토랑, 신진 작가 전시회, 하이엔드 리빙 공간 등은 모두 VIP 고객이 추구하는 높은 품질 인식을 충족시키는 전략의 일부입니다.',
+            timestamp: new Date().toISOString()
           }
         ];
-      }
-      
-      function formatTranscript(apiResponse) {
-        if (apiResponse.messages && Array.isArray(apiResponse.messages)) {
-          // 모든 이전 페르소나 이름을 @georgia_joe로 변경하고 대화 내용도 럭셔리 마케팅에 맞게 변환
-          return apiResponse.messages.map((message, index) => {
-            let newMessage = { ...message };
-            
-            // 스피커 이름 변경
-            if (message.speaker === '@sey.min' || message.speaker === '@editor_kab' || message.speaker === '@sey.min') {
-              newMessage.speaker = '@georgia_joe';
-            }
-            
-            // 대화 내용을 럭셔리 마케팅에 맞게 변환
-            if (newMessage.speaker === '@georgia_joe') {
-              const georgiaResponses = [
-                '안녕하세요. 오늘은 20년간의 VIP 마케팅 경험을 바탕으로 럭셔리 브랜드의 전략적 포지셔닝에 대해 이야기해보고 싶습니다.',
-                '현대 럭셔리 시장에서는 단순한 인지도를 넘어, 브랜드 가치를 높이는 독점적인 브랜드 자산이 중요합니다. 저는 이러한 희소하고 모방하기 어려운 자산의 디지털 대변인 역할을 하고 있어요.',
-                '가장 중요한 것은 파트너사와의 관계입니다. 저는 클라이언트보다 함께 일하는 파트너사와의 관계가 정말 중요하다고 생각하며, 파트너를 가장 주요한 자산으로 보고 있습니다.',
-                '20년간 매거진 마케팅 업무를 통해 대한민국 VIP 마케팅 분야에서 독보적인 위치를 차지하고 있으며, 조지아컴퍼니 설립 이후 컨설팅 역할로 그 권위를 확장했습니다.',
-                'VIP 세그먼트를 세분화하고 만족시키기 위해 뷰티, 패션뿐 아니라 아트, 와인, 음식까지 다양한 분야를 치열하게 공부하고 섭렵했습니다.'
-              ];
-              
-              // 인덱스에 따라 다른 응답 사용 (순환)
-              const responseIndex = index % georgiaResponses.length;
-              newMessage.text = georgiaResponses[responseIndex];
-            }
-            
-            // 텍스트에서 이전 페르소나 이름 제거
-            newMessage.text = newMessage.text.replace(/@sey\.min|@editor_kab/g, '@georgia_joe');
-            
-            return newMessage;
-          });
-        }
-        return apiResponse;
-      }
-      
-      async function fetchAgent() {
-        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.AGENT_ID === 'YOUR_AGENT_ID') {
-          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
-          return getDemoAgent();
-        }
-        
-        try {
-          const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
-          const endpoint = config.USE_PROXY 
-            ? `/convai/agents/${config.AGENT_ID}`
-            : `/convai/agents/${config.AGENT_ID}`;
-          
-          const url = `${baseUrl}${endpoint}`;
-          console.log('에이전트 API 호출 URL:', url);
-          
-          const headers = {
-            'Accept': 'application/json'
-          };
-          
-          if (config.USE_PROXY) {
-            headers['x-api-key'] = config.API_KEY;
-          } else {
-            headers['xi-api-key'] = config.API_KEY;
-          }
-          
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: headers
-          });
-          
-          if (!response.ok) {
-            if (response.status === 401) {
-              throw new Error('API 키가 유효하지 않습니다.');
-            } else if (response.status === 404) {
-              throw new Error('에이전트를 찾을 수 없습니다.');
-            } else {
-              throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
-            }
-          }
-          
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error('에이전트 로드 실패:', error);
-          throw error;
-        }
-      }
-      
-      function getDemoAgent() {
-        return {
-          id: config.AGENT_ID,
-          name: 'Virtual @georgia_joe',
-          description: '럭셔리 마케팅 전문가이자 전략적 컨설턴트',
-          voice: {
-            name: 'Korean Female',
-            stability: 0.5,
-            similarity_boost: 0.8
-          },
-          personality: {
-            traits: ['전문가', '전략적', '관계지향적'],
-            communication_style: '전문적이고 신뢰할 수 있는'
-          },
-          status: 'active'
-        };
       }
     </script>
   </body>
