@@ -208,6 +208,7 @@
       const transcriptText = document.getElementById('transcriptText');
       const transcriptLoading = document.getElementById('transcriptLoading');
       const widgetContainer = document.getElementById('widgetContainer');
+      console.log('위젯 컨테이너 찾기:', widgetContainer);
       
       // 위젯 확대 상태
       let isWidgetExpanded = false;
@@ -223,18 +224,26 @@
       
       // 위젯 클릭 시 한 번만 확대하고 계속 유지
       if (widgetContainer) {
+        console.log('위젯 이벤트 리스너 등록됨');
         widgetContainer.addEventListener('click', function(e) {
+          console.log('위젯 클릭됨', e.target);
           // iframe 내부 클릭은 제외
           if (e.target.tagName === 'IFRAME' || e.target.closest('iframe')) {
+            console.log('iframe 클릭으로 무시됨');
             return;
           }
           
           // 아직 확대되지 않았으면 한 번만 확대
           if (!isWidgetExpanded) {
+            console.log('위젯 확대 시도');
             expandWidget();
+          } else {
+            console.log('이미 확대된 상태');
           }
           // 이미 확대되었으면 아무 동작도 하지 않음
         });
+      } else {
+        console.error('위젯 컨테이너를 찾을 수 없습니다');
       }
 
       // 이벤트 리스너 설정
@@ -532,7 +541,7 @@
           },
           {
             role: 'assistant',
-            message: '재료의 물성을 이해하고, 상처와 치유의 과정을 '결(Gyeol)'이라는 시각적 언어로 표현하는 것입니다. 붕대가 가마 속에서 소멸하고 그 흔적만 남은 도자기로 변성되는 과정은 고통을 창조의 원동력으로 변환하는 은유입니다.',
+            message: '재료의 물성을 이해하고, 상처와 치유의 과정을 \'결(Gyeol)\'이라는 시각적 언어로 표현하는 것입니다. 붕대가 가마 속에서 소멸하고 그 흔적만 남은 도자기로 변성되는 과정은 고통을 창조의 원동력으로 변환하는 은유입니다.',
             timestamp: new Date().toISOString()
           },
           {
