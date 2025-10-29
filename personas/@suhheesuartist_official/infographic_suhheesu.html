@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@suhheesuartist_official 심층 분석 리포트</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .analysis-section {
+            margin-bottom: 80px;
+        }
+
+        .analysis-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .analysis-title {
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .analysis-description {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .pie-chart-container {
+            height: 300px;
+            max-height: 350px;
+        }
+
+        .three-column-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .flow-box {
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #999;
+        }
+
+        .strengths-weaknesses-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .sw-card {
+            border: 1px solid #cccccc;
+            padding: 40px;
+        }
+
+        .sw-card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .sw-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sw-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .sw-icon {
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .sw-content h4 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .sw-content p {
+            font-size: 13px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        table td {
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .positive-cell {
+            color: #333333;
+        }
+
+        .negative-cell {
+            color: #666666;
+        }
+
+        @media (max-width: 1200px) {
+            .three-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .analysis-title {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 30px 20px;
+            }
+
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .strengths-weaknesses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .pie-chart-container {
+                height: 250px;
+            }
+
+            .flow-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+        
+        <div class="analysis-header">
+            <h1 class="analysis-title">인스타그램 계정 @suhheesuartist_official 심층 분석</h1>
+            <p class="analysis-description">계정 포스트에서 발견된 운영자의 심리적 프로파일 및 내재된 욕망 추론</p>
+        </div>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">1. 자아 분석: '생성된 자아'의 구축</h2>
+                <p class="analysis-description">
+                    본 분석은 @suhheesuartist_official 계정 데이터를 기반으로 합니다. 이 계정은 단순한 예술 작품 홍보 채널을 넘어, 작가 서희수의 정교하게 구축된 '가상자아(virtual ego)'가 수행되는 디지털 공간입니다. 작가의 개인적 트라우마와 치유 과정을 예술적 서사로 승화시키는 과정을 공적으로 아카이브하며, 이는 계정의 진정성과 서사적 깊이를 형성하는 핵심 요인입니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">2. 계정 핵심 요소 중요도 분석</h2>
+            
+            <div class="content-card">
+                <p style="color: #333333; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto 40px;">
+                    @suhheesuartist_official 계정은 단순한 작업 아카이브를 넘어, 작가의 철학과 삶이 통합된 공간입니다. 분석 결과, 세 가지 핵심 자아(시각적, 사회적, 개념적)와 세 가지 중심 철학(빛, 결, 순간)이 계정 페르소나를 구성하며, 각 요소의 상대적 중요도는 아래 레이더 차트와 같습니다.
+                </p>
+                <div class="chart-container">
+                    <canvas id="egoRadarChart"></canvas>
+                </div>
+                <p style="text-align: center; color: #333333; margin-top: 20px; font-size: 14px;">
+                    계정 구성 핵심 요소의 상대적 중요도 (1-5점 척도, 데이터 기반 추정)
+                </p>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">3. 세 가지 자아: 강점과 한계</h2>
+            
+            <div class="content-card">
+                <p style="color: #333333; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto 40px;">
+                    계정에서 드러나는 시각적, 사회적, 개념적 자아는 각각 뚜렷한 강점을 가지지만, 동시에 내재적인 긴장과 한계를 포함하고 있습니다. 이러한 복합성이 계정의 깊이와 독특한 매력을 형성합니다.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>통합 자아</th>
+                            <th>시각적 자아</th>
+                            <th>사회적 자아</th>
+                            <th>개념적 자아</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>긍정적 측면 (강점)</strong></td>
+                            <td class="positive-cell"><strong>진정성과 깊이:</strong> 삶, 철학, 예술이 완벽하게 일치하여 강력한 진정성과 서사적 깊이를 가집니다. 이는 팔로워에게 높은 신뢰감을 줍니다.</td>
+                            <td class="positive-cell"><strong>세련된 미학:</strong> '결'이라는 핵심 개념을 중심으로 통일되고 세련된 시각적 언어를 구축하여, 계정의 정체성을 명확하게 전달합니다.</td>
+                            <td class="positive-cell"><strong>전문성과 연결성:</strong> 주요 갤러리 전시, 박물관 소장 등 전문가로서의 권위를 성공적으로 구축합니다. 우표 전시회 참여처럼 대중과 연결되려는 의지가 강합니다.</td>
+                            <td class="positive-cell"><strong>철학적 기반 제공:</strong> 시각적 이미지에 깊이와 의미를 부여하고, 모든 활동의 이유를 설명하는 강력한 철학적 뼈대를 제공합니다.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>부정적 측면 (한계/긴장)</strong></td>
+                            <td class="negative-cell"><strong>높은 진입장벽:</strong> 철학적 깊이가 있어, 가볍고 즉각적인 소통을 선호하는 대중에게는 다소 무겁거나 어렵게 느껴질 수 있습니다.</td>
+                            <td class="negative-cell"><strong>본질의 희석 위험:</strong> 아름답고 정제된 이미지는 그 근원이 된 실제 고통과 투쟁을 미학화함으로써, 역설적으로 그 서사를 평면화하고 가볍게 만들 위험을 내포합니다.</td>
+                            <td class="negative-cell"><strong>사적 서사의 상품화:</strong> 지극히 사적인 치유의 과정을 공적으로 전시할 때, 진실된 여정이 시장성 있는 '브랜드 스토리'로 전락할 수 있다는 긴장 관계에 놓입니다.</td>
+                            <td class="negative-cell"><strong>텍스트 의존성:</strong> 이미지 만으로는 전달하기 힘든 심오한 의미를 전달하기 위해 캡션(텍스트)에 과도하게 의존해야 하는 구조적 한계를 가집니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">4. 주요 시각적 요소 분석</h2>
+            
+            <div class="content-card">
+                <div class="two-column-layout">
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">4.1. 색상 분포</h3>
+                        <p style="color: #333333; line-height: 1.8;">
+                            계정의 미학은 '웜 화이트', '베이지' 등 따뜻하고 자연스러운 색상을 중심으로 구성되어 차분하고 명상적인 분위기를 조성합니다. 이러한 색상 선택은 작가의 치유와 회복의 철학을 시각적으로 반영합니다.
+                        </p>
+                        <div class="chart-container pie-chart-container" style="margin-top: 30px;">
+                            <canvas id="colorPieChart"></canvas>
+                        </div>
+                        <p style="text-align: center; color: #333333; margin-top: 20px; font-size: 14px;">주요 사용 색상 분포 (데이터 기반 추정)</p>
+                    </div>
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">4.2. 소재 분포</h3>
+                        <p style="color: #333333; line-height: 1.8;">
+                            '빛'과 '결'이라는 개념적 핵심이 '나무', '한지', '도자기' 등 실제 재료의 물성과 결합되어 독특한 시각 언어를 만듭니다. 이러한 소재 사용은 작가의 작업 철학인 '상처, 치유, 소멸'의 서사를 물질적으로 구현합니다.
+                        </p>
+                        <div class="chart-container pie-chart-container" style="margin-top: 30px;">
+                            <canvas id="materialDoughnutChart"></canvas>
+                        </div>
+                        <p style="text-align: center; color: #333333; margin-top: 20px; font-size: 14px;">작품에 주로 사용되는 소재 분포 (데이터 기반 추정)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title" style="text-align: center;">5. 소통 방식: 참여의 불균형</h2>
+                <p style="color: #333333; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto 40px;">
+                    데이터 분석 결과, 게시물들은 '좋아요' 수에 비해 '댓글' 수가 현저히 낮은 경향을 보입니다. 이는 피상적인 호응('좋아요')을 넘어, 작품과 철학에 대한 깊은 '이해'와 '소통'(댓글)을 갈망하는 작가의 내재된 욕구를 시사할 수 있습니다.
+                </p>
+                <div class="chart-container">
+                    <canvas id="engagementBarChart"></canvas>
+                </div>
+                <p style="text-align: center; color: #333333; margin-top: 20px; font-size: 14px;">게시물 유형별 '좋아요' 대비 '댓글' 수 비교 (예시 데이터)</p>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title" style="text-align: center;">6. 핵심 철학과 내재된 욕망</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 20px; font-weight: 500; text-align: center; margin-bottom: 30px;">핵심 철학의 흐름</h3>
+                    <div class="flow-container">
+                        <div class="flow-box">
+                            <div style="font-size: 18px; font-weight: 500; color: #F0AD4E; margin-bottom: 10px;">빛</div>
+                            <div style="font-size: 14px; color: #333333;">(데이터: "조명", "자연광")</div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div style="font-size: 18px; font-weight: 500; color: #5CB85C; margin-bottom: 10px;">결</div>
+                            <div style="font-size: 14px; color: #333333;">(데이터: "우드", "한지", "도자기")</div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div style="font-size: 18px; font-weight: 500; color: #D9534F; margin-bottom: 10px;">순간</div>
+                            <div style="font-size: 14px; color: #333333;">(데이터: "찰나", "시간")</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #333333; margin-top: 20px; font-size: 14px;">
+                        작업의 근원('빛')이 재료의 물성('결')을 통해 축적되고, 찰나의 '순간'으로 발현되는 철학적 흐름을 보여줍니다.
+                    </p>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <h3 style="font-size: 20px; font-weight: 500; text-align: center; margin-bottom: 30px;">데이터 기반 추론: 내재된 욕망</h3>
+                    <div style="max-width: 800px; margin: 0 auto; padding: 30px; background: #f0f7ff; border: 1px solid #b3d9ff; border-radius: 8px;">
+                        <p style="font-size: 16px; text-align: center; color: #333333; line-height: 1.8;">
+                            분석 결과, 운영자의 핵심 욕망은 단순한 표면적 호응('좋아요')을 넘어, 자신의 깊은 철학과 개인적 서사가 담긴 작업을 관람객들이 진정으로 '이해'하고, 이를 바탕으로 의미 있는 '소통'을 나누는 것에 있음을 강하게 시사합니다.
+                        </p>
+                        <p style="text-align: center; color: #666666; margin-top: 20px; font-size: 14px; font-weight: 500;">
+                            (근거: '좋아요' 대비 '댓글' 불균형, 철학적 캡션, 개인 서사 공유)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top: 80px; text-align: center; padding: 40px 0; border-top: 1px solid #cccccc; color: #333333; font-size: 14px;">
+            <p>본 인포그래픽은 @suhheesuartist_official 계정의 공개 데이터를 기반으로 분석 및 제작되었습니다.</p>
+            <p style="margin-top: 10px;">제작일: 2025년 10월 29일</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart.js 로드 확인
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js가 로드되지 않았습니다.');
+                return;
+            }
+            
+            // Palette definition
+            const palette = {
+                 white: '#FFFFFF', lightGray: '#F5F5F5', mediumGray: '#CCCCCC',
+                 darkGray: '#666666', black: '#333333', charcoal: '#1A1A1A',
+                 borderGray: '#CCCCCC', backgroundGray: '#F0F0F0',
+                 radarFill: 'rgba(102, 102, 102, 0.2)', radarBorder: '#666666'
+            };
+
+            // Original labels (used for tooltips)
+            const originalRadarLabels = ['개념적 자아', '빛 (철학)', '시각적 자아', '결 (철학)', '사회적 자아', '순간 (철학)'];
+            const originalColorLabels = ["화이트", "라이트 그레이", "미디엄 그레이", "다크 그레이", "블랙", "기타"];
+            const originalMaterialLabels = ["화이트", "라이트 그레이", "미디엄 그레이", "다크 그레이", "블랙", "기타"];
+            const originalEngagementLabels = ["전시 홍보", "작품/과정", "라이프스타일"];
+
+            // Label wrapping function
+            function wrapLabels(label, maxWidth = 16) {
+                if (typeof label !== 'string' || label.length <= maxWidth) return label;
+                const words = label.split(/[\s-]+/);
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if (currentLine.length === 0) currentLine = word;
+                    else if ((currentLine + ' ' + word).length <= maxWidth) currentLine += ' ' + word;
+                    else { lines.push(currentLine); currentLine = word; }
+                });
+                if (currentLine) lines.push(currentLine);
+                return lines.join('\n');
+            }
+
+            // Tooltip title callback function
+            const tooltipTitleCallback = function(tooltipItems) {
+                 const item = tooltipItems[0];
+                 const chartId = item.chart.canvas.id;
+                 let originalLabelArray;
+                 if (chartId === 'egoRadarChart') originalLabelArray = originalRadarLabels;
+                 else if (chartId === 'colorPieChart') originalLabelArray = originalColorLabels;
+                 else if (chartId === 'materialDoughnutChart') originalLabelArray = originalMaterialLabels;
+                 else if (chartId === 'engagementBarChart') originalLabelArray = originalEngagementLabels;
+                 else originalLabelArray = [];
+
+                 return originalLabelArray[item.dataIndex] || item.label;
+             };
+
+            // Common Chart Options
+            const commonChartOptions = {
+                 responsive: true,
+                 maintainAspectRatio: false,
+                 plugins: {
+                     tooltip: {
+                         callbacks: { title: tooltipTitleCallback },
+                         bodyFont: { family: "'Roboto Mono', monospace", size: 12 },
+                         titleFont: { family: "'Roboto Mono', monospace", size: 13 }
+                     },
+                     legend: {
+                         position: 'bottom',
+                         labels: { padding: 20, font: { family: "'Roboto Mono', monospace", size: 12 } }
+                     }
+                 }
+            };
+
+            // Radar Chart
+            const radarCanvas = document.getElementById('egoRadarChart');
+            if (radarCanvas) {
+                const radarCtx = radarCanvas.getContext('2d');
+                try {
+                    new Chart(radarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: originalRadarLabels.map(l => wrapLabels(l, 10)),
+                        datasets: [{
+                            label: '핵심 요소 중요도', 
+                            data: [5, 5, 4, 4, 3, 4], 
+                            fill: true,
+                            backgroundColor: palette.radarFill, 
+                            borderColor: palette.radarBorder,
+                            pointBackgroundColor: palette.radarBorder, 
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff', 
+                            pointHoverBorderColor: palette.radarBorder
+                        }]
+                    },
+                    options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: { 
+                             tooltip: commonChartOptions.plugins.tooltip, 
+                             legend: { display: false } 
+                         },
+                         scales: {
+                             r: {
+                                 angleLines: { color: '#dee2e6' }, 
+                                 grid: { color: '#dee2e6' },
+                                 pointLabels: { 
+                                     font: { family: "'Roboto Mono', monospace", size: 11 }, 
+                                     color: palette.darkGray 
+                                 },
+                                 ticks: { 
+                                     color: palette.lightGray, 
+                                     backdropColor: 'transparent', 
+                                     stepSize: 1, 
+                                     max: 5, 
+                                     min: 0, 
+                                     font: { size: 10 } 
+                                 }
+                             }
+                         }
+                    }
+                });
+                } catch (error) {
+                    console.error('Radar Chart 초기화 오류:', error);
+                }
+            }
+
+            // Color Pie Chart
+            const colorCanvas = document.getElementById('colorPieChart');
+            if (colorCanvas) {
+                const colorCtx = colorCanvas.getContext('2d');
+                try {
+                    new Chart(colorCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: originalColorLabels.map(l => wrapLabels(l)),
+                        datasets: [{
+                            label: '주요 색상 분포', 
+                            data: [35, 25, 15, 10, 10, 5],
+                            backgroundColor: [palette.white, palette.lightGray, palette.mediumGray, palette.darkGray, palette.black, palette.charcoal],
+                            borderColor: '#ffffff', 
+                            borderWidth: 2
+                        }]
+                    },
+                    options: commonChartOptions
+                });
+                } catch (error) {
+                    console.error('Color Pie Chart 초기화 오류:', error);
+                }
+            }
+
+            // Material Doughnut Chart
+            const materialCanvas = document.getElementById('materialDoughnutChart');
+            if (materialCanvas) {
+                const materialCtx = materialCanvas.getContext('2d');
+                try {
+                    new Chart(materialCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: originalMaterialLabels.map(l => wrapLabels(l)),
+                        datasets: [{
+                            label: '주요 소재 분포', 
+                            data: [20, 20, 25, 15, 10, 10],
+                            backgroundColor: [palette.white, palette.lightGray, palette.mediumGray, palette.darkGray, palette.black, palette.charcoal],
+                            borderColor: '#ffffff', 
+                            borderWidth: 2
+                        }]
+                    },
+                    options: commonChartOptions
+                });
+                } catch (error) {
+                    console.error('Material Doughnut Chart 초기화 오류:', error);
+                }
+            }
+
+            // Engagement Bar Chart
+            const engagementCanvas = document.getElementById('engagementBarChart');
+            if (engagementCanvas) {
+                const engagementCtx = engagementCanvas.getContext('2d');
+                try {
+                    new Chart(engagementCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: originalEngagementLabels.map(l => wrapLabels(l)),
+                        datasets: [
+                            { 
+                                label: '좋아요 (평균)', 
+                                data: [90, 70, 150], 
+                                backgroundColor: palette.darkGray + 'BF', 
+                                borderColor: palette.darkGray, 
+                                borderWidth: 1, 
+                                borderRadius: 5 
+                            },
+                            { 
+                                label: '댓글 (평균)', 
+                                data: [1, 0.5, 5], 
+                                backgroundColor: palette.black + 'BF', 
+                                borderColor: palette.black, 
+                                borderWidth: 1, 
+                                borderRadius: 5 
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: commonChartOptions.plugins,
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                title: { 
+                                    display: true, 
+                                    text: '평균 상호작용 수', 
+                                    font: { family: "'Roboto Mono', monospace", size: 14, weight: 'bold' } 
+                                }, 
+                                ticks: { font: { family: "'Roboto Mono', monospace" } } 
+                            },
+                            x: { 
+                                ticks: { 
+                                    font: { family: "'Roboto Mono', monospace", size: 11 }, 
+                                    maxRotation: 0, 
+                                    autoSkip: false 
+                                } 
+                            }
+                        }
+                    }
+                });
+                } catch (error) {
+                    console.error('Engagement Bar Chart 초기화 오류:', error);
+                }
+            }
+
+        }); // End of DOMContentLoaded listener
+    </script>
+</body>
+</html>
