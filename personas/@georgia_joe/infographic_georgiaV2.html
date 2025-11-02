@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@georgia_joe 심층 분석 리포트</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .analysis-section {
+            margin-bottom: 80px;
+        }
+
+        .analysis-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .analysis-title {
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .analysis-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        .three-column-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .flow-box {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #999;
+        }
+
+        .strengths-weaknesses-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .sw-card {
+            border: 1px solid #e0e0e0;
+            padding: 40px;
+        }
+
+        .sw-card-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .sw-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sw-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .sw-icon {
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .sw-content h4 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .sw-content p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1200px) {
+            .three-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .analysis-title {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 30px 20px;
+            }
+
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .strengths-weaknesses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .flow-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+        
+        <div class="analysis-header">
+            <h1 class="analysis-title">인스타그램 계정 @georgia_joe 심층 분석</h1>
+            <p class="analysis-description">계정 포스트에서 발견된 운영자의 심리적 프로파일 및 내재된 욕망 추론</p>
+        </div>
+
+        <section class="analysis-section">
+            <div class="content-card">
+                <h2 class="card-title">1. 자아 분석: '생성된 자아'의 구축</h2>
+                <p class="analysis-description">
+                    본 분석은 @georgia_joe 계정 데이터를 기반으로 합니다. @georgia_joe 계정은 단순한 '가상 자아'가 아닌, 운영자의 실제 철학과 경험을 정제하고 확장하여 의도적으로 구축한 <strong>'생성된 자아(Generated Self)'</strong>를 보여줍니다. 이 자아는 온라인상의 페르소나와 현실 자아 간의 높은 일치성을 특징으로 하며, 이는 계정의 진정성과 한계점을 동시에 결정짓는 핵심 요인입니다.
+                </p>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">2. @georgia_joe에서 발견한 세 가지 자아</h2>
+            
+            <div class="content-card">
+                <div class="two-column-layout">
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">2.1. 시각적 자아 (Visual Self)</h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            '노력하지 않은 듯한 우아함(Sprezzatura)'이 핵심입니다. 포스트는 전문적이고 세련된 미학을 유지하며, 부드럽고 자연스러운 조명, 정제된 색상 팔레트를 통해 고급 라이프스타일을 시각화합니다. 이는 단순한 미적 과시가 아닌, 개념적 자아의 철학을 뒷받침하는 시각적 '증거'로 기능합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 18px; font-weight: 500; text-align: center; margin-bottom: 20px;">주요 콘텐츠 카테고리 분포</h4>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px;">계정의 시각적 정체성은 전문적 브랜딩과 고급 라이프스타일 콘텐츠의 전략적 혼합을 통해 구축됩니다.</p>
+                        <div class="chart-container">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="two-column-layout">
+                    <div>
+                        <h4 style="font-size: 18px; font-weight: 500; text-align: center; margin-bottom: 20px;">주요 포스트별 참여도(Engagement) 추이</h4>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px;">인터뷰와 같은 전문적 서사가 높은 참여를 유도하며, 일관된 라이프스타일 포스트가 꾸준한 반응을 확보합니다.</p>
+                        <div class="chart-container">
+                            <canvas id="engagementChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">2.2. 사회적 자아 (Social Self)</h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            높은 '관계자본(Relationship Capital)'을 기반으로 합니다. 포스트는 팀워크, 협업, 지인과의 식사 등 사회적 상호작용을 비중 있게 다룹니다. 이는 단순한 인맥 과시가 아니라, '함께 성장한다'는 메시지를 전달하며 팔로워와의 유대감을 강화하고 신뢰를 구축하는 전략입니다. 참여도 차트에서 보듯이, 전문적 서사와 관계가 결합될 때 가장 높은 반응을 이끌어냅니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3 class="card-title" style="text-align: center;">2.3. 개념적 자아 (Conceptual Self)</h3>
+                <p style="color: #666; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto 40px;">
+                    '서사의 중요성'이 이 계정의 핵심입니다. 'P급 브랜드' 철학에서 명시되듯, 제품이나 서비스가 아닌 '경험'과 '컨텍스트'를 제공하는 것을 목표로 합니다. 홈쿠킹조차 단순한 레시피가 아닌 '삶의 질을 높이는 루틴'이라는 서사로 포장됩니다. 이 개념적 자아는 다른 두 자아(시각, 사회)를 통제하고 방향성을 부여하는 가장 상위의 자아입니다.
+                </p>
+                
+                <div class="flow-container">
+                    <div class="flow-box">현실 자아<br>(경험, 철학)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">생성된 자아<br>(인스타그램 포스팅)</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">팔로워<br>('컨텍스트' 경험)</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">3. 외부 데이터로 추론한 @georgia_joe의 자아</h2>
+            
+            <div class="content-card">
+                <div class="two-column-layout">
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">'P급 브랜드'로서의 정체성</h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            우먼센스 인터뷰에서 언급된 'P급 브랜드' 개념은 계정의 모든 활동을 관통하는 핵심입니다. 이는 '제품(Product)'이 아닌 '사람(People)', '철학(Philosophy)', '관점(Perspective)'을 기반으로 한 브랜드를 의미합니다.
+                        </p>
+                        <p style="color: #666; line-height: 1.8; margin-top: 20px;">
+                            @georgia_joe는 운영자 자신을 'P급 브랜드'로 규정하고, 인스타그램을 통해 자신의 철학과 경험이라는 '컨텍스트'를 제공합니다. 이 전략은 외부 데이터(인터뷰)와 내부 데이터(포스트) 간의 완벽한 일치성을 보여주며, '생성된 자아'의 높은 진정성을 입증합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 18px; font-weight: 500; text-align: center; margin-bottom: 20px;">계정 핵심 테마 분석</h4>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px;">분석 결과, '브랜드 철학'과 '라이프스타일'이 계정을 이끄는 쌍두마차이며, '단순 제품 홍보'는 의도적으로 배제됩니다.</p>
+                        <div class="chart-container">
+                            <canvas id="themesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-section">
+            <h2 class="card-title" style="text-align: center;">4. @georgia_joe의 장/단점 (높은 일치성의 양면성)</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                '생성된 자아'와 '현실 자아'의 높은 일치성은 강력한 무기인 동시에 명확한 한계를 지닙니다.
+            </p>
+
+            <div class="strengths-weaknesses-grid">
+                <div class="sw-card">
+                    <h3 class="sw-card-title">장점 (Strengths)</h3>
+                    <ul class="sw-list">
+                        <li>
+                            <span class="sw-icon">✓</span>
+                            <div class="sw-content">
+                                <h4>압도적 진정성 및 신뢰도</h4>
+                                <p>온라인과 현실의 간극이 적어 팔로워에게 높은 신뢰를 줍니다.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sw-icon">✓</span>
+                            <div class="sw-content">
+                                <h4>강력하고 일관된 서사</h4>
+                                <p>'P급 브랜드'라는 명확한 철학이 모든 포스트를 관통합니다.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sw-icon">✓</span>
+                            <div class="sw-content">
+                                <h4>높은 관계자본 형성</h4>
+                                <p>전문성과 인간적 면모를 동시에 보여주며 강력한 커뮤니티를 구축합니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sw-card">
+                    <h3 class="sw-card-title">단점 (Weaknesses)</h3>
+                    <ul class="sw-list">
+                        <li>
+                            <span class="sw-icon">✗</span>
+                            <div class="sw-content">
+                                <h4>브랜드 확장의 제한</h4>
+                                <p>계정이 운영자 개인과 너무 밀착되어, 개인의 정체성을 벗어나는 확장이 어렵습니다.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sw-icon">✗</span>
+                            <div class="sw-content">
+                                <h4>'유한한 브랜드'로서의 한계</h4>
+                                <p>브랜드의 생명력이 운영자의 개인 활동에 전적으로 의존합니다.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="sw-icon">✗</span>
+                            <div class="sw-content">
+                                <h4>높은 큐레이션 유지 비용</h4>
+                                <p>'노력하지 않은 듯한' 우아함을 연출하기 위해 지속적인 관리와 노력이 필요합니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="text-align: center; font-size: 13px; color: #666; padding-top: 40px; border-top: 1px solid #e0e0e0; margin-top: 60px;">
+            본 분석은 제공된 데이터를 기반으로 한 추론이며, 실제 운영자의 의도와 다를 수 있습니다.
+        </p>
+    </footer>
+
+    <script>
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            if (currentLine.trim().length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+        
+        const commonPlugins = {
+            legend: {
+                labels: {
+                    font: {
+                        family: 'Roboto Mono',
+                        size: 14,
+                    }
+                }
+            },
+            tooltip: {
+                titleFont: { family: 'Roboto Mono' },
+                bodyFont: { family: 'Roboto Mono' },
+                callbacks: {
+                    title: tooltipTitleCallback
+                }
+            }
+        };
+
+        const commonOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: commonPlugins
+        };
+
+        (function() {
+            if (document.getElementById('categoriesChart')) {
+                const ctx = document.getElementById('categoriesChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['홈쿠킹/라이프스타일', '프로페셔널/마케팅', '개인 성찰/일상', '기타'],
+                        datasets: [{
+                            label: '콘텐츠 분포',
+                            data: [40, 30, 20, 10],
+                            backgroundColor: ['rgba(0, 0, 0, 0.9)', 'rgba(0, 0, 0, 0.7)', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.3)'],
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        ...commonOptions,
+                        plugins: {
+                            ...commonPlugins,
+                            legend: {
+                                ...commonPlugins.legend,
+                                position: 'bottom',
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('engagementChart')) {
+                const ctx = document.getElementById('engagementChart').getContext('2d');
+                const engagementLabels = ['Post 1 (인터뷰)', 'Post 10 (팀)', 'Post 35 (푸드)', 'Post 70 (푸드)'].map(wrapLabel);
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: engagementLabels,
+                        datasets: [{
+                            label: '좋아요 수',
+                            data: [1000, 300, 200, 124],
+                            borderColor: 'rgba(0, 0, 0, 0.9)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                            yAxisID: 'yLikes',
+                            tension: 0.1,
+                            fill: true
+                        }, {
+                            label: '댓글 수',
+                            data: [115, 30, 25, 20],
+                            borderColor: 'rgba(0, 0, 0, 0.6)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                            yAxisID: 'yComments',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        ...commonOptions,
+                        scales: {
+                            yLikes: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: '좋아요 수' }
+                            },
+                            yComments: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: { display: true, text: '댓글 수' },
+                                grid: {
+                                    drawOnChartArea: false, 
+                                },
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('themesChart')) {
+                const ctx = document.getElementById('themesChart').getContext('2d');
+                const themeLabels = ['브랜드 철학', '라이프스타일', '관계/팀워크', '개인 성찰', '단순 제품 홍보'].map(wrapLabel);
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: themeLabels,
+                        datasets: [{
+                            label: '테마 중요도',
+                            data: [5, 4, 4, 3, 1],
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                            borderColor: 'rgba(0, 0, 0, 0.8)',
+                            pointBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(0, 0, 0, 0.8)'
+                        }]
+                    },
+                    options: {
+                        ...commonOptions,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 5,
+                                ticks: { stepSize: 1 }
+                            }
+                        }
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
