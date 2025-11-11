@@ -103,10 +103,30 @@ This site documents the first encounters and conversations between invited parti
       
       // 나머지 47개 페르소나 (Coming Soon)
       for (let i = 4; i <= 50; i++) {
+        let name = "****";
+        let tag = "Coming Soon";
+
+        if (i === 4) {
+          name = "@by.kimseungryul";
+          tag = "2025-11-20";
+        } else if (i === 5) {
+          name = "@garten_pnique";
+          tag = "2025-11-21";
+        } else if (i === 6) {
+          name = "@jeon.eunkyung";
+          tag = "2025-11-21";
+        } else if (i === 7) {
+          name = "@songey.you_life";
+          tag = "2025-11-22";
+        } else if (i === 8) {
+          name = "@next7378";
+          tag = "2025-12-07";
+        }
+
         personas.push({
           id: i,
-          name: "****",
-          tag: "Coming Soon",
+          name,
+          tag,
           youtubeId: null,
           released: false,
           link: null,
