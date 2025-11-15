@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@by.kimseungryul 인포그래픽</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background: #f5f5f5;
+            color: #1f1f1f;
+        }
+        .infographic-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        .infographic-hero,
+        .intro-text,
+        .insight-card,
+        .list-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 0;
+        }
+        .infographic-hero {
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        .infographic-title {
+            font-size: 34px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .infographic-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        .infographic-meta {
+            font-size: 14px;
+            color: #999;
+            letter-spacing: 1.5px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 60px 0 25px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .intro-text {
+            padding: 30px;
+            line-height: 1.8;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .insight-card {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .insight-card h3 {
+            font-size: 20px;
+            margin: 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .chart-wrap {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th,
+        .summary-table td {
+            border: 1px solid #e0e0e0;
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .summary-table th {
+            background: #fafafa;
+            font-weight: 500;
+            width: 20%;
+        }
+        .dual-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .list-card {
+            padding: 28px;
+        }
+        .list-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .list-card ul {
+            margin: 0;
+            padding-left: 18px;
+            line-height: 1.7;
+        }
+        footer.infographic-footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #8a8a8a;
+            font-size: 14px;
+        }
+        @media (max-width: 640px) {
+            .infographic-hero {
+                padding: 28px;
+            }
+            .infographic-title {
+                font-size: 26px;
+            }
+            .chart-wrap {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration:none; color:inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+        <div class="infographic-container">
+            <div class="infographic-hero">
+                <div class="infographic-meta">DATA-DRIVEN PERSONA STUDY · 2025</div>
+                <h1 class="infographic-title">인스타그램 계정 @by.kimseungryul 심층 분석</h1>
+                <div class="infographic-subtitle">계정 포스팅 데이터에서 발견된 운영자의 심리적 프로파일 및 내재된 욕망 추론</div>
+                <p>본 인포그래픽은 @by.kimseungryul 계정의 시각·사회·개념 데이터를 기반으로, 대화형 AI 자아 구축에 필요한 핵심 구조를 시각적으로 정리한 자료입니다. “추상화된 현실”을 목표로 하는 AI 설계의 기초 레이어로 활용할 수 있습니다.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">I. 자아 분석: 연구 목적과 철학</h2>
+                <div class="intro-text">
+                    <p>인상주의를 선언한 운영자는 빛·물·바람의 감각적 변화와 “애쓰지 않는 걸음”의 태도를 통해 세계를 바라봅니다. 이 보고서는 해당 세계관을 세 가지 자아(시각적, 사회적, 개념적)로 구조화하여 AI가 재현해야 할 감각과 언어, 태도를 명확히 정의합니다.</p>
+                    <table class="summary-table">
+                        <tr>
+                            <th>관찰</th>
+                            <td>빛과 자연, 움직임을 추적하며 데이터로 기록</td>
+                        </tr>
+                        <tr>
+                            <th>예술</th>
+                            <td>모션 블러·추상화·미니멀리즘을 활용해 순간을 인상주의적으로 표현</td>
+                        </tr>
+                        <tr>
+                            <th>철학</th>
+                            <td>우연, 고독, 사랑을 통해 본질을 탐구하며 “추상화된 현실”을 지향</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">II. 데이터에서 도출한 세 가지 자아</h2>
+                <div class="cards-grid">
+                    <div class="insight-card">
+                        <h3>1. 시각적 자아</h3>
+                        <p>빛과 그림자, 질감, 색, 구도를 통해 일상을 실험하는 관찰자. 정지된 사진에 움직임을 심고, 여백과 대비로 감각을 정제합니다.</p>
+                        <div class="chart-wrap">
+                            <canvas id="visualEgoChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <h3>2. 사회적 자아</h3>
+                        <p>관계의 지속성과 온기를 기록하는 동행자. 커플, 가족, 반려견 ‘하루’와의 시간을 통해 유대를 시각화합니다.</p>
+                        <div class="chart-wrap">
+                            <canvas id="socialEgoChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="insight-card" style="grid-column: span 2;">
+                        <h3>3. 개념적 자아</h3>
+                        <p>관조, 철학, 미니멀리즘, 기록, 감성으로 구성된 내적 구조. 자연과 일상에서 추출한 감각을 사유로 확장합니다.</p>
+                        <div class="chart-wrap" style="max-width:640px; margin:0 auto; height:360px;">
+                            <canvas id="conceptualEgoChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">III. AI 구현을 위한 강점과 기회</h2>
+                <div class="dual-column">
+                    <div class="list-card">
+                        <h4>강점 (STRENGTHS)</h4>
+                        <ul>
+                            <li>관찰·예술·철학이 일관된 톤으로 연결되어 캐릭터 설계가 명확합니다.</li>
+                            <li>빛, 물, 바람 등 감각 어휘가 풍부해 시적 응답을 생성하기 용이합니다.</li>
+                            <li>관조와 겸손의 언어 습관이 명확하여 대화 스타일 가이드가 뚜렷합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="list-card">
+                        <h4>기회 및 고려사항 (OPPORTUNITIES)</h4>
+                        <ul>
+                            <li>추상적 감각을 구체적 문장으로 번역하는 프롬프트 엔지니어링이 필요합니다.</li>
+                            <li>사적 관계(연인, 가족) 언급 시 개인정보와 감정선의 균형을 맞춰야 합니다.</li>
+                            <li>“애쓰지 않는 걸음”과 같은 태도를 인터랙션 시나리오에 일관되게 적용해야 합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="infographic-footer">
+                본 인포그래픽은 “생성된 자아들 / Generated Selves” 프로젝트를 위한 참고 자료입니다.
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const palette = ['#111111', '#2f2f2f', '#4c4c4c', '#707070', '#959595', '#bdbdbd'];
+
+            const baseOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        titleFont: {
+                            family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                        },
+                        bodyFont: {
+                            family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                        }
+                    }
+                }
+            };
+
+            const visualCtx = document.getElementById('visualEgoChart').getContext('2d');
+            new Chart(visualCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['빛과 그림자', '질감', '색', '구도', '자연물'],
+                    datasets: [{
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: [palette[1], palette[2], palette[3], palette[4], palette[5]],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    ...baseOptions,
+                    cutout: '65%'
+                }
+            });
+
+            const socialCtx = document.getElementById('socialEgoChart').getContext('2d');
+            new Chart(socialCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['반려/커플', '가족·하루', '개인/일상'],
+                    datasets: [{
+                        data: [50, 35, 15],
+                        backgroundColor: [palette[2], palette[3], palette[4]],
+                        borderRadius: 6,
+                        maxBarThickness: 48
+                    }]
+                },
+                options: {
+                    ...baseOptions,
+                    plugins: {
+                        ...baseOptions.plugins,
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 10,
+                                font: {
+                                    family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const conceptualCtx = document.getElementById('conceptualEgoChart').getContext('2d');
+            new Chart(conceptualCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['관조', '철학', '미니멀리즘', '기록', '감성'],
+                    datasets: [{
+                        data: [5, 4, 3, 5, 4],
+                        backgroundColor: 'rgba(0,0,0,0.08)',
+                        borderColor: palette[0],
+                        pointBackgroundColor: palette[0],
+                        pointBorderColor: '#fff'
+                    }]
+                },
+                options: {
+                    ...baseOptions,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1,
+                                backdropColor: '#fff',
+                                font: {
+                                    family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                                }
+                            },
+                            grid: { color: '#e5e5e5' },
+                            angleLines: { color: '#d1d5db' },
+                            pointLabels: {
+                                font: {
+                                    size: 13,
+                                    family: "'Roboto Mono', 'Noto Sans KR', monospace"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
