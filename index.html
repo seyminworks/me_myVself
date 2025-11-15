@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generated Selves fromIntimately Personal Data</title>
+    <title>Generated Selves from Intimately Personal Data</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -55,6 +55,7 @@ This site documents the first encounters and conversations between invited parti
     </div>
 
     <script>
+      const FORCE_THUMBNAIL_HOVER = false;
       // Sample data
       const personas = [
         // 첫 번째 페르소나 - @sey.min (실제 데이터)
@@ -105,10 +106,12 @@ This site documents the first encounters and conversations between invited parti
       for (let i = 4; i <= 50; i++) {
         let name = "****";
         let tag = "Coming Soon";
+        let link = null;
 
         if (i === 4) {
           name = "@by.kimseungryul";
           tag = "2025-11-20";
+          link = "personas/@by.kimseungryul/persona.html";
         } else if (i === 5) {
           name = "@garten_pnique";
           tag = "2025-11-21";
@@ -131,8 +134,8 @@ This site documents the first encounters and conversations between invited parti
           name,
           tag,
           youtubeId: null,
-          released: false,
-          link: null,
+          released: !!link,
+          link: link,
           conversations: [
             "This persona will be revealed soon.",
             "Stay tuned for updates."
@@ -336,6 +339,17 @@ This site documents the first encounters and conversations between invited parti
         }
         grid.appendChild(card);
       });
+
+      if (FORCE_THUMBNAIL_HOVER) {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('.hover-image').forEach(img => {
+            img.style.opacity = '1';
+          });
+          document.querySelectorAll('.default-content').forEach(content => {
+            content.style.opacity = '0';
+          });
+        });
+      }
 
       // 인덱스 페이지로 돌아가기
       function showIndex() {
