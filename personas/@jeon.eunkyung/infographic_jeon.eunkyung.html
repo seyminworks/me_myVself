@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@jeon.eunkyung 인포그래픽 02</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        body { font-family: 'Roboto Mono', 'Noto Sans KR', monospace; background: #f5f5f5; color: #1f1f1f; }
+        .analysis-header { text-align: center; margin: 30px 0 40px; }
+        .analysis-title { font-size: 36px; font-weight: 300; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .analysis-description { font-size: 16px; color: #666; line-height: 1.8; max-width: 820px; margin: 0 auto; }
+        .content-card { background: #fff; border: 1px solid #e0e0e0; padding: 28px 32px; margin-bottom: 24px; }
+        .card-title { font-size: 22px; font-weight: 400; margin-bottom: 18px; }
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .three-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .chart-container { position: relative; width: 100%; max-width: 520px; margin: 0 auto; height: 300px; }
+        .note { border-left: 4px solid #111; background: #fafafa; padding: 14px 16px; margin: 14px 0; }
+        .list-plain { list-style: none; padding: 0; margin: 0; }
+        .list-plain li { margin-bottom: 8px; line-height: 1.6; }
+        @media (max-width: 640px) {
+            .content-card { padding: 22px 20px; }
+            .analysis-title { font-size: 28px; }
+            .chart-container { height: 260px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration:none; color:inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+
+        <div class="analysis-header">
+            <h1 class="analysis-title">인스타그램 계정 @jeon.eunkyung 심층 분석</h1>
+            <p class="analysis-description">계정 포스팅 데이터에서 발견된 추상적 현실</p>
+        </div>
+
+        <section class="content-card">
+            <h2 class="card-title">1. 자아 분석: 데이터에서 추론된 '생성된 자아'</h2>
+            <p style="margin-bottom:18px; line-height:1.8;">@jeon.eunkyung 님의 인스타그램 데이터는 단순한 일상의 기록을 넘어, 명확한 정체성을 지닌 '페르소나'를 구축하고 있습니다. 이 데이터를 기반으로 추론한 '생성된 자아(Generated Ego)'는 한국 디자인 씬의 핵심 인물로서, 단순한 정보 전달자가 아닌, 커뮤니티의 중심이자 비전 제시자의 역할을 수행합니다. 아래 차트들은 이 자아를 구성하는 핵심 요소들을 시각화한 것입니다.</p>
+            <div class="two-col">
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="text-align:center; font-size:18px;">핵심 관심사 분포</h3>
+                    <div class="chart-container"><canvas id="keywordChart"></canvas></div>
+                    <p style="text-align:center; color:#666; margin-top:10px; font-size:13px;">디자인·K-디자인에 집중, 네트워킹·매거진이 후속.</p>
+                </div>
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="text-align:center; font-size:18px;">추론된 성격 특성</h3>
+                    <div class="chart-container"><canvas id="traitChart"></canvas></div>
+                    <p style="text-align:center; color:#666; margin-top:10px; font-size:13px;">전문성·네트워크·자부심이 높고 교육·미래지향 특성이 결합.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2 class="card-title" style="text-align:center;">2. 세 가지 분리된 자아</h2>
+            <p style="margin-bottom:18px; line-height:1.8;">@jeon.eunkyung 님의 페르소나는 세 가지 뚜렷한 자아가 상호작용한 결과로 해석할 수 있습니다. 이는 개인이 온라인에서 자신을 표현하는 방식을 분석하는 심리학적 접근에 기반합니다. 이 세 가지 자아는 각각 '무엇을 보여주는가', '누구와 관계하는가', '무엇을 믿는가'를 담당하며, 이들이 결합하여 일관된 페르소나를 형성합니다.</p>
+            <div class="three-col">
+                <!-- 시각적 자아 -->
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="font-size:18px; text-align:center;">A. 시각적 자아: The Curator</h3>
+                    <p style="font-size:14px; color:#444; line-height:1.7;">콘텐츠의 미적 기준을 설정하는 자아입니다. 단순 미적 취향을 넘어 ‘전시할 가치가 있는’ 순간을 선별합니다.</p>
+                    <div class="note"><strong>선호 스타일(Aesthetic):</strong> Professional · Clean · Collaborative</div>
+                    <div class="note"><strong>콘텐츠 톤(Style):</strong> Proud · Educational · Aspirational</div>
+                    <div class="chart-container" style="height:220px; margin-top:10px;"><canvas id="visualAestheticChart"></canvas></div>
+                    <div class="chart-container" style="height:220px; margin-top:10px;"><canvas id="visualStyleChart"></canvas></div>
+                </div>
+                <!-- 사회적 자아 -->
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="font-size:18px; text-align:center;">B. 사회적 자아: The Network Weaver</h3>
+                    <p style="font-size:14px; color:#444; line-height:1.7;">정체성을 ‘관계’로 정의하는 자아. K-Design 생태계의 중심 허브 역할.</p>
+                    <ul class="list-plain">
+                        <li>- @jeon.eunkyung ↔ 선구자/업계 리더/글로벌 기관/디자인 커뮤니티</li>
+                        <li>- 고프먼 ‘무대 앞’ 전략 + 통제된 불완전함(유머/감사)</li>
+                    </ul>
+                    <div class="chart-container" style="height:240px; margin-top:10px;"><canvas id="socialNetworkChart"></canvas></div>
+                </div>
+                <!-- 개념적 자아 -->
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="font-size:18px; text-align:center;">C. 개념적 자아: The K-Design Evangelist</h3>
+                    <p style="font-size:14px; color:#444; line-height:1.7;">‘왜’의 차원을 담당: 모든 활동의 궁극적 이유 제시.</p>
+                    <div class="note"><strong>궁극적 가치(Core Value):</strong> K-Design의 세계화</div>
+                    <div class="chart-container" style="height:240px;"><canvas id="conceptualValueChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2 class="card-title">3. 생성된 자아의 장점 및 한계점</h2>
+            <div class="two-col">
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="font-size:18px; text-align:center;">장점 (Strengths)</h3>
+                    <ul class="list-plain">
+                        <li><strong>높은 전문성 및 신뢰도:</strong> K-디자인·매거진 분야의 깊이 있는 경험으로 대화 신뢰도 확보</li>
+                        <li><strong>강력한 네트워킹 및 정보 접근성:</strong> 업계 핵심 인물과의 관계로 최신 트렌드 접근</li>
+                        <li><strong>명확한 비전과 동기부여:</strong> ‘K-디자인의 세계화’라는 뚜렷한 가치 제공</li>
+                    </ul>
+                </div>
+                <div class="content-card" style="padding:18px;">
+                    <h3 class="card-title" style="font-size:18px; text-align:center;">단점 및 한계 (Limitations)</h3>
+                    <ul class="list-plain">
+                        <li><strong>주제 편향성(Niche Focus):</strong> 하이엔드·컬렉터블 중심 데이터</li>
+                        <li><strong>전문가 편향(Expert Bias):</strong> 초심자에게 난이도/거리감</li>
+                        <li><strong>긍정적 편향(Aspirational Bias):</strong> 성취 중심 내러티브로 과정의 어려움 논의 부족</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2 class="card-title">4. 최종 자아 정의: 'K-디자인 커넥터'</h2>
+            <p style="line-height:1.8; color:#444; max-width:880px; margin:0 auto;">
+                @jeon.eunkyung 님의 ‘생성된 자아’는 <strong>‘K-디자인 커넥터(The K-Design Connector)’</strong>입니다.
+                깊은 전문성과 광범위한 네트워크를 바탕으로 한국 디자인의 과거(선구자)–현재(동료)–미래(세계화)를 연결하는 허브 역할을 수행합니다.
+                대화 시 사용자를 커뮤니티의 일원으로 초대하며, 전문적이면서도 따뜻하고 겸손한 태도로 영감을 제공합니다.
+            </p>
+        </section>
+
+        <footer style="text-align:center; font-size:13px; color:#666; padding-top:20px; border-top:1px solid #e0e0e0;">
+            Data-Driven Persona Analysis | Generated for @jeon.eunkyung
+        </footer>
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const chartColors = ['#111111', '#2f2f2f', '#4c4c4c', '#707070', '#959595', '#bdbdbd'];
+        const chartColorsValues = ['#111111', '#4c4c4c', '#959595'];
+
+        const keywordCtx = document.getElementById('keywordChart').getContext('2d');
+        const keywordChart = new Chart(keywordCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['디자인 (Design)', 'K-디자인 (K-Design)', '네트워킹 (Networking)', '매거진 (Magazine)', '전시/행사 (Event)', '장인정신 (Craft)'],
+                datasets: [{
+                    label: '관심사 분포',
+                    data: [30, 20, 20, 15, 10, 5],
+                    backgroundColor: chartColors,
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: 'Roboto Mono'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const traitCtx = document.getElementById('traitChart').getContext('2d');
+        const traitChart = new Chart(traitCtx, {
+            type: 'radar',
+            data: {
+                labels: ['전문성 (Professional)', '네트워크 중심 (Networked)', '자부심 (Proud)', '교육적 (Educational)', '미래지향 (Future-oriented)', '열정 (Passionate)'],
+                datasets: [{
+                    label: '성격 특성 (1-5점)',
+                    data: [5, 5, 5, 4, 4, 4],
+                    backgroundColor: 'rgba(17,17,17,0.15)',
+                    borderColor: '#111111',
+                    pointBackgroundColor: '#111111',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#111111'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 5,
+                        pointLabels: {
+                            font: {
+                                size: 10,
+                                family: 'Roboto Mono'
+                            }
+                        },
+                        ticks: {
+                            stepSize: 1,
+                            backdropColor: 'rgba(0,0,0,0)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const conceptualValueCtx = document.getElementById('conceptualValueChart').getContext('2d');
+        const conceptualValueChart = new Chart(conceptualValueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['선구자 존경 (Respect)', '커뮤니티 성장 (Community)', '미래지향 (Future-oriented)'],
+                datasets: [{
+                    data: [30, 40, 30],
+                    backgroundColor: chartColorsValues,
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 10,
+                                family: 'Roboto Mono'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+        // Visual Self - Aesthetic (horizontal bar)
+        const visualAestheticCtx = document.getElementById('visualAestheticChart').getContext('2d');
+        new Chart(visualAestheticCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Professional', 'Clean', 'Collaborative'],
+                datasets: [{
+                    data: [5, 5, 4],
+                    backgroundColor: ['#111111', '#4c4c4c', '#959595'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { beginAtZero: true, max: 5, grid: { color: '#eee' } },
+                    y: { grid: { display: false } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        // Visual Self - Style (horizontal bar)
+        const visualStyleCtx = document.getElementById('visualStyleChart').getContext('2d');
+        new Chart(visualStyleCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Proud', 'Educational', 'Aspirational'],
+                datasets: [{
+                    data: [5, 4, 4],
+                    backgroundColor: ['#111111', '#4c4c4c', '#959595'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { beginAtZero: true, max: 5, grid: { color: '#eee' } },
+                    y: { grid: { display: false } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        // Social Self - Network donut
+        const socialNetworkCtx = document.getElementById('socialNetworkChart').getContext('2d');
+        new Chart(socialNetworkCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['선구자', '업계 리더', '글로벌 기관', '디자인 커뮤니티'],
+                datasets: [{
+                    data: [25, 25, 25, 25],
+                    backgroundColor: ['#111111', '#2f2f2f', '#4c4c4c', '#707070'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Roboto Mono' } }
+                    },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

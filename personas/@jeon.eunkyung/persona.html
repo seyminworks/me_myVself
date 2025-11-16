@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@jeon.eunkyung — Generated Self</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="persona.css" />
+    <script src="elevenlabs-config.js"></script>
+    <!-- ElevenLabs ConvAI Widget Script -->
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  </head>
+  <body>
+    <header>
+      <a href="../../index.html" style="text-decoration: none; color: inherit;"><div class="logo">생성된 자아들 / Generated Selves</div></a>
+      <nav>
+        <a href="../../index.html">Home</a>
+        <a href="../../about.html">About</a>
+        <a href="#">Contact</a>
+        <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <a href="../../index.html" class="back-button">
+        ← Back
+      </a>
+      
+      <div class="detail-header">
+        <h1 class="detail-title">@jeon.eunkyung</h1>
+        <p class="detail-subtitle">따뜻한 전문가 · 문화적 연결자 (Design Director)</p>
+        
+        <p class="core-identity-description">
+          빛, 물, 바람이 만들어내는 순간적 감각을 인상주의적 시선으로 기록하며, 관찰·예술·철학을 하나의 세계관으로 엮어내는 다층적 자아입니다. 일상에서 발견한 미세한 변화까지 포착해 “추상화된 현실”로 재구성하고, 그 과정을 통해 사용자에게 사색과 위안을 건넵니다.
+        </p>
+        
+        <p class="core-identity-keywords">
+          #빛 #물 #바람 #인상주의 #관찰자 #관조 #우연 #추상화된현실
+        </p>
+      </div>
+
+      <div class="detail-content">
+        <!-- ========== 비디오 + 오디오 섹션 ========== -->
+        <div class="top-section">
+          <!-- 비디오 섹션 (왼쪽) -->
+          <div class="video-section">
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background: #000;">
+              <iframe
+                src="https://www.youtube.com/embed/2Ehnm6RdWDE?feature=youtu.be"
+                title="YouTube video player"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          
+          <!-- 녹음된 대화 오디오 (오른쪽) -->
+          <div class="audio-section-left">
+            <h3>녹음된 대화 (Recorded Conversation) / 2025-11-21</h3>
+            <div class="audio-container">
+              <div class="audio-player-compact">
+                <audio id="conversationAudio" controls preload="metadata">
+                  <source src="" type="audio/mpeg">
+                  <source src="" type="audio/wav">
+                  브라우저가 오디오 재생을 지원하지 않습니다.
+                </audio>
+              </div>
+              <div class="audio-controls-compact">
+                <button id="loadConversationBtn" class="load-btn">대화 불러오기</button>
+                <button id="downloadAudioBtn" class="download-btn" style="display: none;">다운로드</button>
+              </div>
+              <p class="audio-note" style="margin-top:8px; color:#666; font-size:13px;">
+                현재는 테스트 음성으로 제공됩니다. 실제 대화는 추후 업데이트 예정입니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+
+        <!-- ========== 트랜스크립트 + 에이전트 섹션 ========== -->
+        <div class="middle-section">
+          <div class="middle-section">
+            <!-- 대화 트랜스크립트 (왼쪽) -->
+            <div class="transcript-section-right">
+              <h3>대화 내용 (Transcript) / 2025-11-21</h3>
+              <div class="transcript-container">
+                <div class="transcript-header">
+                  <div class="transcript-controls">
+                    <button id="loadTranscriptBtn" class="load-btn">트랜스크립트 불러오기</button>
+                    <button id="toggleTranscriptBtn" class="toggle-btn" style="display: none;">보기/숨기기</button>
+                  </div>
+                </div>
+                
+                <div id="transcriptContent" class="transcript-content-wide" style="display: none;">
+                  <div class="loading" id="transcriptLoading">트랜스크립트를 불러오는 중...</div>
+                  <div id="transcriptText" class="transcript-text-wide" style="display: none;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 에이전트 섹션 (오른쪽) -->
+            <div class="agent-section">
+              <h3>자아와 대화하기 (Talking to the Self) / 10min. max.</h3>
+              <!-- ElevenLabs ConvAI Widget -->
+              <div id="widgetContainer" class="widget-container">
+                <elevenlabs-convai agent-id="agent_0501ka66ws10eeavb2wjsrp50v9h"></elevenlabs-convai>
+                <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+              </div>
+            </div>
+          </div>
+        </div> <!-- container 닫힘 -->
+
+        <div class="persona-overview">
+          <div class="overview-section">
+            <h3 class="overview-title">시각적 자아 (Visual Self)</h3>
+            <div class="overview-content">
+              <p style="margin-bottom: 15px;">유기적 모더니즘과 따뜻한 미니멀리즘을 바탕으로, 기능과 미학을 균형 있게 큐레이션하는 시각적 관찰자입니다.</p>
+              <ul>
+                <li>자연광·목재·가죽·중립톤 위에 녹색/분홍/파란 악센트</li>
+                <li>주제별 변주: 플랫레이/대칭·반복/자연광 활용</li>
+                <li>사진이 철학을 증명하는 구조: 시각 언어로 가치 설득</li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="overview-section">
+            <h3 class="overview-title">개념적 자아 (Conceptual Self)</h3>
+            <div class="overview-content">
+              <p style="margin-bottom: 15px;">부르디외의 ‘문화 자본’과 ‘아비투스’ 틀을 실천적으로 해석하며, 롱라이프 디자인의 윤리와 ‘허투루 하지 않는’ 태도를 지향합니다.</p>
+              <ul>
+                <li>롱라이프 디자인: 지속가능한 가치와 장인정신을 중시</li>
+                <li>공간=문화 자본: 체화/객관화/제도화된 자본의 연결</li>
+                <li>일·삶 통합(#everydayresort), 경험 기반 학습의 설득력</li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="overview-section">
+            <h3 class="overview-title">사회적 자아 (Social Self)</h3>
+            <div class="overview-content">
+              <p style="margin-bottom: 15px;">고프먼의 ‘무대 앞’ 전략을 활용하되, 유머와 감사로 통제된 불완전함을 드러내 진정성 있는 전문가 이미지를 구축합니다.</p>
+              <ul>
+                <li>리더/연결자/멘토/학습자의 다중 역할을 유연히 수행</li>
+                <li>#은경시티서치로 ‘전문가의 시선’을 커뮤니티 자산화</li>
+                <li>자기 인식적 유머·투명한 감사로 심리적 거리 축소</li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="overview-section">
+            <h3 class="overview-title">핵심 특성</h3>
+            <div class="overview-content">
+              <ul>
+                <li><strong>경험 기반 전문성:</strong> 9.5 / 10</li>
+                <li><strong>문화적 연결 능력:</strong> 9.0 / 10</li>
+                <li><strong>미학적 일관성:</strong> 9.0 / 10</li>
+                <li><strong>겸손/유머:</strong> 8.5 / 10</li>
+                <li><strong>균형 감각(초대/공유):</strong> 8.0 / 10</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    
+
+    
+          <div class="cta-section">
+            <h2 class="cta-title">더 자세한 분석 보기</h2>
+            <div class="cta-buttons">
+              <a href="analysis_report.html" class="cta-button">심층 분석 리포트</a>
+              <a href="infographic_jeon.eunkyung.html" class="cta-button">전체 분석 리포트</a>
+              <a href="https://instagram.com/jeon.eunkyung" class="cta-button" target="_blank">Instagram 보기</a>
+            </div>
+          </div>
+
+    <script>
+      // ElevenLabs API 설정 (설정 파일에서 가져옴)
+      const config = window.ELEVENLABS_CONFIG || {
+        API_KEY: 'YOUR_ELEVENLABS_API_KEY',
+        BASE_URL: 'https://api.elevenlabs.io/v1',
+        CONVERSATION_ID: ''
+      };
+      
+      // 설정 유효성 검사
+      const configErrors = window.validateConfig ? window.validateConfig() : [];
+      if (configErrors.length > 0) {
+        console.warn('ElevenLabs 설정 오류:', configErrors);
+      }
+      
+      // 전역 변수
+      let currentAudioUrl = null;
+      let currentTranscript = null;
+      
+      // DOM 요소들
+      const loadConversationBtn = document.getElementById('loadConversationBtn');
+      const loadTranscriptBtn = document.getElementById('loadTranscriptBtn');
+      const downloadAudioBtn = document.getElementById('downloadAudioBtn');
+      const toggleTranscriptBtn = document.getElementById('toggleTranscriptBtn');
+      const conversationAudio = document.getElementById('conversationAudio');
+      const audioDuration = document.getElementById('audioDuration');
+      const transcriptContent = document.getElementById('transcriptContent');
+      const transcriptText = document.getElementById('transcriptText');
+      const transcriptLoading = document.getElementById('transcriptLoading');
+      const widgetContainer = document.getElementById('widgetContainer');
+      
+      // 위젯 확대 상태
+      let isWidgetExpanded = false;
+      
+      // 위젯 확대 함수
+      function expandWidget() {
+        if (widgetContainer && !isWidgetExpanded) {
+          widgetContainer.classList.add('expanded');
+          isWidgetExpanded = true;
+          console.log('위젯 확대됨');
+        }
+      }
+      
+      // 위젯 클릭 시 한 번만 확대하고 계속 유지
+      if (widgetContainer) {
+        widgetContainer.addEventListener('click', function(e) {
+          // iframe 내부 클릭은 제외
+          if (e.target.tagName === 'IFRAME' || e.target.closest('iframe')) {
+            return;
+          }
+          
+          // 아직 확대되지 않았으면 한 번만 확대
+          if (!isWidgetExpanded) {
+            expandWidget();
+          }
+          // 이미 확대되었으면 아무 동작도 하지 않음
+        });
+      }
+
+      // 이벤트 리스너 설정
+      loadConversationBtn.addEventListener('click', loadConversationAudio);
+      loadTranscriptBtn.addEventListener('click', loadTranscript);
+      downloadAudioBtn.addEventListener('click', downloadAudio);
+      toggleTranscriptBtn.addEventListener('click', toggleTranscript);
+      
+      // 오디오 메타데이터 로드 이벤트
+      conversationAudio.addEventListener('loadedmetadata', function() {
+        const duration = conversationAudio.duration;
+        audioDuration.textContent = formatTime(duration);
+      });
+      
+      // 시간 포맷팅 함수
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+      
+      // ElevenLabs 대화 오디오 불러오기
+      async function loadConversationAudio() {
+        try {
+          loadConversationBtn.textContent = '불러오는 중...';
+          loadConversationBtn.disabled = true;
+          
+          console.log('오디오 로드 시작...', {
+            apiKey: config.API_KEY ? '설정됨' : '미설정',
+            conversationId: config.CONVERSATION_ID
+          });
+          
+          const audioUrl = await fetchConversationAudio();
+          
+          if (audioUrl) {
+            conversationAudio.src = audioUrl;
+            currentAudioUrl = audioUrl;
+            downloadAudioBtn.style.display = 'inline-block';
+            loadConversationBtn.textContent = '오디오 불러오기 완료';
+            loadConversationBtn.style.background = '#28a745';
+            console.log('오디오 로드 성공:', audioUrl);
+          }
+        } catch (error) {
+          console.error('오디오 로드 실패:', error);
+          alert(`오디오를 불러오는 중 오류가 발생했습니다: ${error.message}`);
+          loadConversationBtn.textContent = '대화 불러오기';
+          loadConversationBtn.style.background = '#000';
+        } finally {
+          loadConversationBtn.disabled = false;
+        }
+      }
+      
+      // 트랜스크립트 불러오기
+      async function loadTranscript() {
+        try {
+          loadTranscriptBtn.textContent = '불러오는 중...';
+          loadTranscriptBtn.disabled = true;
+          transcriptContent.style.display = 'block';
+          transcriptLoading.style.display = 'block';
+          transcriptText.style.display = 'none';
+          
+          const transcript = await fetchTranscript();
+          
+          if (transcript) {
+            currentTranscript = transcript;
+            displayTranscript(transcript);
+            toggleTranscriptBtn.style.display = 'inline-block';
+            loadTranscriptBtn.textContent = '트랜스크립트 불러오기 완료';
+            loadTranscriptBtn.style.background = '#28a745';
+            // 트랜스크립트 로드 시 위젯 확대
+            expandWidget();
+          }
+        } catch (error) {
+          console.error('트랜스크립트 로드 실패:', error);
+          alert('트랜스크립트를 불러오는 중 오류가 발생했습니다.');
+          loadTranscriptBtn.textContent = '트랜스크립트 불러오기';
+          loadTranscriptBtn.style.background = '#000';
+        } finally {
+          loadTranscriptBtn.disabled = false;
+          transcriptLoading.style.display = 'none';
+        }
+      }
+      
+      // 트랜스크립트 표시
+      function displayTranscript(transcript) {
+        transcriptText.innerHTML = '';
+        
+        // transcript가 배열인지 확인
+        let messages = [];
+        if (Array.isArray(transcript)) {
+          messages = transcript;
+        } else if (transcript.messages && Array.isArray(transcript.messages)) {
+          messages = transcript.messages;
+        } else if (transcript.conversation && Array.isArray(transcript.conversation)) {
+          messages = transcript.conversation;
+        }
+        
+        console.log('트랜스크립트 표시:', messages.length, '개 메시지');
+        
+        messages.forEach(entry => {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = 'message';
+          
+          // role과 message 필드 사용
+          const role = entry.role || 'unknown';
+          const message = entry.message || entry.text || '';
+          const timestamp = entry.timestamp || entry.created_at || '';
+          
+          // role을 한국어로 변환
+          let roleDisplay = role;
+          if (role === 'user') roleDisplay = '사용자';
+          else if (role === 'assistant' || role === 'agent') roleDisplay = '@jeon.eunkyung';
+          else if (role === 'system') roleDisplay = '시스템';
+          
+          const timestampSpan = document.createElement('span');
+          timestampSpan.className = 'timestamp';
+          timestampSpan.textContent = timestamp ? formatTimestamp(timestamp) : '';
+          
+          const speakerSpan = document.createElement('span');
+          speakerSpan.className = 'speaker';
+          speakerSpan.textContent = roleDisplay;
+          
+          const textSpan = document.createElement('span');
+          textSpan.textContent = message;
+          
+          messageDiv.appendChild(timestampSpan);
+          messageDiv.appendChild(speakerSpan);
+          messageDiv.appendChild(textSpan);
+          
+          transcriptText.appendChild(messageDiv);
+        });
+        
+        transcriptText.style.display = 'block';
+        
+        const transcriptContent = document.getElementById('transcriptContent');
+        if (transcriptText.scrollHeight > transcriptContent.clientHeight) {
+          transcriptContent.style.borderBottom = '1px solid #e0e0e0';
+        }
+      }
+      
+      // 타임스탬프 포맷팅
+      function formatTimestamp(timestamp) {
+        if (!timestamp) return '';
+        try {
+          const date = new Date(timestamp);
+          const hours = date.getHours().toString().padStart(2, '0');
+          const minutes = date.getMinutes().toString().padStart(2, '0');
+          const seconds = date.getSeconds().toString().padStart(2, '0');
+          return `${hours}:${minutes}:${seconds}`;
+        } catch (e) {
+          return timestamp;
+        }
+      }
+      
+      // 트랜스크립트 토글
+      function toggleTranscript() {
+        const isVisible = transcriptText.style.display !== 'none';
+        transcriptText.style.display = isVisible ? 'none' : 'block';
+        toggleTranscriptBtn.textContent = isVisible ? '트랜스크립트 보기' : '트랜스크립트 숨기기';
+      }
+      
+      // 오디오 다운로드
+      function downloadAudio() {
+        if (currentAudioUrl) {
+          const a = document.createElement('a');
+          a.href = currentAudioUrl;
+          a.download = 'jeon_eunkyung_conversation.mp3';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      }
+      
+      // ElevenLabs API 호출 함수들
+      async function fetchConversationAudio() {
+        if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || config.CONVERSATION_ID === 'YOUR_CONVERSATION_ID') {
+          console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
+          return getDemoAudioUrl();
+        }
+        
+        try {
+          const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+          const endpoint = config.USE_PROXY 
+            ? `/convai/conversations/${config.CONVERSATION_ID}/audio`
+            : `/convai/conversations/${config.CONVERSATION_ID}/audio`;
+          
+          const url = `${baseUrl}${endpoint}`;
+          console.log('API 호출 URL:', url);
+          
+          const headers = {
+            'Accept': 'audio/mpeg'
+          };
+          
+          if (config.USE_PROXY) {
+            headers['x-api-key'] = config.API_KEY;
+          } else {
+            headers['xi-api-key'] = config.API_KEY;
+          }
+          
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: headers
+          });
+          
+          if (!response.ok) {
+            if (response.status === 401) {
+              throw new Error('API 키가 유효하지 않습니다.');
+            } else if (response.status === 404) {
+              throw new Error('대화를 찾을 수 없습니다.');
+            } else {
+              throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+            }
+          }
+          
+          const blob = await response.blob();
+          return URL.createObjectURL(blob);
+        } catch (error) {
+          console.error('오디오 로드 실패:', error);
+          throw error;
+        }
+      }
+      
+      async function fetchTranscript() {
+        try {
+          console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+          
+          // conversation 정보를 먼저 가져옴
+          const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
+            method: 'GET',
+            headers: {
+              'xi-api-key': config.API_KEY,
+              'Accept': 'application/json'
+            }
+          });
+          
+          console.log('API 응답 상태:', response.status);
+          
+          if (!response.ok) {
+            if (response.status === 401) {
+              throw new Error('API 키가 유효하지 않습니다.');
+            } else if (response.status === 404) {
+              throw new Error('대화를 찾을 수 없습니다.');
+            } else {
+              const errorText = await response.text();
+              console.error('API 응답 오류:', errorText);
+              throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+            }
+          }
+          
+          const data = await response.json();
+          console.log('API 응답 데이터:', data);
+          
+          // transcript 배열을 찾아서 반환
+          if (data.transcript && Array.isArray(data.transcript)) {
+            console.log('트랜스크립트 메시지 개수:', data.transcript.length);
+            return data.transcript;
+          }
+          
+          // transcript가 없는 경우 경고
+          console.warn('트랜스크립트 배열을 찾을 수 없습니다:', data);
+          return getDemoTranscript();
+        } catch (error) {
+          console.error('트랜스크립트 로드 실패:', error);
+          console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
+          return getDemoTranscript();
+        }
+      }
+      
+      function getDemoAudioUrl() {
+        return 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3';
+      }
+      
+      function getDemoTranscript() {
+        return [
+          {
+            role: 'user',
+            message: '안녕하세요, @by.kimseungryul님. 오늘 어떤 이야기를 나누고 싶으신가요?',
+            timestamp: new Date().toISOString()
+          },
+          {
+            role: 'assistant',
+            message: '안녕하세요. 오늘은 빛과 바람을 따라 기록한 최근 작업에 대해 이야기해보고 싶습니다.',
+            timestamp: new Date().toISOString()
+          },
+          {
+            role: 'user',
+            message: '흥미롭네요. 어떤 장면이 인상을 남겼나요?',
+            timestamp: new Date().toISOString()
+          },
+          {
+            role: 'assistant',
+            message: '바람이 만든 흔들림과 물 위의 반사를 그대로 두고, 그 순간의 색을 인상주의적으로 옮기는 작업입니다.',
+            timestamp: new Date().toISOString()
+          },
+          {
+            role: 'user',
+            message: '정말 멋진 시선이네요. 우연을 믿는 태도가 느껴집니다.',
+            timestamp: new Date().toISOString()
+          },
+          {
+            role: 'assistant',
+            message: '감사합니다. 저는 결과보다 순간을 받아들이고, 그 과정이 남기는 감정을 나누고 싶습니다.',
+            timestamp: new Date().toISOString()
+          }
+        ];
+      }
+    </script>
+  </body>
+</html>
