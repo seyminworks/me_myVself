@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@songey.you_life 자아 정체성 시각화</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            color: #111;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 15px;
+        }
+
+        .section-number {
+            font-size: 18px;
+            font-weight: 700;
+            margin-right: 15px;
+            background: #000;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Cards (Minimal) */
+        .card {
+            border: 1px solid #e0e0e0;
+            padding: 0;
+            background: #fff;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Canvas Containers */
+        .canvas-container {
+            width: 100%;
+            height: 250px;
+            background-color: #fafafa;
+            border-top: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .canvas-label {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 6px;
+            border: 1px solid #eee;
+        }
+
+        /* Chart Containers */
+        .chart-box {
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .chart-tag {
+            font-size: 11px;
+            color: #666;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .chart-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .chart-area {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        /* Bias Section */
+        .bias-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .bias-item {
+            background: #fafafa;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .bias-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+            filter: grayscale(100%);
+        }
+
+        .bias-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .bias-eng {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .bias-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .footer-dots {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .bias-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-title {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 40px; color: #666; text-decoration: none; font-size: 14px;">←
+            Back</a>
+
+        <!-- Header -->
+        <div class="header">
+            <span class="header-badge">AI Persona Analysis</span>
+            <h1 class="header-title">@songey.you_life</h1>
+            <div class="header-subtitle">데이터에서 추출한 생성된 자아 (Generated Self)</div>
+        </div>
+
+        <!-- Section 1: Core Identity Visuals -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">핵심 정체성 시각화</h2>
+            </div>
+
+            <div class="grid-2">
+                <!-- Gestural Artist Card -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">제스처 예술가</h3>
+                        <span class="card-subtitle">Gestural Artist</span>
+                        <p class="card-text">
+                            "대담한 추상 드로잉"과 "신체의 에너지". 언어 이전의 감각과 행위(Gesture)를 통해 자아를 증명합니다. 흑백의 강렬한 대비가 특징입니다.
+                        </p>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="gestureCanvas"></canvas>
+                        <div class="canvas-label">Generated Visual: Energy Flow</div>
+                    </div>
+                </div>
+
+                <!-- Cultural Mediator Card -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">문화적 매개자</h3>
+                        <span class="card-subtitle">Cultural Mediator</span>
+                        <p class="card-text">
+                            "소통과 교감"을 위한 연결고리. 자신(Self)을 중심으로 예술(Art), 공간(Space), 대중(Public)을 연결하며 제3의 공간에서 관계를 맺습니다.
+                        </p>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="networkCanvas"></canvas>
+                        <div class="canvas-label">Generated Visual: Connection Node</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: The Three Selves (Data Analysis) -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">자아 데이터 분석</h2>
+            </div>
+
+            <div class="grid-3">
+                <!-- Visual Self Chart -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">시각적 자아 구성</h4>
+                        <span class="chart-tag">Visual Self</span>
+                    </div>
+                    <p class="chart-desc">미니멀하지만 강력한 시각 언어. 흑백의 기조 위에 포인트가 더해진 구조입니다.</p>
+                    <div class="chart-area">
+                        <canvas id="visualDonutChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Social Self Chart -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">사회적 자아: 소통 대상</h4>
+                        <span class="chart-tag">Social Self</span>
+                    </div>
+                    <p class="chart-desc">예술 애호가 및 갤러리 방문객과의 소통에 집중하며, 전문적 지위를 확보하려는 경향이 뚜렷합니다.</p>
+                    <div class="chart-area">
+                        <canvas id="audienceBarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self Chart -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">개념적 자아: 가치 척도</h4>
+                        <span class="chart-tag">Conceptual Self</span>
+                    </div>
+                    <p class="chart-desc">진정성과 예술성을 최우선으로 하되, 접근성을 통해 대중과의 접점을 유지합니다.</p>
+                    <div class="chart-area">
+                        <canvas id="valuesRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attitude Chart (Full Width) -->
+            <div class="chart-box" style="margin-top: 30px;">
+                <div class="chart-header">
+                    <h4 class="chart-title">예상 태도: 커뮤니케이션 톤</h4>
+                    <span class="chart-tag">Attitude & Tone</span>
+                </div>
+                <p class="chart-desc">전문가적 정보 전달과 장난기 넘치는 경험 공유가 공존합니다.</p>
+                <div class="chart-area">
+                    <canvas id="styleBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Bias & Limitations -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">데이터 편향성 및 한계</h2>
+            </div>
+
+            <div class="card" style="padding: 30px; margin-bottom: 30px; background: #fafafa;">
+                <p class="card-text" style="margin-bottom: 0;">
+                    '생성된 자아'는 원본 데이터(Instagram)의 특성상 공적으로 연출된 <strong>'무대(Front Stage)'</strong>에 기반합니다. 따라서 다음과 같은 구조적
+                    편향성을 가집니다.
+                </p>
+            </div>
+
+            <div class="bias-grid">
+                <!-- Bias 1 -->
+                <div class="bias-item">
+                    <div class="bias-icon">😃</div>
+                    <h4 class="bias-title">긍정성의 편향</h4>
+                    <span class="bias-eng">Positivity Bias</span>
+                    <p class="bias-desc">
+                        전시, 성공, 'Joy' 등 긍정적 측면에 데이터가 집중되어 있습니다. 창작의 고뇌나 실패 같은 심층적 데이터는 결여되어 있습니다.
+                    </p>
+                </div>
+
+                <!-- Bias 2 -->
+                <div class="bias-item">
+                    <div class="bias-icon">🏛️</div>
+                    <h4 class="bias-title">문화적 동질성</h4>
+                    <span class="bias-eng">Cultural Homogeneity</span>
+                    <p class="bias-desc">
+                        'Art Lovers' 등 문화 자본을 공유하는 집단 내 소통에 최적화되어 있어, 일반 대중에게의 접근성은 미지수입니다.
+                    </p>
+                </div>
+
+                <!-- Bias 3 -->
+                <div class="bias-item">
+                    <div class="bias-icon">🎨</div>
+                    <h4 class="bias-title">시각적 자기 지시성</h4>
+                    <span class="bias-eng">Visual Self-Reference</span>
+                    <p class="bias-desc">
+                        사회적 담론을 이야기하더라도 결국 본인의 '시각 예술 작업'으로 수렴되는 경향이 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data Source: @songey.you_life Instagram Analysis</p>
+            <div class="footer-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Monochrome Palette
+        const palette = {
+            black: '#111111',
+            darkGray: '#444444',
+            gray: '#888888',
+            lightGray: '#DDDDDD',
+            bg: '#FAFAFA'
+        };
+
+        // --- 1. GESTURAL ARTIST VISUALIZATION (Canvas API) ---
+        const gestureCanvas = document.getElementById('gestureCanvas');
+        if (gestureCanvas) {
+            const ctx = gestureCanvas.getContext('2d');
+            const container = gestureCanvas.parentElement;
+
+            function resizeGesture() {
+                gestureCanvas.width = container.clientWidth;
+                gestureCanvas.height = container.clientHeight;
+                drawGesture();
+            }
+            window.addEventListener('resize', resizeGesture);
+
+            function drawGesture() {
+                const w = gestureCanvas.width;
+                const h = gestureCanvas.height;
+                ctx.clearRect(0, 0, w, h);
+
+                // Background
+                ctx.fillStyle = palette.bg;
+                ctx.fillRect(0, 0, w, h);
+
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Abstract Black Strokes
+                for (let i = 0; i < 6; i++) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = palette.black;
+                    ctx.lineWidth = 5 + Math.random() * 10;
+                    ctx.globalAlpha = 0.7;
+
+                    const startX = Math.random() * w;
+                    const startY = Math.random() * h;
+                    ctx.moveTo(startX, startY);
+
+                    ctx.bezierCurveTo(
+                        Math.random() * w, Math.random() * h,
+                        Math.random() * w, Math.random() * h,
+                        Math.random() * w, Math.random() * h
+                    );
+                    ctx.stroke();
+                }
+
+                // Accent (Dark Gray instead of Red)
+                ctx.beginPath();
+                ctx.strokeStyle = palette.darkGray;
+                ctx.lineWidth = 15;
+                ctx.globalAlpha = 0.9;
+                const rx = Math.random() * w * 0.5 + w * 0.25;
+                const ry = Math.random() * h * 0.5 + h * 0.25;
+                ctx.arc(rx, ry, 25, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            setTimeout(resizeGesture, 100);
+        }
+
+        // --- 2. CULTURAL MEDIATOR VISUALIZATION (Canvas API) ---
+        const networkCanvas = document.getElementById('networkCanvas');
+        if (networkCanvas) {
+            const ctx = networkCanvas.getContext('2d');
+            const container = networkCanvas.parentElement;
+
+            function resizeNetwork() {
+                networkCanvas.width = container.clientWidth;
+                networkCanvas.height = container.clientHeight;
+                drawNetwork();
+            }
+            window.addEventListener('resize', resizeNetwork);
+
+            function drawNetwork() {
+                const w = networkCanvas.width;
+                const h = networkCanvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+                ctx.clearRect(0, 0, w, h);
+
+                const nodes = [
+                    { label: 'Self', x: cx, y: cy, r: 40, color: palette.black, text: '#fff' },
+                    { label: 'Art', x: cx - 100, y: cy - 60, r: 25, color: palette.gray, text: '#fff' },
+                    { label: 'Space', x: cx + 100, y: cy - 60, r: 25, color: palette.gray, text: '#fff' },
+                    { label: 'Public', x: cx, y: cy + 80, r: 30, color: palette.lightGray, text: '#111' }
+                ];
+
+                // Lines
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = palette.gray;
+                ctx.setLineDash([4, 4]);
+
+                for (let i = 1; i < nodes.length; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[0].x, nodes[0].y);
+                    ctx.lineTo(nodes[i].x, nodes[i].y);
+                    ctx.stroke();
+                }
+                ctx.setLineDash([]);
+
+                // Nodes
+                nodes.forEach(node => {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+                    ctx.fillStyle = node.color;
+                    ctx.fill();
+
+                    ctx.fillStyle = node.text;
+                    ctx.font = `500 ${node.r / 2.5}px 'Roboto Mono'`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.label, node.x, node.y);
+                });
+            }
+
+            setTimeout(resizeNetwork, 100);
+        }
+
+        // --- 3. DATA CHARTS (Chart.js) ---
+        Chart.defaults.font.family = "'Roboto Mono', 'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#666';
+
+        const chartCommonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleFont: { size: 12 },
+                    bodyFont: { size: 12 },
+                    padding: 10,
+                    cornerRadius: 0,
+                    displayColors: false
+                }
+            }
+        };
+
+        // Visual Self Donut
+        const visualCtx = document.getElementById('visualDonutChart');
+        if (visualCtx) {
+            new Chart(visualCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['흑백 (Monochrome)', '제스처 (Gestural)', '포인트 (Accent)'],
+                    datasets: [{
+                        data: [65, 25, 10],
+                        backgroundColor: [palette.black, palette.gray, palette.lightGray],
+                        borderWidth: 0,
+                        hoverOffset: 5
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    cutout: '70%',
+                }
+            });
+        }
+
+        // Audience Bar
+        const audienceCtx = document.getElementById('audienceBarChart');
+        if (audienceCtx) {
+            new Chart(audienceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Art Lovers', 'Gallery Goers', 'Collectors', 'General Public'],
+                    datasets: [{
+                        data: [85, 70, 40, 20],
+                        backgroundColor: [palette.black, palette.darkGray, palette.gray, palette.lightGray],
+                        borderRadius: 0,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#eee' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Values Radar
+        const valuesCtx = document.getElementById('valuesRadarChart');
+        if (valuesCtx) {
+            new Chart(valuesCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['예술성', '진정성', '접근성', '기쁨', '소통'],
+                    datasets: [{
+                        label: '가치 점수',
+                        data: [95, 85, 70, 80, 90],
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        borderColor: palette.black,
+                        pointBackgroundColor: palette.black,
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#eee' },
+                            grid: { color: '#eee' },
+                            pointLabels: { font: { size: 11 }, color: '#333' },
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Style Bar (Horizontal)
+        const styleCtx = document.getElementById('styleBarChart');
+        if (styleCtx) {
+            new Chart(styleCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Professional (정보)', 'Playful (경험)', 'Promotional (홍보)'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: [palette.black, palette.gray, palette.lightGray],
+                        borderRadius: 0,
+                        barThickness: 20
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    ...chartCommonOptions,
+                    scales: {
+                        x: { beginAtZero: true, grid: { color: '#eee' } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
