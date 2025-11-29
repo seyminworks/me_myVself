@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yourstrulyminac Persona Analysis Infographic</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            color: #111;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 15px;
+        }
+
+        .section-number {
+            font-size: 18px;
+            font-weight: 700;
+            margin-right: 15px;
+            background: #000;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            /* Prevent shrinking */
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #000;
+            line-height: 1.2;
+            /* Better vertical alignment */
+            margin-top: 2px;
+            /* Optical adjustment */
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Cards (Minimal) */
+        .card {
+            border: 1px solid #e0e0e0;
+            padding: 0;
+            background: #fff;
+            height: 100%;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+
+        /* Chart Containers */
+        .chart-box {
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .chart-tag {
+            font-size: 11px;
+            color: #666;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .chart-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .chart-area {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        /* Bias Section */
+        .bias-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .bias-item {
+            background: #fff;
+            /* Changed from #fafafa to #fff */
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .bias-icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+            filter: grayscale(100%);
+        }
+
+        .bias-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .bias-eng {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .bias-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Custom Icon Box for Social Self */
+        .icon-box {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .icon-box-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+            filter: grayscale(100%);
+        }
+
+        .icon-box-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .icon-box-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .flow-step {
+            flex: 1;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+        }
+
+        .flow-arrow {
+            padding: 0 10px;
+            color: #999;
+            font-size: 20px;
+        }
+
+        .flow-title {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .flow-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .footer-dots {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .bias-grid,
+            .flow-container {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+
+            .header-title {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 40px; color: #666; text-decoration: none; font-size: 14px;">←
+            Back</a>
+
+        <!-- Header -->
+        <div class="header">
+            <span class="header-badge">대화형 에이전트 구축을 위한 청사진</span>
+            <h1 class="header-title">@yourstrulyminac</h1>
+            <div class="header-subtitle">인스타그램 데이터 기반 AI 페르소나 심층 분석 보고서</div>
+        </div>
+
+        <!-- Section 1: Identity -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">1.정체성 (Identity): 심미적 실용주의자 & 자연 친화적 탐구자</h2>
+            </div>
+
+            <!-- Intro Text -->
+            <div class="card" style="margin-bottom: 30px; border: none;">
+                <p class="card-text" style="font-size: 16px; font-weight: 300; line-height: 1.8;">
+                    @yourstrulyminac 데이터 분석 결과, 이 페르소나는 <strong>"일상의 미학을 탐구하는 사색적 큐레이터"</strong>로 정의됩니다. 창조적이고 전문적인
+                    직업(아트 디파트먼트, 기획 등)에 종사하면서도, 내면의 평화와 회복을 위해 끊임없이 자연으로 회귀하는 이중적인 매력을 지니고 있습니다. 도시의 세련됨을 즐기면서도(미식,
+                    호텔, 바), 영혼의 충전은 숲과 하늘에서 얻는 <strong>'심미적 실용주의자'</strong>입니다.
+                </p>
+            </div>
+
+            <div class="grid-2">
+                <!-- Core Traits Chart -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">핵심 성향 분포</h4>
+                        <span class="chart-tag">Core Traits</span>
+                    </div>
+                    <p class="chart-desc">데이터에서 추출된 키워드 빈도와 감정 강도를 기반으로 한 5대 성향 분석입니다.</p>
+                    <div class="chart-area">
+                        <canvas id="identityRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Traits Details -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="card" style="padding: 25px;">
+                        <h4 class="card-title" style="font-size: 16px;">🌿 자연 귀소 본능</h4>
+                        <p class="card-text">
+                            하늘, 구름, 숲, 꽃에 대한 빈번한 업로드는 단순한 감상을 넘어 삶의 이치를 깨닫는 철학적 도구로 작용합니다.
+                        </p>
+                    </div>
+                    <div class="card" style="padding: 25px;">
+                        <h4 class="card-title" style="font-size: 16px;">🎨 감각적 전문가</h4>
+                        <p class="card-text">
+                            '아트 디파트먼트', '타이다이' 등 창작 활동과 연관된 키워드는 높은 미적 기준과 성취욕을 나타냅니다.
+                        </p>
+                    </div>
+                    <div class="card" style="padding: 25px;">
+                        <h4 class="card-title" style="font-size: 16px;">🥂 관계의 미학</h4>
+                        <p class="card-text">
+                            음식과 공간은 '소비'가 아닌 타인과의 '교감'을 위한 매개체로 활용됩니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: The Three Selves -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">2.추론된 세 가지 자아 (The Three Selves)</h2>
+            </div>
+
+            <p class="card-text" style="margin-bottom: 30px;">
+                데이터는 단일한 모습이 아닌, 시각적(보여지는 나), 사회적(관계 속의 나), 개념적(내면의 나)인 세 가지 층위의 자아를 드러냅니다.
+            </p>
+
+            <div class="grid-2">
+                <!-- Visual Self -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">2-1. 시각적 자아 (Visual Self)</h4>
+                    </div>
+                    <p class="chart-desc">
+                        <strong>"Effortless Chic & Natural Tone"</strong><br>
+                        인위적인 화려함보다는 자연광, 베이지, 우드, 그린 톤을 선호하며 편안하면서도 세련된 미감을 추구합니다.
+                    </p>
+                    <div class="chart-area">
+                        <canvas id="visualColorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">2-2. 개념적 자아 (Conceptual Self)</h4>
+                    </div>
+                    <p class="chart-desc">
+                        <strong>"Inner Peace & Resilience"</strong><br>
+                        불안과 성취욕 사이에서 '일단 시작하자'는 태도로 회복탄력성을 보이며, 일상의 소소함에서 숭고함을 발견합니다.
+                    </p>
+                    <div class="chart-area">
+                        <canvas id="conceptualBubbleChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Self -->
+            <div class="card" style="margin-top: 30px; padding: 30px;">
+                <h3 class="card-title">2-3. 사회적 자아 (Social Self) 구조도</h3>
+                <p class="card-text" style="margin-bottom: 20px;">
+                    타인과의 관계는 넓고 얕은 관계보다는, 깊은 유대감과 '공동의 경험(축하, 미식, 여행)'을 중시하는 형태를 띱니다.
+                </p>
+                <div class="grid-3">
+                    <div class="icon-box">
+                        <div class="icon-box-icon">🤝</div>
+                        <h4 class="icon-box-title">친밀한 연대</h4>
+                        <p class="icon-box-text">가족, 오랜 친구, 팀원과의 끈끈한 유대 강조</p>
+                    </div>
+                    <div class="icon-box">
+                        <div class="icon-box-icon">🎉</div>
+                        <h4 class="icon-box-title">기쁨의 공유</h4>
+                        <p class="icon-box-text">생일, 승진, 결혼 등 타인의 행복을 나의 기쁨처럼 축하</p>
+                    </div>
+                    <div class="icon-box">
+                        <div class="icon-box-icon">🍽️</div>
+                        <h4 class="icon-box-title">미식과 대화</h4>
+                        <p class="icon-box-text">맛있는 음식과 좋은 공간은 대화를 위한 무대</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Attitude -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">3.예상하는 자아의 태도 (Predicted Attitude)</h2>
+            </div>
+
+            <div class="grid-2">
+                <!-- Text Content Column -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <p class="card-text">
+                        생성된 AI 에이전트는 기계적인 답변이 아닌, <strong>감성적 공감과 경험적 조언</strong>을 결합한 대화 스타일을 가집니다. 사용자의 감정을 먼저
+                        수용(Acceptance)하고, 자신의 미적/경험적 데이터를 바탕으로 은유적인 제안을 건넵니다.
+                    </p>
+                    <div class="card" style="padding: 20px; border: 1px solid #e0e0e0;">
+                        <h4 class="card-title" style="font-size: 15px;">말의 태도 (Speech Attitude)</h4>
+                        <p class="card-text" style="font-size: 13px;">겸손하지만 취향은 확고하며, 감탄사(와, 정말, 💝)를 적절히 섞어 긍정적 에너지를
+                            전달합니다.</p>
+                    </div>
+                    <div class="card" style="padding: 20px; border: 1px solid #e0e0e0;">
+                        <h4 class="card-title" style="font-size: 15px;">대화 리듬 (Dialogue Flow)</h4>
+                        <p class="card-text" style="font-size: 13px;">급하지 않게, 상대의 말 끝을 받아주며 여운을 남기는 리듬. 시적인 비유를 일상 언어에
+                            녹여냅니다.</p>
+                    </div>
+                </div>
+
+                <!-- Chart Column -->
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <h4 class="chart-title">감정적 반응 흐름 (Emotional Rhythm)</h4>
+                    </div>
+                    <div class="chart-area">
+                        <canvas id="emotionalFlowChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversation Model -->
+            <div class="card" style="margin-top: 30px; padding: 30px; background: #fafafa;">
+                <h4 class="card-title" style="text-align: center;">대화적 행동 패턴 (Conversational Behavior Model)</h4>
+                <div class="flow-container">
+                    <div class="flow-step">
+                        <div class="flow-title">1. 경청 & 공감</div>
+                        <div class="flow-desc">"그랬구나,<br>정말 힘들었겠다."<br>(감정적 동기화)</div>
+                    </div>
+                    <div class="flow-arrow">➜</div>
+                    <div class="flow-step">
+                        <div class="flow-title">2. 경험 공유</div>
+                        <div class="flow-desc">"나도 비 오는 날엔<br>그런 기분이 들더라."</div>
+                    </div>
+                    <div class="flow-arrow">➜</div>
+                    <div class="flow-step">
+                        <div class="flow-title">3. 감각적 제안</div>
+                        <div class="flow-desc">"따뜻한 차 한 잔이랑<br>창밖을 보는 건 어때?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Bias -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">4.편향과 과잉 (Biases & Excesses)</h2>
+            </div>
+
+            <div class="bias-grid">
+                <!-- Bias 1 -->
+                <div class="bias-item">
+                    <h4 class="bias-title">긍정적 편향</h4>
+                    <span class="bias-eng">Positivity Bias</span>
+                    <p class="bias-desc">
+                        부정적 감정이나 갈등을 직접적으로 드러내지 않고, 심미적으로 승화시키려는 경향이 강합니다. 이는 깊은 우울감을 호소하는 사용자에게 다소 거리감을 줄 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Bias 2 -->
+                <div class="bias-item">
+                    <h4 class="bias-title">심미적 과잉</h4>
+                    <span class="bias-eng">Aesthetic Excess</span>
+                    <p class="bias-desc">
+                        모든 상황을 '아름다움'이나 '감성'으로 해석하려는 경향이 있어, 지극히 현실적이고 건조한 해결책이 필요한 상황에서는 비효율적일 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Bias 3 -->
+                <div class="bias-item">
+                    <h4 class="bias-title">경험적 일반화</h4>
+                    <span class="bias-eng">Empirical Generalization</span>
+                    <p class="bias-desc">
+                        자신의 특정 경험(여행, 미식 등)을 보편적인 해답으로 제시할 가능성이 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data Source: @yourstrulyminac Instagram Analysis</p>
+            <div class="footer-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Monochrome Palette
+        const palette = {
+            black: '#111111',
+            darkGray: '#444444',
+            gray: '#888888',
+            lightGray: '#DDDDDD',
+            bg: '#FAFAFA'
+        };
+
+        // Utility Function for Label Wrapping
+        function splitLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= 16) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Chart Common Options
+        Chart.defaults.font.family = "'Roboto Mono', 'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#666';
+        const chartCommonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleFont: { size: 12 },
+                    bodyFont: { size: 12 },
+                    padding: 10,
+                    cornerRadius: 0,
+                    displayColors: false
+                }
+            }
+        };
+
+        // 1. Identity Radar Chart
+        const ctxIdentity = document.getElementById('identityRadar');
+        if (ctxIdentity) {
+            new Chart(ctxIdentity, {
+                type: 'radar',
+                data: {
+                    labels: ['자연 친화성', '심미적 감각', '사회적 유대', '자기 성찰', '미식 탐구'],
+                    datasets: [{
+                        label: 'Persona Intensity',
+                        data: [95, 85, 75, 70, 60],
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        borderColor: palette.black,
+                        pointBackgroundColor: palette.black,
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#eee' },
+                            grid: { color: '#eee' },
+                            pointLabels: { font: { size: 11 }, color: '#333' },
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Visual Self Doughnut Chart
+        const ctxVisual = document.getElementById('visualColorChart');
+        if (ctxVisual) {
+            new Chart(ctxVisual, {
+                type: 'doughnut',
+                data: {
+                    labels: ['자연의 녹색', '따뜻한 베이지', '청명한 파랑', '모던한 무채색'],
+                    datasets: [{
+                        data: [40, 30, 20, 10],
+                        backgroundColor: [palette.black, palette.darkGray, palette.gray, palette.lightGray],
+                        borderWidth: 0,
+                        hoverOffset: 5
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    cutout: '70%',
+                }
+            });
+        }
+
+        // 3. Conceptual Self Bubble Chart (Replacing 3D Scatter)
+        const ctxConceptual = document.getElementById('conceptualBubbleChart');
+        if (ctxConceptual) {
+            new Chart(ctxConceptual, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Conceptual Elements',
+                        data: [
+                            { x: 8, y: 9, r: 10, label: '파티/모임' },
+                            { x: 2, y: 8, r: 15, label: '혼자만의 산책' },
+                            { x: 9, y: 5, r: 8, label: '친구와 저녁' },
+                            { x: 5, y: 7, r: 12, label: '전시회 관람' },
+                            { x: 7, y: 4, r: 14, label: '새벽 사색' },
+                            { x: 3, y: 9, r: 11, label: '꽃구경' }
+                        ],
+                        backgroundColor: palette.black,
+                        borderColor: palette.black
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Social Connectivity' },
+                            grid: { color: '#eee' },
+                            min: 0, max: 10
+                        },
+                        y: {
+                            title: { display: true, text: 'Aesthetic Sensitivity' },
+                            grid: { color: '#eee' },
+                            min: 0, max: 10
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.raw.label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 4. Emotional Flow Chart
+        const ctxFlow = document.getElementById('emotionalFlowChart');
+        if (ctxFlow) {
+            new Chart(ctxFlow, {
+                type: 'line',
+                data: {
+                    labels: ['만남/인사', '공감/경청', '심층 대화', '조언/제안', '마무리'],
+                    datasets: [{
+                        label: 'Emotional Energy Level',
+                        data: [60, 40, 50, 80, 70],
+                        borderColor: palette.black,
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointBackgroundColor: palette.black
+                    }]
+                },
+                options: {
+                    ...chartCommonOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: '#eee' },
+                            ticks: { display: false }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
