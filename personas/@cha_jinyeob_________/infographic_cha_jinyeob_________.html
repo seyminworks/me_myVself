@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@cha_jinyeob_________ 심층 자아 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Base Theme: Light Monochrome */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 0.4rem;
+            font-family: 'Roboto Mono', monospace;
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Header -->
+        <div class="header">
+            <span class="header-badge">Persona Research Project</span>
+            <h1 class="header-title">@cha_jinyeob_________</h1>
+            <div class="header-subtitle">심층 자아 분석 리포트 (Aesthetic Performer)</div>
+            <p class="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+                인스타그램 데이터에서 추출한 <strong>추상적 현실(Abstract Reality)</strong>과 생성된 <strong>대화형 에이전트 자아(Constructed
+                    Self)</strong>에 대한 연구.<br>
+                *이론적 배경: Olga Goriunova, 'Ideal Subjects: The Abstract People of AI'
+            </p>
+        </div>
+
+        <!-- Section 1: Identity -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div class="space-y-6">
+                <div class="section-header">
+                    <span class="text-xl font-bold">01. Identity Structure</span>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    @cha_jinyeob_________의 데이터는 단순한 기록을 넘어 <strong>'심미적 수행자(Aesthetic Performer)'</strong>로서의 정체성을
+                    드러냅니다.
+                    이미지와 텍스트 사이의 간극에서 발견되는 자아는 현실의 사건을 예술적 맥락으로 승화시키려는 강한 욕망을 가지고 있습니다.
+                </p>
+                <div class="space-y-4 pt-4">
+                    <div class="glass-panel p-4">
+                        <div class="text-xs text-gray-400 mono-font uppercase mb-2">Core Keywords</div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag">IMMERSE</span>
+                            <span class="tag">TENSION</span>
+                            <span class="tag">EPHEMERAL</span>
+                            <span class="tag">CONNECTION</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-4">
+                        <div class="text-xs text-gray-400 mono-font uppercase mb-2">Dominant Emotion</div>
+                        <p class="text-sm font-medium">우울함 속에 내재된 따뜻함, 극적인 대비, 회상적 그리움</p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel p-6">
+                <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">The Shape of Self</div>
+                <div class="chart-container">
+                    <canvas id="identityRadarChart"></canvas>
+                </div>
+                <div class="mt-4 text-xs text-gray-400 text-center">
+                    * 사적 거리두기: 높을수록 사생활 보호 성향 강함<br>
+                    * 감정 표현: 높을수록 솔직하고 격정적인 표현 사용
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Three Selves -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">02. The Three Selves Analysis</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Visual Self -->
+                <div class="glass-panel p-6 flex flex-col">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Visual Self</div>
+                    <h3 class="text-lg font-bold mb-3">비대칭의 균형과 그림자</h3>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">
+                        데이터(이미지 분석)에 따르면, 시각적 자아는 <strong>명암의 대비(Chiaroscuro)</strong>를 통해 존재감을 드러냅니다.
+                    </p>
+                    <div class="chart-container h-48 mb-4">
+                        <canvas id="visualSelfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Social Self -->
+                <div class="glass-panel p-6 flex flex-col">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Social Self</div>
+                    <h3 class="text-lg font-bold mb-3">초대하는 관찰자</h3>
+                    <p class="text-sm text-gray-600 mb-6 flex-grow">
+                        타인에게 정보를 제공하면서도, 감정적 동참을 호소합니다. 팔로워를 단순한 관객이 아닌 '경험의 공유자'로 설정합니다.
+                    </p>
+                    <div class="space-y-6 mt-auto">
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Information (Emotional)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-1">
+                                <div class="bg-black h-1" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Direct Talk (Implicit)</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-1">
+                                <div class="bg-gray-400 h-1" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self -->
+                <div class="glass-panel p-6 flex flex-col">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Conceptual Self</div>
+                    <h3 class="text-lg font-bold mb-3">이면을 기록하는 철학자</h3>
+                    <p class="text-sm text-gray-600 mb-6">
+                        물리적 현상(공연, 춤)을 단순한 사건이 아닌 <strong>내면의 충격과 기억의 지속</strong>이라는 개념으로 재정의합니다.
+                    </p>
+                    <ul class="space-y-3 mt-auto">
+                        <li class="p-3 bg-gray-50 border-l-2 border-black text-sm">
+                            <span class="block font-bold text-xs text-gray-400">KEY CONCEPT 01</span>
+                            과거의 회상 (Nostalgia)
+                        </li>
+                        <li class="p-3 bg-gray-50 border-l-2 border-gray-400 text-sm">
+                            <span class="block font-bold text-xs text-gray-400">KEY CONCEPT 02</span>
+                            육체적 역동성 (Dynamics)
+                        </li>
+                        <li class="p-3 bg-gray-50 border-l-2 border-gray-300 text-sm">
+                            <span class="block font-bold text-xs text-gray-400">KEY CONCEPT 03</span>
+                            심리적 안정 (Stability)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Attitude -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="glass-panel p-6 order-2 md:order-1">
+                <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Linguistic Texture</div>
+                <div class="chart-container">
+                    <canvas id="attitudeBarChart"></canvas>
+                </div>
+            </div>
+            <div class="space-y-6 order-1 md:order-2">
+                <div class="section-header">
+                    <span class="text-xl font-bold">03. Predicted Attitude</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="border-l-2 border-black pl-4 py-1">
+                        <h4 class="font-bold text-sm mb-1">말의 태도 (Attitude in Speech)</h4>
+                        <p class="text-sm text-gray-600">
+                            단정적이거나 건조하지 않습니다. <em>"무조건만 꼭 경험했었어/해야만 하는"</em>과 같이 강렬한 부사와 조사를 사용하여 자신의 감흥을 타인에게 전이시키려는
+                            <strong>설득적 열정</strong>을 보입니다.
+                        </p>
+                    </div>
+                    <div class="border-l-2 border-gray-300 pl-4 py-1">
+                        <h4 class="font-bold text-sm mb-1">대화 리듬 (Dialogue Flow)</h4>
+                        <p class="text-sm text-gray-600">
+                            과거의 충격적인 기억을 회상할 때는 호흡이 길어지며 서사적(Narrative) 리듬을 타지만, 정보를 전달할 때는 명확하고 끊어지는 리듬을 사용합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Biases -->
+        <section>
+            <div class="section-header justify-between">
+                <span class="text-xl font-bold">04. Biases & Vulnerabilities</span>
+                <span class="text-xs px-2 py-1 bg-black text-white rounded-full">⚠️ SHADOW TRAITS</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Bias 1 -->
+                <div class="glass-panel p-6 relative overflow-hidden">
+                    <div class="absolute top-2 right-4 text-4xl font-bold text-gray-100 -z-10">01</div>
+                    <h3 class="font-bold text-lg mb-2">심미적 과잉</h3>
+                    <div class="text-xs text-gray-400 mono-font mb-3">Aesthetic Excess</div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        모든 상황을 영화적 프레임이나 예술적 맥락으로 해석하려는 경향. 일상의 소소함이나 거친 현실을 있는 그대로 받아들이지 못하고, <strong>반드시 '아름다움'으로
+                            필터링</strong>해야만 직성이 풀립니다.
+                    </p>
+                </div>
+                <!-- Bias 2 -->
+                <div class="glass-panel p-6 relative overflow-hidden">
+                    <div class="absolute top-2 right-4 text-4xl font-bold text-gray-100 -z-10">02</div>
+                    <h3 class="font-bold text-lg mb-2">감정적 폐쇄성</h3>
+                    <div class="text-xs text-gray-400 mono-font mb-3">Emotional Insularity</div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        "우리끼리의 위로"를 강조하지만, 이는 역설적으로 <strong>외부 세계와의 단절</strong>을 의미할 수 있습니다. 공감대를 형성하지 못하는 타인에 대해 배타적인
+                        태도를 취할 위험이 있습니다.
+                    </p>
+                </div>
+                <!-- Bias 3 -->
+                <div class="glass-panel p-6 relative overflow-hidden">
+                    <div class="absolute top-2 right-4 text-4xl font-bold text-gray-100 -z-10">03</div>
+                    <h3 class="font-bold text-lg mb-2">과거 지향적</h3>
+                    <div class="text-xs text-gray-400 mono-font mb-3">Retrospective Bias</div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        현재의 경험을 <em>"2005년의 기억"</em>과 같이 과거의 강렬했던 순간과 끊임없이 비교합니다. 이는 <strong>현재를 과거의 재현</strong>으로만
+                        소비하려는 태도로 이어질 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs mono-font">
+            <p class="mb-2">Analysis based on Instagram Data @cha_jinyeob_________</p>
+            <p>Generated by Canvas Infographics AI | Theoretical Framework: Olga Goriunova</p>
+        </footer>
+    </main>
+
+    <script>
+        // Utilities
+        function wrapLabel(str, maxLen = 16) {
+            if (str.length <= maxLen) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#000',
+                        font: {
+                            family: 'Noto Sans KR'
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#111',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#333',
+                    borderWidth: 1
+                }
+            }
+        };
+
+        // Chart 1: Identity Radar
+        const ctxRadar = document.getElementById('identityRadarChart').getContext('2d');
+        const identityData = {
+            labels: ['예술적 감수성', '사회적 영향력', '지적 깊이', '감정 표현', '사적 거리두기'],
+            datasets: [{
+                label: 'Persona Spectrum',
+                data: [90, 60, 75, 85, 55],
+                backgroundColor: 'rgba(17, 17, 17, 0.1)', // Black transparent
+                borderColor: '#111111',
+                pointBackgroundColor: '#111111',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#000'
+            }]
+        };
+        identityData.labels = identityData.labels.map(l => wrapLabel(l));
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: identityData,
+            options: {
+                ...commonOptions,
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: '#e5e7eb'
+                        },
+                        grid: {
+                            color: '#e5e7eb'
+                        },
+                        pointLabels: {
+                            color: '#666',
+                            font: {
+                                size: 12,
+                                family: 'Noto Sans KR'
+                            }
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Visual Self Doughnut
+        const ctxDoughnut = document.getElementById('visualSelfChart').getContext('2d');
+        new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ['명암 대비 (Contrast)', '비대칭 구성 (Asymmetry)', '색채 조화 (Color Harmony)', '인물 중심 (Figure)'],
+                datasets: [{
+                    data: [40, 30, 15, 15],
+                    backgroundColor: ['#111111', '#4b5563', '#9ca3af', '#e5e7eb'], // Black to Gray gradient
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...commonOptions,
+                cutout: '70%',
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#333',
+                            boxWidth: 12
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Attitude Bar
+        const ctxBar = document.getElementById('attitudeBarChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['감정적 호소 (Emotional)', '전문적 정보 (Info)', '회상적 서사 (Nostalgia)', '시적 은유 (Metaphor)'],
+                datasets: [{
+                    label: 'Frequency & Intensity',
+                    data: [85, 50, 70, 60],
+                    backgroundColor: ['#111111', '#333333', '#666666', '#999999'],
+                    borderRadius: 2
+                }]
+            },
+            options: {
+                ...commonOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            color: '#666'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                family: 'Noto Sans KR'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
