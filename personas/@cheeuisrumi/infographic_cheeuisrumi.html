@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@cheeuisrumi 심층 자아 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <style>
+        /* Base Theme: Light Monochrome (Matches next7378) */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Header Standard Style */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Components */
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 0.4rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Header (Content Preserved) -->
+        <div class="header">
+            <span class="header-badge">Generative AI Persona Research</span>
+            <h1 class="header-title">@cheeuisrumi</h1>
+            <div class="header-subtitle">심층 자아 분석 리포트 (Curator of Daily Elegance)</div>
+        </div>
+
+        <!-- Executive Summary (Content Preserved) -->
+        <section class="text-center space-y-6">
+            <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed font-sans">
+                데이터 분석 결과, <strong>@cheeuisrumi</strong>의 자아는 <strong>"일상의 미학적 기록자"</strong>로 정의됩니다.
+                단순한 소비를 넘어 경험의 질감을 중시하며, 시각적인 우아함과 내면의 따뜻함(자선, 배려)을 동시에 추구하는 복합적인 정체성을 가집니다.
+            </p>
+
+            <!-- Structure adapted to Cards (Content mapped) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="glass-panel p-4 text-center">
+                    <div class="text-xs text-gray-500 mono-font uppercase mb-1">Archetype</div>
+                    <div class="text-xl font-bold text-black">Aesthetic Recorder</div>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <div class="text-xs text-gray-500 mono-font uppercase mb-1">Tone</div>
+                    <div class="text-xl font-bold text-gray-800">Warm & Elegant</div>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <div class="text-xs text-gray-500 mono-font uppercase mb-1">Core Value</div>
+                    <div class="text-xl font-bold text-gray-600">Commitment</div>
+                </div>
+                <div class="glass-panel p-4 text-center">
+                    <div class="text-xs text-gray-500 mono-font uppercase mb-1">Visual Code</div>
+                    <div class="text-xl font-bold text-gray-400">Neutral & Texture</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 1: IDENTITY (Content Preserved) -->
+        <section>
+            <div class="section-header">
+                <h3 class="text-2xl font-bold text-black">01. 정체성 (Identity)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Chart (Visual Style Updated, Data Preserved) -->
+                <div class="glass-panel p-6">
+                    <h4 class="text-lg font-bold text-black mb-2">페르소나 5대 구성 요소</h4>
+                    <p class="text-xs text-gray-500 mb-4 font-sans">데이터 기반 성향 추론 지수</p>
+                    <div class="chart-container">
+                        <canvas id="identityRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Identity Narrative (Content Preserved) -->
+                <div class="flex flex-col gap-4">
+                    <div class="glass-panel p-6 border-l-4 border-black">
+                        <h4 class="text-lg font-bold text-black mb-2">Core Keyword: 우아한 헌신</h4>
+                        <p class="text-sm text-gray-600 font-sans">
+                            패션과 미식을 즐기면서도 자선(Charity)과 같은 사회적 가치에 무게를 둡니다. 화려함 속에 윤리적 깊이를 내포하려는 욕망이 관찰됩니다.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-6 border-l-4 border-gray-600">
+                        <h4 class="text-lg font-bold text-gray-700 mb-2">Core Keyword: 감각적 기록</h4>
+                        <p class="text-sm text-gray-600 font-sans">
+                            "지금을 놓치겠다"는 불안과 기록 욕구 사이의 긴장. 순간의 미학을 영구적으로 소유하고자 하는 수집가적 태도를 보입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 2: THREE SELVES (Content Preserved) -->
+        <section>
+            <div class="section-header">
+                <h3 class="text-2xl font-bold text-black">02. 추론된 세 가지 자아</h3>
+            </div>
+
+            <div class="glass-panel p-6">
+                <!-- 2-1 Visual Self -->
+                <div class="mb-8 border-b border-gray-100 pb-8">
+                    <h4 class="text-lg font-bold text-black mb-4">2-1. 시각적 자아 (Visual Self)</h4>
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/3 chart-container" style="height: 250px;">
+                            <canvas id="visualSelfDoughnut"></canvas>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <p class="text-gray-700 mb-4 text-sm font-sans">
+                                시각적 자아는 <strong>"따뜻한 미니멀리즘"</strong>을 지향합니다. 데이터의 `visual_elements` 분석 결과, 자극적인 원색보다는
+                                아이보리,
+                                회색, 그리고 조명을 활용한 질감 표현에 집착합니다.
+                            </p>
+                            <ul class="text-xs text-gray-500 space-y-2 mono-font">
+                                <li>▶ Tone: 안정감을 주는 뉴트럴 톤(Neutral Tone) 선호.</li>
+                                <li>▶ Composition: 거울 셀카, 클로즈업 등 피사체와 자신을 동일한 심미적 거리에서 관찰.</li>
+                                <li>▶ Atmosphere: "포근함", "우아함"이라는 키워드가 지배적.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-2 Social Self -->
+                <div class="mb-8 border-b border-gray-100 pb-8">
+                    <h4 class="text-lg font-bold text-black mb-4">2-2. 사회적 자아 (Social Self)</h4>
+                    <p class="text-gray-700 text-sm font-sans mb-4">
+                        타인에게 보여지는 자아는 <strong>"친근한 향유자(Friendly Connoisseur)"</strong>입니다. 고급스러운 취향을 드러내되, 유머(🤣)와 솔직한
+                        감탄을 섞어 위화감을 줄이고 공감을 유도합니다.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 p-3">
+                            <strong class="block text-black text-xs mb-1">관계 지향성</strong>
+                            <span class="text-xs text-gray-500">함께하는 시간(Dining)과 나눔(Charity)을 통해 유대감을 확인</span>
+                        </div>
+                        <div class="bg-gray-50 p-3">
+                            <strong class="block text-black text-xs mb-1">브랜드 태도</strong>
+                            <span class="text-xs text-gray-500">브랜드를 과시하기보다 경험의 도구로써 자연스럽게 노출</span>
+                        </div>
+                        <div class="bg-gray-50 p-3">
+                            <strong class="block text-black text-xs mb-1">소통 방식</strong>
+                            <span class="text-xs text-gray-500">격식 없는 구어체와 이모지를 사용하여 심리적 거리 좁히기</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-3 Conceptual Self -->
+                <div>
+                    <h4 class="text-lg font-bold text-black mb-4">2-3. 개념적 자아 (Conceptual Self)</h4>
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/2">
+                            <p class="text-gray-700 text-sm font-sans mb-4">
+                                내면 깊숙이 자리 잡은 자아는 <strong>"시간의 붙잡음"</strong>에 대한 강박과 애정을 동시에 가집니다.
+                                "지금을 놓치겠다"는 캡션은 현재의 행복이 사라지는 것에 대한 아쉬움과, 이를 기록(사진)으로 영속화하려는 의지를 보여줍니다.
+                            </p>
+                            <div class="bg-black text-white p-4 text-center">
+                                <p class="italic text-sm">"기록하지 않으면 사라진다."</p>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 chart-container" style="height: 250px;">
+                            <canvas id="conceptualBubbleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 3: PREDICTED ATTITUDE (Content Preserved) -->
+        <section>
+            <div class="section-header">
+                <h3 class="text-2xl font-bold text-black">03. 예상하는 자아의 태도</h3>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Text Analysis -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="glass-panel p-4 border-l-4 border-black">
+                        <h4 class="font-bold text-black text-sm mb-1">말의 태도</h4>
+                        <p class="text-xs text-gray-600 sans">감탄사(흠?, 🙈)와 자문자답형 어투를 사용. 논리적 설명보다는 감각적 느낌을 먼저 뱉어내는 '직관형'
+                            화법.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-4 border-l-4 border-black">
+                        <h4 class="font-bold text-black text-sm mb-1">대화 리듬</h4>
+                        <p class="text-xs text-gray-600 sans">빠르고 경쾌함. 문장이 짧게 끊어지며, 의식의 흐름대로 주제가 전환되는 '스타카토' 리듬.</p>
+                    </div>
+                    <div class="glass-panel p-4 border-l-4 border-black">
+                        <h4 class="font-bold text-black text-sm mb-1">언어의 결</h4>
+                        <p class="text-xs text-gray-600 sans">고급 어휘와 일상 속어(뿜뿜, 끽지라)가 혼재된 '믹스매치' 텍스처.</p>
+                    </div>
+                </div>
+
+                <!-- Tone Map -->
+                <div class="lg:col-span-2 glass-panel p-6">
+                    <h4 class="text-lg font-bold text-black mb-4">대화형 에이전트 톤 앤 매너 맵</h4>
+                    <div class="chart-container">
+                        <canvas id="toneScatterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 4: BIASES (Content Preserved) -->
+        <section>
+            <div class="section-header">
+                <h3 class="text-2xl font-bold text-black">04. 편향과 과장 (Biases)</h3>
+            </div>
+
+            <div class="glass-panel p-6 border-l-4 border-gray-400 bg-gray-50">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h4 class="text-lg font-bold text-black mb-2">현실의 미화 (Aesthetic Filter)</h4>
+                        <p class="text-sm text-gray-600 mb-4 font-sans">
+                            @cheeuisrumi 데이터는 현실의 부정적이거나 거친 면을 철저히 배제합니다.
+                            모든 순간이 "예술"이나 "감동"으로 치환되는 <strong>긍정적 왜곡(Positive Distortion)</strong> 편향이 존재합니다.
+                        </p>
+                        <h5 class="text-xs font-bold text-black mb-1">부족한 점</h5>
+                        <ul class="list-disc list-inside text-xs text-gray-500">
+                            <li>갈등 상황에 대한 데이터 부재</li>
+                            <li>일상의 지루함에 대한 언급 없음</li>
+                            <li>부정적 감정의 직접적 표출 부족</li>
+                        </ul>
+                    </div>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="biasBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white py-10 text-center">
+        <p class="text-gray-500 text-sm mono-font">
+            INTEGRATED REPORT FOR @CHEEUISRUMI<br>
+            Analysis Module v2.1 | Powered by Chart.js & Plotly
+        </p>
+    </footer>
+
+    <script>
+        // --- Common Options ---
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#666666';
+        Chart.defaults.scale.grid.color = '#E2E8F0';
+
+        const commonOptions = {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#111', font: { size: 11 } } },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)', titleColor: '#fff', bodyColor: '#ddd',
+                    padding: 10, cornerRadius: 0
+                }
+            }
+        };
+
+        // 1. Identity Radar (Data Preserved)
+        new Chart(document.getElementById('identityRadar'), {
+            type: 'radar',
+            data: {
+                labels: ['미적 감각 (Aesthetics)', '사회적 교류 (Social)', '자선/헌신 (Charity)', '미식/경험 (Gastronomy)', '기록/메모 (Archiving)'],
+                datasets: [{
+                    label: 'Intensity',
+                    data: [95, 85, 70, 90, 80],
+                    borderColor: '#111', backgroundColor: 'rgba(17,17,17,0.1)',
+                    pointBackgroundColor: '#111'
+                }]
+            },
+            options: { ...commonOptions, plugins: { legend: { display: false } }, scales: { r: { suggestedMax: 100 } } }
+        });
+
+        // 2. Visual Self Doughnut (Data Preserved)
+        new Chart(document.getElementById('visualSelfDoughnut'), {
+            type: 'doughnut',
+            data: {
+                labels: ['따뜻한 아이보리 (Warm Ivory)', '세련된 회색 (Sophisticated Gray)', '조명/빛 (Lighting)', '질감/텍스처 (Texture)', '기타 요소'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: ['#111111', '#333333', '#666666', '#999999', '#CCCCCC'],
+                    borderWidth: 0
+                }]
+            },
+            options: { ...commonOptions, plugins: { legend: { position: 'right' } } }
+        });
+
+        // 3. Conceptual Bubble (Data Preserved)
+        new Chart(document.getElementById('conceptualBubbleChart'), {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Keywords',
+                    data: [
+                        { x: 80, y: 90, r: 25, label: '기록 (Record)' },
+                        { x: 60, y: 85, r: 20, label: '순간 (Moment)' },
+                        { x: 90, y: 50, r: 15, label: '아름다움 (Beauty)' },
+                        { x: 40, y: 60, r: 18, label: '나눔 (Sharing)' },
+                        { x: 30, y: 40, r: 10, label: '유머 (Humor)' }
+                    ],
+                    backgroundColor: 'rgba(17,17,17,0.6)', borderColor: '#111'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+
+        // 4. Tone Scatter (Data Preserved)
+        new Chart(document.getElementById('toneScatterChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: '@cheeuisrumi', data: [{ x: 75, y: 80 }],
+                    backgroundColor: '#111', pointRadius: 10
+                }, {
+                    label: '일반 AI', data: [{ x: 10, y: 20 }],
+                    backgroundColor: '#ccc', pointRadius: 6
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: { title: { display: true, text: '비격식성' }, min: 0, max: 100 },
+                    y: { title: { display: true, text: '감성 지수' }, min: 0, max: 100 }
+                }
+            }
+        });
+
+        // 5. Bias Bar (Data Preserved)
+        new Chart(document.getElementById('biasBarChart'), {
+            type: 'bar',
+            data: {
+                labels: ['미적 요소 (Beauty)', '긍정적 감정 (Positivity)', '고급 경험 (Luxury)', '갈등/부정 (Conflict)', '일상적 지루함 (Boredom)'],
+                datasets: [{
+                    data: [90, 85, 70, 5, 2],
+                    backgroundColor: ['#111', '#111', '#111', '#ccc', '#ccc']
+                }]
+            },
+            options: { ...commonOptions, indexAxis: 'y', plugins: { legend: { display: false } } }
+        });
+    </script>
+</body>
+
+</html>
