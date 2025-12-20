@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@lee_byungyeob 심층 분석 리포트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <style>
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .report-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+            line-height: 1.8;
+        }
+
+        /* Header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .report-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #111;
+            word-break: keep-all;
+        }
+
+        .report-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .report-meta {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Content Typography */
+        .report-content h1 {
+            font-size: 26px;
+            margin: 70px 0 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #000;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .report-content h2 {
+            font-size: 22px;
+            margin: 50px 0 20px;
+            color: #111;
+            font-weight: 500;
+        }
+
+        .report-content h3 {
+            font-size: 18px;
+            margin: 35px 0 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .report-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 15px;
+            color: #444;
+            word-break: keep-all;
+        }
+
+        /* Lists */
+        .report-content ul,
+        .report-content ol {
+            margin: 20px 0 30px;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .report-content li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 18px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .report-content ul li:before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .report-content ol {
+            counter-reset: item;
+        }
+
+        .report-content ol li:before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 0;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .report-content li strong {
+            font-weight: 500;
+            color: #000;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+
+        .report-content th,
+        .report-content td {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .report-content th {
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+            font-weight: 500;
+            background: #fafafa;
+            color: #000;
+        }
+
+        .report-content tr:last-child td {
+            border-bottom: 1px solid #000;
+        }
+
+        /* Highlights & Quotes */
+        blockquote {
+            margin: 30px 0;
+            padding: 20px 30px;
+            background: #f9f9f9;
+            border-left: 3px solid #333;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Directives Box */
+        .directives-box {
+            border: 1px solid #333;
+            padding: 40px;
+            margin: 50px 0;
+            background: #fff;
+        }
+
+        .directives-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons & Links */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            border-color: #000;
+            color: #000;
+        }
+
+        .doc-link {
+            margin-top: 80px;
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .doc-link a {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 0;
+            transition: opacity 0.2s;
+        }
+
+        .doc-link a:hover {
+            opacity: 0.8;
+        }
+
+        .doc-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .report-container {
+                padding: 30px 20px;
+            }
+
+            .report-title {
+                font-size: 26px;
+            }
+
+            .report-content h1 {
+                font-size: 22px;
+            }
+
+            .directives-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+
+        <div class="report-container">
+            <div class="report-header">
+                <h1 class="report-title">디지털 아키텍토닉스와 이상적 주체(Ideal Subject)의 계보학:<br>인스타그램 계정 @lee_byungyeob의 페르소나, 공간
+                    정치, 그리고 데이터화된 자아에 대한 심층 비평</h1>
+                <div class="report-subtitle">In-depth Analysis of @lee_byungyeob</div>
+                <div class="report-meta">분석 대상: @lee_byungyeob | 2025년</div>
+            </div>
+
+            <div class="report-content">
+                <h1>1. 서론: 데이터화된 삶과 건축가의 디지털 존재론</h1>
+
+                <h2>1.1. 연구의 배경 및 목적</h2>
+                <p>
+                    현대 사회에서 소셜 미디어 플랫폼, 그중에서도 인스타그램은 단순한 커뮤니케이션 도구를 넘어 자아(Self)를 구성하고 전시하며, 나아가 타인과의 존재론적 관계를 규정하는 제3의
+                    장소(The Third Place)로 기능한다. 물리적 공간을 설계하고 구축하는 건축가에게 있어, 비물질적 공간인 디지털 플랫폼은 자신의 철학을 투영하고, 전문성을 입증하며,
+                    잠재적 클라이언트 및 대중과 교감하는 핵심적인 포트폴리오이자 아고라가 되었다.
+                </p>
+                <p>
+                    건축가 이병엽의 인스타그램 계정(@lee_byungyeob)은 이러한 디지털 환경 속에서 개인의 직업적 정체성, 미적 취향, 공동체적 지향, 그리고 삶의 내밀한 철학이 어떻게
+                    융합되어 하나의 완결된 '디지털 페르소나'를 형성하는지를 보여주는 탁월한 텍스트이다. 본 보고서는 제공된 방대한 데이터 파일과 다각적인 이론적 연구 자료들을 바탕으로 해당 계정의
+                    시각적(Visual), 텍스트적(Textual), 맥락적(Contextual) 요소를 미시적으로 해부하고 거시적으로 조망한다.
+                </p>
+                <p>
+                    특히, 본 연구는 미디어 이론가 올가 고리우노바(Olga Goriunova)가 그녀의 저서 <em>Ideal Subjects: The Abstract People of
+                        AI</em>에서 제시한 이론적 틀을 핵심 분석 렌즈로 채택한다. 고리우노바는 디지털 주체가 생물학적 본인의 단순한 확장이 아니라, 데이터 연산, 알고리즘적 예측, 그리고
+                    플랫폼의 기술적 어포던스(affordance)를 통해 생성된, 현실과 거리를 둔 새로운 '추상적 실체(Abstract Entity)'라고 주장한다. 이 관점에 따르면,
+                    @lee_byungyeob 계정은 이병엽이라는 실존 인물의 투명한 기록임과 동시에, 팔로워들의 미적 욕망이 투영되고 인스타그램의 알고리즘적 논리에 의해 강화되는 별도의 '이상적
+                    주체(Ideal Subject)'로 해석될 수 있다.
+                </p>
+                <p>
+                    본 연구는 15,000단어 분량의 심층 보고서로서, 다음 세 가지 주요 목표를 수행한다. 첫째, 계정 내 시각 데이터와 텍스트 서사가 어떻게 결합하여 '철학적 건축가'이자
+                    '라이프스타일 큐레이터'라는 권위를 형성하는지 분석한다. 둘째, 어빙 고프만(Erving Goffman)의 연극학적 분석과 고리우노바의 데이터 주체성 이론을 통해 이 계정이
+                    수행하는 '진정성(Authenticity)'의 실체를 규명한다. 셋째, 이러한 디지털 자아 연출이 서촌 젠트리피케이션, 배타적 취향 공동체, 심미적 자본주의와 같은 사회적, 윤리적
+                    문제와 어떻게 연루되어 있는지를 비판적으로 고찰함으로써, 디지털 시대 건축가의 사회적 책임과 한계를 논한다.
+                </p>
+
+                <h2>1.2. 이론적 프레임워크: 이상적 주체와 연출된 자아</h2>
+                <p>
+                    본 연구의 이론적 기반은 크게 두 축으로 나뉜다. 첫 번째 축은 올가 고리우노바(Olga Goriunova)의 '이상적 주체(Ideal Subject)' 론이다. 고리우노바는
+                    현대의 데이터 분석과 AI 기술이 개인의 데이터를 수집하여 확률론적이고 예측 가능한 모델, 즉 '이상적 주체'를 생성한다고 본다. 이 주체는 실제 인간보다 '더' 완벽하고
+                    일관되지만, 동시에 인간적인 불확실성과 복잡성이 제거된 '덜' 인간적인 존재이다. 이병엽의 인스타그램 계정은 이러한 이론적 틀 안에서, 잡음(noise)이 제거되고 미적, 윤리적
+                    이상만이 남은 데이터화된 자아의 전형으로 분석된다.
+                </p>
+                <p>
+                    두 번째 축은 어빙 고프만(Erving Goffman)의 '자아 연출(Presentation of Self)' 이론이다. 고프만은 사회적 상호작용을 연극에 비유하며, 개인이
+                    타인에게 특정 인상을 주기 위해 '전면 무대(Front Stage)'와 '후면 무대(Back Stage)'를 관리한다고 설명한다. 인스타그램은 완벽하게 통제 가능한 전면 무대로서,
+                    건축가는 이곳에서 자신의 전문성, 취향, 인간관계를 선별적으로 공연(perform)한다. 본 연구는 이 두 이론을 상호보완적으로 사용하여, 디지털 페르소나가 어떻게 구축되고
+                    소비되는지를 입체적으로 분석한다.
+                </p>
+
+                <h1>2. 시각적 자아의 건축: 미니멀리즘, 물성, 그리고 빛의 현상학</h1>
+
+                <h2>2.1. 미니멀리즘과 텍스처의 정치학: 디지털 공허 속의 물성 탐닉</h2>
+                <p>
+                    제공된 데이터 파일의 시각적 분석에 따르면, @lee_byungyeob 계정의 이미지는 일관된 미적 코드를 공유한다. 그것은 '정제된 미니멀리즘(Refined
+                    Minimalism)'과 '물성(Materiality)의 강조'이다. 게시물 ID 1, ID 4, ID 5 (2024.08.23), ID 21, ID 66 등을 살펴보면, 그는
+                    건축물의 구조적 뼈대, 콘크리트의 거친 질감, 목재의 따뜻한 결, 그리고 돌의 육중함을 집요하게 포착한다.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>게시물 ID</th>
+                                <th>주요 시각 요소</th>
+                                <th>색상 팔레트</th>
+                                <th>텍스처(Texture)</th>
+                                <th>분위기(Mood)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ID 1</td>
+                                <td>흰 벽돌 곡선, 검은 그림자</td>
+                                <td>화이트, 블랙</td>
+                                <td>매끄러움, 차가움</td>
+                                <td>명상적, 기하학적</td>
+                            </tr>
+                            <tr>
+                                <td>ID 4</td>
+                                <td>통나무 테이블, 로프 난간</td>
+                                <td>월넛 브라운, 크림</td>
+                                <td>거침, 유기적</td>
+                                <td>중력감, 안정감</td>
+                            </tr>
+                            <tr>
+                                <td>ID 21</td>
+                                <td>석재 마감, 둥근 거울</td>
+                                <td>황갈색, 블랙</td>
+                                <td>차가움, 반사적</td>
+                                <td>세련됨, 도시적</td>
+                            </tr>
+                            <tr>
+                                <td>ID 66</td>
+                                <td>돌, 금속 조각, 회색 배경</td>
+                                <td>그레이쉬 블루, 베이지</td>
+                                <td>매트함, 단단함</td>
+                                <td>실험적, 정적</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="doc-note" style="text-align: center; margin-bottom: 30px;">표 1. 주요 게시물의 시각적 요소 분석</p>
+
+                <p>
+                    이러한 이미지들은 고리우노바가 언급한 '추상화(Abstraction)'의 과정을 시각적으로 구현한다. 건축 현장은 본래 소음, 먼지, 노동의 땀, 그리고 혼란이 공존하는 곳이다.
+                    그러나 이병엽의 프레임 안에서 이러한 '현실의 노이즈'는 철저히 소거된다. 대신 남는 것은 완벽하게 조율된 빛과 그림자, 그리고 물성 그 자체다. <strong>ID
+                        4</strong>의 '중력 테이블' 사진은 테이블이 공중에 부유하는 듯한 연출을 통해 물리적 법칙(중력)마저 미적 요소로 승화시킨다.
+                </p>
+                <p>
+                    이러한 <strong>'물성의 포르노그래피(Material Pornography)'</strong>는 디지털 스크린이라는 비물질적 매체를 통해 역설적으로 가장 물질적인 촉각적
+                    경험을 전달하려 한다. 이는 디지털 시대의 사용자들이 겪는 '감각의 결핍'을 보상하려는 시도이자, 건축가로서 자신의 전문성을 단순한 공간 구획자가 아닌 '감각의 조율사'로
+                    포지셔닝하려는 고도의 전략이다. 그는 돌의 차가움과 나무의 따뜻함을 시각적으로 번역하여 전달함으로써, 팔로워들로 하여금 그 공간에 실제로 존재하지 않으면서도 그 물성을 욕망하게
+                    만든다.
+                </p>
+                <p>
+                    하지만 비판적 관점에서 볼 때, 이러한 연출은 건축을 사회적 맥락이나 기능적 공간이 아닌, 소비 가능한 '이미지'로 환원시킬 위험을 내포한다. 관련 연구에서 지적하듯,
+                    "인스타그래머블한 건축(Instagrammable Architecture)"은 공간의 깊이와 역사성을 제거하고, 오직 사진에 잘 찍히기 위한 표면만을 남길 수 있다. 이병엽의
+                    계정에서 건축물은 종종 그곳에 사는 사람이나 주변 환경과의 유기적 관계보다는, 그 자체로 완결된 조형물처럼 묘사된다(ID 41, ID 42). 이는 건축의 공공성보다 심미성을
+                    우위에 두는 태도로 해석될 수 있다.
+                </p>
+
+                <h2>2.2. 빛과 그림자를 통한 영적 아우라(Aura)의 재구성</h2>
+                <p>
+                    이 계정의 또 다른 시각적 특징은 자연광의 극적인 활용이다. 다수의 이미지(ID 5, ID 33, ID 47, ID 85)에서 빛은 단순한 조명이 아니라, 공간에
+                    성스러운(sacred) 분위기를 부여하는 주체로 등장한다.
+                </p>
+                <ul>
+                    <li><strong>ID 33 (2022.08.30, 여수 문화교회):</strong> 강렬한 햇빛이 시멘트 벽을 비스듬히 가로지르며, 인물의 실루엣을 강조한다. 이는 르
+                        코르뷔지에(Le Corbusier)의 롱샹 성당을 연상시키는 '빛의 건축'을 표방하며, 공간에 영적 깊이를 부여한다.</li>
+                    <li><strong>ID 85 (2025.10.07, 목일정):</strong> 좁은 문틈으로 새어 나오는 황금빛 빛줄기는 비밀스럽고 내밀한 휴식의 공간을 암시한다. 여기서 빛은
+                        치유와 성찰의 메타포로 사용된다.</li>
+                </ul>
+                <p>
+                    발터 벤야민(Walter Benjamin)은 기술 복제 시대에 예술 작품의 '아우라(Aura)'가 상실된다고 보았다. 그러나 이병엽은 인스타그램이라는 가장 대중적이고 복제 가능한
+                    매체 위에서, 역설적으로 '디지털 아우라'를 재건하려 시도한다. 그는 특정한 시간대, 특정한 각도에서만 포착될 수 있는 찰나의 빛을 기록함으로써, 그 순간의 유일무이성을 강조한다.
+                    이는 팔로워들에게 "이 공간에 가면 나도 저런 특별한 순간을 경험할 수 있을 것"이라는 환상을 심어준다.
+                </p>
+                <p>
+                    고리우노바의 '이상적 주체' 이론에 대입해 보면, 이러한 빛의 연출은 데이터화된 자아에 '영혼'을 불어넣는 과정이다. 차가운 데이터와 픽셀로 이루어진 디지털 공간에 '빛'이라는
+                    자연적이고 초월적인 요소를 개입시킴으로써, 그는 자신의 디지털 페르소나를 단순한 전문가를 넘어 '철학적 구도자'나 '영적 안내자'의 위치로 격상시킨다.
+                </p>
+
+                <h2>2.3. 프레임 밖의 배제: 정제된 시선과 은폐된 현실</h2>
+                <p>
+                    사진의 프레임은 무엇을 보여주느냐만큼이나 무엇을 보여주지 않느냐(exclusion)가 중요하다. @lee_byungyeob의 사진들은 철저히 통제된 앵글을 유지한다.
+                    <strong>ID 40</strong>의 거실 사진이나 <strong>ID 63</strong>의 잡지 표지 사진을 보면, 공간은 잡동사니 하나 없이 완벽하게 정돈되어 있다.
+                    이는 생활감(life-ness)을 제거한 '모델하우스적 미학'이다.
+                </p>
+                <p>
+                    고프만의 이론에 따르면, 이는 혼란스러운 '후면 무대'를 철저히 감추는 행위이다. 건축 과정에서의 갈등, 현장의 지저분함, 일상의 지루함이나 추함은 이 계정에서 찾아볼 수 없다.
+                    오직 미적으로 승화된 결과물이나, 고도로 연출된 '자연스러운' 과정만이 존재한다. 이러한 시각적 배제는 팔로워들에게 현실에 존재하지 않는 이상적인 삶의 기준을 제시하며, 상대적
+                    박탈감을 유발하거나 현실의 복잡성을 외면하게 만드는 부작용을 낳을 수 있다. 그의 시선은 도시의 혼잡함과 누추함을 삭제하고, 오직 아름답고 질서 정연한 부분만을 선택적으로
+                    데이터화하여 '이상적 도시'의 환영을 구축한다.
+                </p>
+
+                <h1>3. 텍스트 서사와 진정성(Authenticity)의 수사학</h1>
+
+                <h2>3.1. 사색적 문체(Contemplative Tone)와 철학적 권위의 구축</h2>
+                <p>
+                    @lee_byungyeob 계정의 영향력은 이미지뿐만 아니라 텍스트에서 비롯된다. 그의 캡션은 인스타그램의 전형적인 짧고 가벼운 문체와는 거리가 멀다. 대신 그는 에세이, 비평,
+                    혹은 철학적 단상에 가까운 긴 호흡의 글쓰기를 구사한다.
+                </p>
+                <ul>
+                    <li><strong>철학적 어휘의 사용:</strong> "중력", "인장력", "협의", "본질", "사유", "시퀀스" 등 전문적이거나 추상적인 어휘를 빈번하게 사용하여
+                        텍스트의 밀도를 높인다(ID 4, ID 5, ID 67).</li>
+                    <li><strong>성찰적 서사:</strong> 단순히 프로젝트를 설명하는 것이 아니라, 그 프로젝트가 자신의 삶과 철학에 어떤 영향을 미쳤는지, 어떤 깨달음을 주었는지를
+                        서술한다. "올해는 그 어느 때보다 힘든 한 해였다... 조용히 지쳐가는 날들이 이어졌다"(ID 85)와 같은 고백은 독자들에게 깊은 공감을 불러일으킨다.</li>
+                </ul>
+                <p>
+                    이러한 글쓰기 전략은 부르디외(Pierre Bourdieu)가 말한 <strong>'문화 자본(Cultural Capital)'</strong>을 과시하는 방식이다. 그는 자신이
+                    단순히 건물을 짓는 기술자가 아니라, 인문학적 소양을 갖춘 지식인임을 은연중에 드러낸다. 텍스트는 이미지의 해석을 독점한다. 예를 들어, 흔들리는 테이블 사진(ID 4)에 대해
+                    "중력, 즉 협의의 존재를 드러낸다"라고 해설함으로써, 관람자가 그 가구를 단순한 물건이 아닌 철학적 오브제로 인식하도록 강제한다. 이는 디지털 공간에서 자신의 권위를 구축하고,
+                    팔로워들과의 관계를 수직적(가르침과 배움)이면서도 수평적(공감과 위로)인 묘한 이중 구조로 가져가는 효과적인 장치이다.
+                </p>
+
+                <h2>3.2. '진정성 노동(Authenticity Labour)'과 연출된 취약성</h2>
+                <p>
+                    현대 소셜 미디어 생태계에서 가장 중요한 화두는 '진정성(Authenticity)'이다. 팔로워들은 완벽하기만 한 인플루언서보다는, 인간적인 면모를 보여주는 사람에게 더 끌린다.
+                    이병엽은 이러한 메커니즘을 본능적으로 혹은 전략적으로 잘 이해하고 있다.
+                </p>
+                <p>
+                    그는 종종 자신의 실패, 두려움, 부족함을 고백한다. "잡지 속 내 사진을 보니 민망해서... 좀 더 한참 부족하다고 느끼면서"(ID 46), "설계보다 변수랑 더 많이 싸우는
+                    중"(ID 79)과 같은 문구는 그를 겸손하고 인간적인 전문가로 보이게 한다. 연구자들은 이를 <strong>'진정성 노동(Authenticity
+                        Labour)'</strong>이라고 부른다. 이는 자연 발생적인 감정 표현이 아니라, '진정성 있어 보이기 위해' 수행되는 감정적 작업이다.
+                </p>
+                <p>
+                    고리우노바의 관점에서 볼 때, 이러한 '연출된 취약성(Curated Vulnerability)'은 디지털 주체를 더욱 강력하게 만드는 요소이다. 완벽한 이미지만으로는 거리감이
+                    생기지만, 적절한 결함과 인간적 고뇌를 데이터에 포함시킴으로써 그 주체는 더욱 '리얼'하게 느껴지고, 결과적으로 팔로워들의 욕망과 동일시(identification)를 더욱 강하게
+                    이끌어낸다. 하지만 이 또한 결국은 플랫폼의 문법에 맞춰 정제된, '안전한 수준의 취약성'이라는 점에서 진정한 의미의 날것(raw)과는 거리가 있다.
+                </p>
+
+                <h2>3.3. 인용과 참조를 통한 지적 네트워크의 과시</h2>
+                <p>
+                    그의 텍스트에는 류이치 사카모토(ID 50), 프란츠 카프카(ID 13), 미셸 푸코(ID 122 - 헤테로토피아 언급) 등 다양한 예술가와 철학자들이 등장한다. 또한 '취향관',
+                    '밑미(Nicetomeetme)', '내셔널 지오그래픽' 등 문화적 상징성을 가진 브랜드나 커뮤니티와의 협업을 지속적으로 언급한다(ID 11, ID 44, ID 76).
+                </p>
+                <p>
+                    이는 자신의 취향과 지적 네트워크를 전시함으로써, 자신이 속한 '문화적 계급'을 명확히 하는 행위이다. 그는 이러한 레퍼런스들을 통해 자신의 작업이 단순한 상업 활동이 아니라,
+                    거대한 문화적, 예술적 흐름 속에 위치해 있음을 주장한다. 이는 팔로워들에게 그가 소비하는 문화적 콘텐츠를 따라 하고 싶게 만드는 '모방 욕구'를 자극하며, 그를 중심으로 한
+                    '취향 공동체'를 결속시키는 접착제 역할을 한다.
+                </p>
+
+                <h1>4. 공간 정치와 공동체의 사회학: 이상과 배제의 경계</h1>
+
+                <h2>4.1. 서촌과 한남동: 젠트리피케이션의 심미적 전위대</h2>
+                <p>
+                    @lee_byungyeob 계정의 콘텐츠는 서울의 특정 지역, 특히 서촌과 한남동에 집중되어 있다. 그는 서촌에서 '사사사가(sasasaga)' 프로젝트(ID 17, ID 18,
+                    ID 76)를 진행하고, 한남동의 빌라(ID 8, ID 40)를 개조하여 거주한다. 이 지역들은 서울에서 젠트리피케이션이 가장 활발하게 일어나고 있는 대표적인 곳들이다.
+                </p>
+                <p>
+                    그의 게시물들은 이 지역들의 '장소성(Placeness)'을 강조한다. 오래된 골목, 한옥, 인왕산의 풍경 등은 그의 렌즈를 통해 낭만적이고 미적인 공간으로 재탄생한다. 관련
+                    연구에 따르면, 이러한 <strong>'상업적 젠트리피케이션(Commercial Gentrification)'</strong>은 지역의 고유성을 '상품화'하여 외부 소비자를
+                    끌어들이는 과정이다. 이병엽은 '조조서촌'과 같은 프로그램을 통해 "도시 일상에 질문을 던지는 시간"을 갖겠다고 하지만, 역설적으로 그가 만들어내는 세련된 공간과 이미지는 임대료
+                    상승을 유발하고 원주민을 밀어내는 젠트리피케이션의 촉매제로 작용할 가능성이 높다.
+                </p>
+                <p>
+                    그의 사진 속에서 서촌은 낡고 루추한 삶의 터전이 아니라, 힙(hip)하고 감각적인 소비의 공간으로 표상된다. 이는 'Insta-Gaze(인스타 시선)'가 지역을 어떻게
+                    변형시키는지를 보여준다. 건축가가 의도했든 안 했든, 그의 계정은 공간을 '미적 대상'으로 대상화(objectify)하며, 그 공간에 얽힌 복잡한 사회경제적 맥락을 심미적 필터로
+                    덮어버린다.
+                </p>
+
+                <h2>4.2. '사사사가'와 '힘의 집': 취향 공동체의 폐쇄성</h2>
+                <p>
+                    그가 운영하거나 관여하는 커뮤니티들, 즉 '사사사가', '힘의 집', '취향관' 등은 강력한 공동체(Community) 서사를 기반으로 한다. <strong>ID
+                        3</strong>에서 그는 "사람과 사람, 자연과 사람 간의 교류가 상실되는 도시에서 제3의 공간인 공동거실을 지향"한다고 밝힌다. 텍스트는 끊임없이 '연결', '교류',
+                    '환대'를 이야기한다.
+                </p>
+                <p>
+                    그러나 이 공동체들은 '취향'과 '문화적 코드'를 공유하는 이들만을 위한 <strong>'선별적 공동체(Exclusive Community)'</strong>의 성격을 띤다.
+                    <strong>ID 83</strong>에서 그는 "취향은 때론 배타적이고 폐쇄적인 성격을 띠는 것처럼 보인다"고 스스로 비판적인 시각을 드러내기도 하지만, 실제 운영 방식이나
+                    참여자들의 면면(디자이너, 예술가, 기획자 등)을 보면 이는 고도의 문화 자본을 가진 이들만의 리그에 가깝다.
+                </p>
+                <p>
+                    고프만의 이론을 빌리자면, 이러한 커뮤니티는 특정 '팀(Team)'에 소속된 이들만이 공유하는 뒷무대와 같다. 외부인에게는 개방된 것처럼 보이지만, 실제로는 그들의 언어와 미적
+                    기준을 이해하지 못하는 이들에게는 보이지 않는 진입 장벽이 존재한다. 이는 사회적 통합보다는 파편화된 '부족주의(Tribalism)'를 강화하며, '끼리끼리'의 문화를 세련되게
+                    포장하는 것에 불과할 수 있다.
+                </p>
+
+                <h2>4.3. '힘의 집': 신체의 규율과 데이터화된 수행</h2>
+                <p>
+                    '힘의 집'(ID 6, ID 82) 프로젝트는 고대 페르시아의 운동법인 '주르카네'를 현대적으로 재해석한 공간이다. 여기서 신체는 단순한 건강 관리의 대상을 넘어, 정신 수양과
+                    공동체적 의례(ritual)의 매개체로 격상된다.
+                </p>
+                <p>
+                    고리우노바는 현대 사회에서 신체가 데이터와 알고리즘에 의해 어떻게 포획되는지를 분석한다. '힘의 집'에서의 운동은 인스타그램을 통해 이미지와 영상으로 기록되고 공유된다. 이
+                    과정에서 신체의 고통, 땀, 불완전함은 미적인 퍼포먼스로 변환된다. "공간이 하나의 악기로 울리는 순간"(ID 80)이라는 묘사는 신체적 행위를 예술적 차원으로 끌어올리지만,
+                    동시에 신체를 시각적 소비의 대상으로 만든다. 이는 <strong>미셸 푸코(Michel Foucault)</strong>가 말한 '생명정치(Biopolitics)'의 미시적
+                    버전으로, 개인 스스로가 자신의 신체를 감시하고 규율하며, 이를 타인에게 전시함으로써 '이상적 주체'로서의 자격을 증명하려는 시도로 해석될 수 있다.
+                </p>
+
+                <h1>5. 올가 고리우노바 이론의 적용: 이상적 주체로서의 비판적 분석</h1>
+
+                <h2>5.1. 데이터화된 욕망과 가능성의 축소</h2>
+                <p>
+                    고리우노바의 핵심 이론인 <strong>'이상적 주체(Ideal Subject)'</strong>는 데이터 패턴과 알고리즘적 예측이 만들어낸, 인간이 도달하고자 하는 추상적
+                    목표물이다. @lee_byungyeob 계정은 팔로워들에게 '성공한 건축가', '깨어있는 지식인', '건강한 신체를 가진 수행자', '따뜻한 커뮤니티 리더'라는 복합적인
+                    이상(Ideal)을 제시한다.
+                </p>
+                <p>
+                    문제는 이러한 이상이 데이터(좋아요, 공유, 댓글)에 의해 강화되고 최적화된다는 점이다. 그는 대중이 반응하는 콘텐츠(감성적인 건축 사진, 진정성 있는 고백 글)를 반복적으로
+                    생산함으로써, 알고리즘이 선호하는 주체로 자신을 가공한다. 고리우노바는 이것이 인간의 잠재적 가능성을 축소시킨다고 경고한다. "우리가 무엇이 될 수 있는가"에 대한 질문이,
+                    "데이터가 무엇을 예측하는가" 혹은 "알고리즘이 무엇을 선호하는가"로 대체되기 때문이다. 이병엽의 계정은 너무나 완벽하게 '이상적인 건축가의 삶'을 보여줌으로써, 그 이외의
+                    대안적인 삶의 방식이나 건축가의 다른 가능성(예: 거칠고 투쟁적인 사회운동가로서의 건축가 등)을 상상력의 지평에서 지워버린다.
+                </p>
+
+                <h2>5.2. 거리(Distance)의 미학과 주체의 소외</h2>
+                <p>
+                    고리우노바는 디지털 주체가 생성되기 위해서는 대상으로부터의 <strong>'거리(Distance)'</strong>가 필요하다고 말한다. 데이터를 추출하고 패턴화하기 위해서는
+                    대상을 객관화하고 추상화해야 하기 때문이다. 이병엽의 사진들은 이러한 '미적 거리두기'를 수행한다.
+                </p>
+                <ul>
+                    <li><strong>인물 사진:</strong> ID 59 (2023.06.19)(흐릿한 실루엣), ID 87(멀리서 본 군중)에서 인물은 구체적인 표정이나 개성을 가진 주체가
+                        아니라, 공간의 분위기를 완성하는 오브제로 격하된다.</li>
+                    <li><strong>건축 사진:</strong> 건물을 사용하는 사람들의 실제 삶보다는 빛과 구조의 조형미에 집중한다.</li>
+                </ul>
+                <p>
+                    이러한 거리두기는 공간과 타인을 '미적 대상'으로만 바라보게 만든다. 이는 타인을 고유한 인격체(Person)가 아닌 데이터 포인트나 미적 요소로 취급하는 <strong>'주체의
+                        소외(Alienation)'</strong>를 낳는다. 그의 사진 속에서 노동자, 원주민, 혹은 평범한 행인은 배제되거나, 미적으로 보기 좋은 형태로만 박제된다. 이는
+                    고리우노바가 우려한 "인간보다 덜한(less than human)" 추상적 주체의 전형적인 모습이다.
+                </p>
+
+                <h2>5.3. 확률론적 주체(Probabilistic Subject)와 현실의 괴리</h2>
+                <p>
+                    디지털 주체는 확률론적이다. 즉, 데이터가 예측하는 '가장 그럴듯한' 모습으로 존재한다. @lee_byungyeob의 피드는 갈등, 실패, 추함이 제거된, 확률적으로 가장
+                    '매력적인' 순간들의 집합이다.
+                </p>
+                <p>
+                    하지만 현실의 인간은 모순적이고, 비일관적이며, 때로는 추하다. 이 계정이 보여주는 '매끄러운(smooth)' 자아와, 실제 현실의 '거친(rough)' 자아 사이에는 필연적인
+                    괴리가 발생한다. 한병철(Byung-Chul Han)은 이를 '매끄러움의 미학'이라 비판하며, 이는 상처받지 않으려는 나르시시즘적 자아의 발로라고 지적한 바 있다. 이병엽의 계정은
+                    이러한 매끄러운 표면을 유지하기 위해 끊임없이 '보이지 않는 노동'을 수행해야 하며, 이는 운영자 본인에게는 소진(Burnout)을, 관람자에게는 도달할 수 없는 이상에 대한
+                    좌절감을 줄 수 있다.
+                </p>
+
+                <h1>6. 결론 및 제언: 디지털 아키텍트의 윤리를 향하여</h1>
+
+                <h2>6.1. 연구 결과 요약</h2>
+                <p>
+                    분석 결과, 이병엽(@lee_byungyeob)의 인스타그램 계정은 단순한 개인의 기록을 넘어, 미적 미니멀리즘, 철학적 서사, 그리고 선별적 공동체를 통해 구축된 고도의 '디지털
+                    건축물'임이 드러났다. 그는 시각적 정제와 텍스트의 깊이를 통해 전문가적 권위와 인간적 매력을 동시에 획득했다.
+                </p>
+                <p>
+                    그러나 올가 고리우노바의 이론을 통해 비판적으로 조망했을 때, 이 계정은 '이상적 주체'의 함정에 빠져 있다.
+                </p>
+                <ol>
+                    <li><strong>현실의 추상화:</strong> 공간과 삶을 미적 이미지로 환원함으로써, 구체적인 사회적 맥락과 갈등을 은폐한다.</li>
+                    <li><strong>진정성의 수행성:</strong> 연출된 취약성과 고백을 통해 진정성을 획득하려 하지만, 이는 결국 소비를 위한 데이터화된 퍼포먼스에 가깝다.</li>
+                    <li><strong>배제적 공동체:</strong> 취향과 미학을 공유하는 이들만의 리그를 형성하여, 도시 공간의 젠트리피케이션과 문화적 위계화를 강화할 위험이 있다.</li>
+                </ol>
+
+                <h2>6.2. 제언: 더 나은 디지털 주체성을 위하여</h2>
+                <p>
+                    디지털 시대의 건축가로서 이병엽이, 그리고 우리가 나아가야 할 방향은 무엇인가? 고리우노바는 디지털 추상화가 불가피하다면, 그 추상화의 과정에 <strong>'윤리적
+                        개입'</strong>이 필요하다고 역설한다.
+                </p>
+                <ol>
+                    <li><strong>노이즈의 수용:</strong> 매끄러운 이미지만을 전시할 것이 아니라, 건축과 삶의 거친 단면, 해결되지 않은 갈등, 미적으로 완벽하지 않은 순간들을 노출할
+                        용기가 필요하다. 이는 '이상적 주체'의 환상을 깨고, 보다 '인간적인(human)' 디지털 주체로 나아가는 길이다.</li>
+                    <li><strong>맥락의 복원:</strong> 공간을 소개할 때 단순히 미적 감상이나 개인적 소회에 그치지 않고, 그 공간이 위치한 지역의 역사, 원주민의 삶,
+                        젠트리피케이션의 영향 등 사회적 맥락을 함께 이야기해야 한다.</li>
+                    <li><strong>개방적 연결:</strong> 취향이 비슷한 사람들끼리의 '동굴'에서 벗어나, 다른 배경과 취향을 가진 이들과 접속할 수 있는 '광장'으로서의 커뮤니티를
+                        지향해야 한다.</li>
+                </ol>
+                <p>
+                    건축은 본래 땅 위에 굳건히 서서 사람의 삶을 담는 그릇이다. 디지털 공간에서의 건축 역시 화려한 이미지가 아니라, 그 안에 담긴 삶의 무게와 진실을 담아낼 때 비로소 진정한
+                    의미의 '집(Vessel)'이 될 수 있을 것이다. @lee_byungyeob의 계정은 그 가능성과 한계를 동시에 보여주는 중요한 텍스트이며, 그의 다음 행보가 '이상적 주체'를
+                    넘어선 '실재적 주체'의 회복으로 이어지기를 기대한다.
+                </p>
+
+
+                <div class="directives-box">
+                    <div class="directives-title">Works cited</div>
+                    <ul class="report-content">
+                        <li>1. lee_byungyeob_analysis_result.txt</li>
+                        <li>2. ai Archives - Aksioma - Institute for Contemporary Art Ljubljana, accessed December 19,
+                            2025, <a href="https://aksioma.org/tag/ai" target="_blank">Link</a></li>
+                        <li>3. HAIC-III Opening Seminar: AI & Identity - Digital Aesthetics Research Center, accessed
+                            December 19, 2025, <a href="https://darc.au.dk/blog/nyhed/artikel/haic-iii-opening-seminar"
+                                target="_blank">Link</a></li>
+                        <li>4. Olga Goriunova - Royal Holloway Research Portal, accessed December 19, 2025, <a
+                                href="https://pure.royalholloway.ac.uk/en/persons/olga-goriunova/"
+                                target="_blank">Link</a></li>
+                        <li>5. Goriunova - The Digital Subject | PDF - Scribd, accessed December 19, 2025, <a
+                                href="https://www.scribd.com/document/777795850/Goriunova-The-Digital-Subject"
+                                target="_blank">Link</a></li>
+                        <li>6. Erving Goffman. The Presentation of Self in Everyday… | by s - Medium, accessed December
+                            19, 2025, <a href="https://medium.com/@s-blog/erving-goffman-afc8d53f76a3"
+                                target="_blank">Link</a></li>
+                        <li>7. The Presentation of Self in Everyday Life - Wikipedia, accessed December 19, 2025, <a
+                                href="https://en.wikipedia.org/wiki/The_Presentation_of_Self_in_Everyday_Life"
+                                target="_blank">Link</a></li>
+                        <li>8. Does it make sense to talk about Instagram architecture ? - DesignAtLarge, accessed
+                            December 19, 2025, <a href="https://www.designatlarge.it/instagram-architecture/?lang=en"
+                                target="_blank">Link</a></li>
+                        <li>9. Viral architecture or the unintentional architecture criticism of social media, accessed
+                            December 19, 2025, <a
+                                href="https://archscience.org/wp-content/uploads/2025/03/Viral-architecture-or-the-unintentional-architecture-criticism-of-social-media.pdf"
+                                target="_blank">Link</a></li>
+                        <li>10. REACT Guest Lectures - Heiner Goebbels - CultTech Association, accessed December 19,
+                            2025, <a href="https://culttech.at/react-guest-lectures" target="_blank">Link</a></li>
+                        <li>11. The Impact of Instagram Aesthetics on Adolescents' Self-Esteem and Body Dissatisfaction,
+                            accessed December 19, 2025, <a
+                                href="https://www.researchgate.net/publication/397899782_The_Impact_of_Instagram_Aesthetics_on_Adolescents'_Self-Esteem_and_Body_Dissatisfaction"
+                                target="_blank">Link</a></li>
+                        <li>12. Time Spent on Instagram and Body Image, Self-esteem, and Physical Comparison Among Young
+                            Adults in Spain: Observational Study - NIH, accessed December 19, 2025, <a
+                                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10131713/" target="_blank">Link</a></li>
+                        <li>13. The Online Profile vs. Your True Self: A Modern Identity Shift - Mentalzon, accessed
+                            December 19, 2025, <a
+                                href="https://mentalzon.com/en/post/5156/the-online-profile-vs-your-true-self-a-modern-identity-shift"
+                                target="_blank">Link</a></li>
+                        <li>14. Being Real: Gen-Z, Self-Presentation, and Authenticity on Social Media - Digital Commons
+                            @ Trinity, accessed December 19, 2025, <a
+                                href="https://digitalcommons.trinity.edu/cgi/viewcontent.cgi?article=1026&context=comm_honors"
+                                target="_blank">Link</a></li>
+                        <li>15. The labour of visual authenticity on social media: Exploring producers' and audiences'
+                            perceptions on Instagram | Request PDF - ResearchGate, accessed December 19, 2025, <a
+                                href="https://www.researchgate.net/publication/346389827_The_labour_of_visual_authenticity_on_social_media_Exploring_producers'_and_audiences'_perceptions_on_Instagram"
+                                target="_blank">Link</a></li>
+                        <li>16. Gentrification in Seoul: The Correlation Between Commercial and Residential Dynamics //
+                            The Roundup, accessed December 19, 2025, <a
+                                href="https://jesuitroundup.org/2025/01/gentrification-in-seoul-the-correlation-between-commercial-and-residential-dynamics/"
+                                target="_blank">Link</a></li>
+                        <li>17. Focused On the 'District Unit Plan' of Seochon, Ikseon and Ttukseom surrounding area -
+                            KoreaScience, accessed December 19, 2025, <a
+                                href="https://koreascience.kr/article/JAKO201932964974899.page;?&lang=en"
+                                target="_blank">Link</a></li>
+                        <li>18. [Eye Plus] Travel back in time in Seochon - The Korea Herald, accessed December 19,
+                            2025, <a href="https://www.koreaherald.com/article/1643786" target="_blank">Link</a></li>
+                        <li>19. Characteristics Analysis of Commercial Gentrification in Seoul Focusing on the
+                            Vitalization of Streets in Residential Areas - MDPI, accessed December 19, 2025, <a
+                                href="https://www.mdpi.com/2071-1050/12/21/8877" target="_blank">Link</a></li>
+                        <li>20. Insta-Gaze: Aesthetic representation and contested transformation of Woljeong, South
+                            Korea, accessed December 19, 2025, <a
+                                href="https://www.researchgate.net/publication/354455708_Insta-Gaze_Aesthetic_representation_and_contested_transformation_of_Woljeong_South_Korea"
+                                target="_blank">Link</a></li>
+                        <li>21. Self-Presentation Theory - TheoryHub - Academic theories reviews for research and T&L,
+                            accessed December 19, 2025, <a
+                                href="https://open.ncl.ac.uk/theories/17/self-presentation-theory/"
+                                target="_blank">Link</a></li>
+                        <li>22. Impression Management: Erving Goffman Theory - Simply Psychology, accessed December 19,
+                            2025, <a href="https://www.simplypsychology.org/impression-management.html"
+                                target="_blank">Link</a></li>
+                        <li>23. Brooklyn of Korea: Place branding as a process in production of space - DSpace@MIT,
+                            accessed December 19, 2025, <a
+                                href="https://dspace.mit.edu/bitstream/handle/1721.1/139987/kim-laurapk-mcp-dusp-2021-thesis.pdf?sequence=1&isAllowed=y"
+                                target="_blank">Link</a></li>
+                        <li>24. "Architects should design provocative architecture that does not conform to Instagram's
+                            aesthetic conventions" - Dezeen, accessed December 19, 2025, <a
+                                href="https://www.dezeen.com/2019/09/05/anti-instagram-architecture-will-jennings/anti-instagram-architecture-will-jennings/"
+                                target="_blank">Link</a></li>
+                        <li>25. Online vs Offline Personality: The Dual Nature of Digital Identity - NetPsychology,
+                            accessed December 19, 2025, <a
+                                href="https://netpsychology.org/online-vs-offline-personality-digital-identity-guide/"
+                                target="_blank">Link</a></li>
+                        <li>26. [오늘의 건축가] 꿈결에 길을 내는: 이병엽 - VMSPACE, accessed December 19, 2025, <a
+                                href="https://vmspace.com/report/report_view.html?base_seq=MjQzNw=="
+                                target="_blank">Link</a></li>
+                        <li>27. 건축가와 무용가 부부의 예술을 닮은 집 - 신세계 빌리브, accessed December 19, 2025, <a
+                                href="https://villiv.co.kr/magazine/all/people/2841" target="_blank">Link</a></li>
+                        <li>28. 힘의집, accessed December 19, 2025, <a
+                                href="https://himuzip.com/%ED%9E%98%EC%9D%98%EC%A7%91/#:~:text=%ED%9E%98%EC%9D%98%EC%A7%91%EC%9D%80%20%EA%B3%A0%EB%8C%80,%EC%A4%91%EC%9A%94%EC%84%B1%EC%9D%84%20%EA%B0%95%EC%A1%B0%ED%95%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%9E%85%EB%8B%88%EB%8B%A4."
+                                target="_blank">Link</a></li>
+                        <li>29. 힘의집 건축화한 힘 by 이병엽 건축가, accessed December 19, 2025, <a
+                                href="https://himuzip.com/%ED%9E%98%EC%9D%98%EC%A7%91/" target="_blank">Link</a></li>
+                        <li>30. 밑미 전시 [오프더레코드] 예약하기, accessed December 19, 2025, <a
+                                href="https://www.nicetomeetme.kr/products/01j9tgzawrc4xvkbk7v8wj39ym"
+                                target="_blank">Link</a></li>
+                        <li>31. 멤버소개 Archives - 힘의집 Himuzip, accessed December 19, 2025, <a
+                                href="https://himuzip.com/category/core/" target="_blank">Link</a></li>
+                    </ul>
+                </div>
+
+                <div class="doc-link">
+                    <!-- Google Doc link placeholder; user did not provide one in the prompt, so leaving as a generic placeholder or the previous one if desired, but best to hide or use # if unknown. I will keep the structure but set href to # for now or omit. -->
+                    <!-- Wait, in previous turns I was asked to set specific links. Here none was provided. I will remove the specific link to avoid confusion but keep the button structure in case they want to add it later, or comment it out. actually, better to remove the specific href hash to avoid broken links. -->
+                    <a href="https://docs.google.com/document/d/1fBKgOlr_vVi4NxHkaywahGdTNOxRGu8yKd0t6PjIqBQ/edit?usp=sharing"
+                        target="_blank">
+                        구글 문서로 원문 전체 보기
+                    </a>
+                    <div class="doc-note">
+                        * 보다 상세한 분석 내용과 참고 문헌은 위 링크에서 확인하실 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

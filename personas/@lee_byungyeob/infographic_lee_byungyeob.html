@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@lee_byungyeob 심층 자아 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Base Theme: Light Monochrome */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 0.4rem;
+            font-family: 'Roboto Mono', monospace;
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        .flow-box {
+            border: 1px solid #111;
+            padding: 15px;
+            background: #fff;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Global Header -->
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Page Header -->
+        <div class="header">
+            <span class="header-badge">Persona Research Project</span>
+            <h1 class="header-title">@lee_byungyeob</h1>
+            <div class="header-subtitle">심층 자아 분석 리포트 (Aesthetic Observer)</div>
+            <p class="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+                데이터 기반 자아 생성: 건축가의 시선, 침묵의 기록, 그리고 내재된 욕망의 시각화.<br>
+                인스타그램 데이터에서 추출한 <strong>추상적 현실(Abstract Reality)</strong>과 생성된 <strong>대화형 에이전트 자아(Constructed
+                    Self)</strong>에 대한 연구.
+            </p>
+        </div>
+
+        <!-- Section 1: Identity Structure -->
+        <section class="space-y-8">
+            <div class="space-y-6">
+                <div class="section-header">
+                    <span class="text-xl font-bold">01. Identity Structure</span>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    @lee_byungyeob 계정의 데이터는 단순한 기록을 넘어, 관찰자(Observer)로서의 확고한 정체성을 드러냅니다.
+                    건축적 구조와 빛의 변주를 통해 세상과 소통하며, 언어보다는 시각적 질서로 자아를 정의합니다.
+                </p>
+            </div>
+
+            <!-- KPIs: 3 Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-panel p-6 flex flex-col items-center text-center justify-center">
+                    <span class="text-xs text-gray-400 mono-font uppercase tracking-wider mb-2">Dominant Theme</span>
+                    <span class="text-2xl font-bold mb-1">Space & Time</span>
+                    <span class="text-xs text-gray-500">공간과 시간의 기록</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel p-6 flex flex-col items-center text-center justify-center">
+                    <span class="text-xs text-gray-400 mono-font uppercase tracking-wider mb-2">Visual Archetype</span>
+                    <span class="text-2xl font-bold mb-1">The Architect</span>
+                    <span class="text-xs text-gray-500">질서와 구조의 탐구자</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel p-6 flex flex-col items-center text-center justify-center">
+                    <span class="text-xs text-gray-400 mono-font uppercase tracking-wider mb-2">Interaction Style</span>
+                    <span class="text-2xl font-bold mb-1">Reflective</span>
+                    <span class="text-xs text-gray-500">내면적 성찰과 독백</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Visual Self -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">02. The Visual Self</span>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-gray-700 leading-relaxed">
+                    시각적 자아는 <strong>'정제된 고요함'</strong>으로 요약됩니다. 복잡한 도심 속에서도 질서(Order)와
+                    물성(Materiality)을 찾아내려는 강박적인 미학적 선호가 데이터를 통해 드러납니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Color Palette -->
+                <div class="glass-panel p-6 flex flex-col items-center">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Aesthetic Palette</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b pb-2">Color Breakdown</h3>
+                    <p class="text-sm text-gray-500 mb-6 text-left w-full">
+                        화이트와 그레이의 중성적 톤이 지배적이며, 자연광(Warm Light)과 식물(Green)이 생명력을 부여합니다.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="colorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Composition -->
+                <div class="glass-panel p-6 flex flex-col items-center">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Compositional Focus</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b pb-2">Visual Elements</h3>
+                    <p class="text-sm text-gray-500 mb-6 text-left w-full">
+                        기하학적 선과 텍스처(질감)에 대한 집착은 계정주가 세상을 '구조적'으로 해석하고 있음을 보여줍니다.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="compositionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Social & Conceptual Self -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">03. Social & Conceptual Self</span>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-gray-700 leading-relaxed">
+                    사회적 자아는 <strong>'거리두기(Distancing)'</strong>를 실천합니다. 적극적인 개입보다는 관조하며,
+                    개념적 자아는 대상에 인격을 부여하여 대화하려는 물활론적 사고방식을 보입니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Radar Chart -->
+                <div class="lg:col-span-7 glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Persona Attribute Radar
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-gray-400 text-center">
+                        * 심미성/관조성 극대화, 오락성 최소화 (전문가적 거리두기)
+                    </div>
+                </div>
+
+                <!-- Cognitive Flow -->
+                <div class="lg:col-span-5 glass-panel p-6 flex flex-col bg-gray-50">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">Cognitive Process Loop</div>
+                    <h3 class="text-lg font-bold text-black mb-4 border-b border-gray-200 pb-2">사고 과정 흐름</h3>
+                    <p class="text-sm text-gray-500 mb-6">
+                        대상의 발견에서 내면화에 이르는 일련의 과정은 반복적인 수행(Practice)과 같습니다.
+                    </p>
+
+                    <div class="flex flex-col items-center gap-4 py-4 w-full">
+                        <div class="flow-box w-full shadow-sm">
+                            <span class="font-bold">1. 발견 (Discovery)</span>
+                            <div class="text-xs font-normal text-gray-500 mt-1">빛, 그림자, 구조적 질서 포착</div>
+                        </div>
+                        <div class="text-black text-xl">↓</div>
+                        <div class="flow-box w-full bg-black text-white border-black">
+                            <span class="font-bold">2. 대화 (Dialogue)</span>
+                            <div class="text-xs font-normal text-gray-300 mt-1">대상에게 인격 부여 ("안부를 묻다")</div>
+                        </div>
+                        <div class="text-black text-xl">↓</div>
+                        <div class="flow-box w-full shadow-sm">
+                            <span class="font-bold">3. 기록 (Archiving)</span>
+                            <div class="text-xs font-normal text-gray-500 mt-1">감정을 배제한 정제된 텍스트와 이미지</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Attitude & Language (Plotly) -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">04. Attitude & Texture</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        텍스트 분석 결과, 계정주의 언어는 <strong>'건조하지만 다정한(Dry but Affectionate)'</strong> 이중적 태도를 보입니다.
+                        객관적인 사실 서술 속에 주관적인 감상을 은밀하게 배치하는 전략을 취합니다.
+                    </p>
+                    <div class="glass-panel p-4">
+                        <h4 class="font-bold text-sm mb-2">Linguistic Dimensions</h4>
+                        <ul class="text-sm text-gray-600 list-disc ml-4 space-y-1">
+                            <li><strong>X축 (객관성):</strong> 사실적 묘사 중심</li>
+                            <li><strong>Y축 (감성도):</strong> 은밀한 정서 표현</li>
+                            <li><strong>Z축 (시간):</strong> 과거 회상과 거리두기</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Plotly Chart -->
+                <div class="glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">3D Attitude Mapping</div>
+                    <div id="plotlyDiv" class="w-full h-[400px] border border-gray-200"></div>
+                    <div class="mt-2 text-xs text-gray-400 text-center">
+                        * Data clustering: '과거 회상' & '객관적 묘사'
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Shadow & Biases -->
+        <section>
+            <div class="section-header justify-between">
+                <span class="text-xl font-bold">05. Biases & Shadows</span>
+                <span class="text-xs px-2 py-1 bg-black text-white rounded-full">⚠️ SHADOW TRAITS</span>
+            </div>
+            <div class="mb-4 text-gray-600">
+                아름다움 이면에 숨겨진 통제 욕구와 현실의 파편화. 완벽하게 조율된 피드는 혼란스러운 현실을 거세하고 싶은 <strong>'심미적 통제(Aesthetic Control)'</strong>
+                욕망을 시사합니다.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Bias Card 1 -->
+                <div class="glass-panel p-6">
+                    <h3 class="font-bold text-lg mb-2">과잉된 낭만화 (Romanticization)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        낡은 벽돌, 그림자, 빛바랜 공간조차 낭만적인 서사로 포장됩니다.
+                        이는 현실의 거친 질감을 그대로 받아들이기보다, 자신의 미적 기준에 맞춰
+                        세상을 재단하려는 <strong>편집증적 태도</strong>로 해석될 수 있습니다.
+                        불편한 현실(소음, 오염, 갈등)은 프레임 밖으로 철저히 배제됩니다.
+                    </p>
+                </div>
+
+                <!-- Bias Card 2 -->
+                <div class="glass-panel p-6">
+                    <h3 class="font-bold text-lg mb-2">타자화된 시선 (Othering of Space)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        "건물과 안부를 묻다"라는 표현은 공간을 의인화하는 동시에,
+                        자신을 철저한 <strong>외부 관찰자</strong>의 위치에 둡니다.
+                        이러한 거리두기는 깊은 개입을 회피하고 안전한 거리에서 대상을 향유하려는
+                        방어기제일 수 있습니다. 공간은 삶의 터전이 아니라 감상(Appreciation)의 대상이 됩니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs mono-font">
+            <p class="mb-2">Analysis based on Instagram Data @lee_byungyeob</p>
+            <p>Generated by Canvas Infographics AI | Theoretical Framework: Olga Goriunova</p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // ---------------------------------------------------------
+        // Utility Function: Label Wrapping
+        // ---------------------------------------------------------
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const processLabels = (labels) => labels.map(label => wrapLabel(label));
+
+        // ---------------------------------------------------------
+        // Chart.js Default Configuration
+        // ---------------------------------------------------------
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#333';
+        Chart.defaults.scale.grid.color = '#eee';
+
+        Chart.defaults.plugins.tooltip.callbacks.title = function (tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#000',
+                        font: { family: 'Noto Sans KR' }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#111',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#333',
+                    borderWidth: 1
+                }
+            }
+        };
+
+        // ---------------------------------------------------------
+        // Chart 1: Color Palette (Doughnut) - Monotone
+        // ---------------------------------------------------------
+        const ctxColor = document.getElementById('colorChart').getContext('2d');
+        new Chart(ctxColor, {
+            type: 'doughnut',
+            data: {
+                labels: processLabels(['White & Concrete (Neutral)', 'Brick & Wood (Warmth)', 'Shadow Black (Contrast)', 'Nature Green (Life)']),
+                datasets: [{
+                    data: [40, 25, 20, 15],
+                    backgroundColor: [
+                        '#e5e5e5', // Light Gray
+                        '#999999', // Medium Gray
+                        '#111111', // Black
+                        '#555555'  // Dark Gray
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#ffffff',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 15, color: '#333' } }
+                },
+                layout: { padding: 10 }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 2: Composition Elements (Bar) - Monotone
+        // ---------------------------------------------------------
+        const ctxComp = document.getElementById('compositionChart').getContext('2d');
+        new Chart(ctxComp, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Geometric Lines', 'Material Texture', 'Light & Shadow', 'Human Figures', 'Urban Landscape']),
+                datasets: [{
+                    label: 'Frequency of Visual Elements',
+                    data: [85, 78, 92, 20, 65],
+                    backgroundColor: '#333333', // Dark Gray/Black
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { color: '#555' } },
+                    x: { grid: { display: false }, ticks: { color: '#333' } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 3: Radar Chart (Personality) - Monotone
+        // ---------------------------------------------------------
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: processLabels(['Aesthetic Sensitivity', 'Social Interaction', 'Analytical Depth', 'Nostalgia/Emotion', 'Professionalism']),
+                datasets: [{
+                    label: 'Derived Persona Profile',
+                    data: [95, 30, 80, 75, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(17, 17, 17, 0.1)', // Black transparent
+                    borderColor: '#111111', // Black Solid
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#111111',
+                    pointHoverBackgroundColor: '#111111',
+                    pointHoverBorderColor: '#fff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e5e5' },
+                        grid: { color: '#e5e5e5' },
+                        pointLabels: {
+                            font: { size: 11 },
+                            color: '#111'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 4: Plotly 3D Scatter (Attitude) - Monotone/Grayscale
+        // ---------------------------------------------------------
+        const trace1 = {
+            x: [0.8, 0.7, 0.9, 0.6, 0.5, 0.9],
+            y: [0.6, 0.8, 0.3, 0.7, 0.5, 0.2],
+            z: [0.9, 0.4, 0.2, 0.8, 0.5, 0.1],
+            mode: 'markers',
+            marker: {
+                size: 8,
+                color: '#333333', // Dark Gray uniform color
+                opacity: 0.8,
+                line: {
+                    color: '#ffffff',
+                    width: 1
+                }
+            },
+            type: 'scatter3d',
+            text: [
+                'Post: "건물과 안부를 묻다"',
+                'Post: "남산 자락의 소용"',
+                'Post: "벽돌의 질감"',
+                'Post: "동네와의 조화"',
+                'Post: "오후의 빛"',
+                'Post: "디테일 샷"'
+            ],
+            hoverinfo: 'text'
+        };
+
+        const layout = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            scene: {
+                xaxis: { title: 'Objectivity', color: '#333' },
+                yaxis: { title: 'Emotion', color: '#333' },
+                zaxis: { title: 'Time', color: '#333' },
+                aspectmode: 'cube',
+                camera: {
+                    eye: { x: 1.5, y: 1.5, z: 1.5 }
+                }
+            }
+        };
+
+        Plotly.newPlot('plotlyDiv', [trace1], layout, { displayModeBar: false });
+
+    </script>
+</body>
+
+</html>
