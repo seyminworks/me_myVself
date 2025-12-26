@@ -176,21 +176,20 @@
         tag = "2025-12-21";
         link = "personas/@cha_jinyeob_________/persona.html";
       } else if (i === 14) {
-        name = "@bosul.k_art";
-        tag = "2025-12-26";
+        name = "@ohrossii";
+        tag = "2025-12-27";
+        link = "personas/@ohrossii/persona.html";
       } else if (i === 15) {
         name = "@yoon_youngme";
         tag = "2025-12-27";
+        link = "personas/@yoon_youngme/persona.html";
       } else if (i === 16) {
-        name = "@ohrossii";
-        tag = "2025-12-27";
-      } else if (i === 17) {
         name = "@pebbloux";
         tag = "2025-12-28";
-      } else if (i === 18) {
+      } else if (i === 17) {
         name = "@hyeen.j";
         tag = "2025-12-28";
-      } else if (i === 19) {
+      } else if (i === 18) {
         name = "@seohyo";
         tag = "2025-12-28";
       }
@@ -555,6 +554,136 @@
             <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
               <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
                 <img src="assets/thumbnails/@cha_jinyeob___________thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+
+        const personaImage = card.querySelector('.persona-image');
+        const hoverImage = card.querySelector('.hover-image');
+        const defaultContent = card.querySelector('.default-content');
+
+        personaImage.addEventListener('mouseenter', function () {
+          hoverImage.style.opacity = '1';
+          defaultContent.style.opacity = '0';
+        });
+
+        personaImage.addEventListener('mouseleave', function () {
+          hoverImage.style.opacity = '0';
+          defaultContent.style.opacity = '1';
+        });
+      } else if (index === 13) {
+        // 14번 썸네일 (@ohrossii)
+        card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@ohrossii_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+
+        const personaImage = card.querySelector('.persona-image');
+        const hoverImage = card.querySelector('.hover-image');
+        const defaultContent = card.querySelector('.default-content');
+
+        personaImage.addEventListener('mouseenter', function () {
+          hoverImage.style.opacity = '1';
+          defaultContent.style.opacity = '0';
+        });
+
+        personaImage.addEventListener('mouseleave', function () {
+          hoverImage.style.opacity = '0';
+          defaultContent.style.opacity = '1';
+        });
+      } else if (index === 14) {
+        // 15번 썸네일 (@yoon_youngme)
+        card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@yoon_youngme_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+
+        const personaImage = card.querySelector('.persona-image');
+        const hoverImage = card.querySelector('.hover-image');
+        const defaultContent = card.querySelector('.default-content');
+
+        personaImage.addEventListener('mouseenter', function () {
+          hoverImage.style.opacity = '1';
+          defaultContent.style.opacity = '0';
+        });
+
+        personaImage.addEventListener('mouseleave', function () {
+          hoverImage.style.opacity = '0';
+          defaultContent.style.opacity = '1';
+        });
+      } else if (index === 15) {
+        // 16번 썸네일 (@pebbloux)
+        card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@pebbloux_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+
+        const personaImage = card.querySelector('.persona-image');
+        const hoverImage = card.querySelector('.hover-image');
+        const defaultContent = card.querySelector('.default-content');
+
+        personaImage.addEventListener('mouseenter', function () {
+          hoverImage.style.opacity = '1';
+          defaultContent.style.opacity = '0';
+        });
+
+        personaImage.addEventListener('mouseleave', function () {
+          hoverImage.style.opacity = '0';
+          defaultContent.style.opacity = '1';
+        });
+      } else if (index === 16) {
+        // 17번 썸네일 (@hyeen.j)
+        card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@hyeen.j_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="default-content">${persona.name}</div>
+            </div>
+            <div class="persona-name">${persona.name}</div>
+            <div class="persona-tag">${persona.tag}</div>
+          `;
+
+        const personaImage = card.querySelector('.persona-image');
+        const hoverImage = card.querySelector('.hover-image');
+        const defaultContent = card.querySelector('.default-content');
+
+        personaImage.addEventListener('mouseenter', function () {
+          hoverImage.style.opacity = '1';
+          defaultContent.style.opacity = '0';
+        });
+
+        personaImage.addEventListener('mouseleave', function () {
+          hoverImage.style.opacity = '0';
+          defaultContent.style.opacity = '1';
+        });
+      } else if (index === 17) {
+        // 18번 썸네일 (@seohyo)
+        card.innerHTML = `
+            <div class="persona-image" style="position: relative; background: #${bgColor}; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-family: 'Roboto Mono';">
+              <div class="hover-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
+                <img src="assets/thumbnails/@seohyo_thumbnail.jpg" alt="${persona.name}" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
               <div class="default-content">${persona.name}</div>
             </div>
