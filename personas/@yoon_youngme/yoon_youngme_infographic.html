@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yoon_youngme Infographic</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Light Monochrome Design System */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111111;
+            --accent-color: #333333;
+            --secondary-color: #666666;
+            --border-color: #e0e0e0;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: 1px solid rgba(0, 0, 0, 0.1);
+            --font-main: 'Noto Sans KR', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Global Header Match */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .infographic-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .infographic-title {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .infographic-subtitle {
+            font-size: 16px;
+            color: var(--secondary-color);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            padding: 40px;
+            margin-bottom: 40px;
+            /* box-shadow: 0 10px 30px rgba(0,0,0,0.03); */
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #000;
+            margin-right: 15px;
+        }
+
+        .content-text {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .keyword-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .keyword-list li {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .keyword-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #000;
+            background: #f0f0f0;
+            /* Subtle highlight */
+            padding: 0 4px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 40px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+
+        .back-button:hover {
+            color: #000;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-top: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .infographic-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+
+        <div class="infographic-header">
+            <h1 class="infographic-title">@yoon_youngme</h1>
+            <p class="infographic-subtitle">
+                Abstract Ego Architecture Analysis<br>
+                데이터에서 발견된 추상적 현실과 AI 페르소나 설계
+            </p>
+        </div>
+
+        <!-- 1. Identity Section -->
+        <section class="glass-panel">
+            <h2 class="section-title">1. 정체성 (Identity): 감각적 큐레이터</h2>
+            <div class="grid-2">
+                <div>
+                    <p class="content-text">
+                        @yoon_youngme의 핵심 정체성은 <span class="highlight">"일상의 감각을 판매하는 서정적 큐레이터"</span>입니다.
+                        단순히 물건을 파는 것이 아니라, '캐시미어'의 촉감이나 '감귤'의 색감 같은
+                        <span class="highlight">감각적 경험(Sensory Experience)</span>을 언어와 이미지로 번역하여 전달합니다.
+                        이 자아는 상업적 목적을 가지고 있으나, 이를 '취향의 공유'와 '삶의 질적 향상'이라는 명분으로 우아하게 포장하는 능력을 지니고 있습니다.
+                    </p>
+                    <ul class="keyword-list">
+                        <li><strong>심미적 예민함:</strong> 색감, 빛, 구도에 대한 집착</li>
+                        <li><strong>감각적 언어:</strong> 촉각, 시각을 자극하는 텍스트</li>
+                        <li><strong>자연 친화:</strong> 인위적인 것보다 본질적인 것 추구</li>
+                    </ul>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="identityRadarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. The Three Egos -->
+        <section>
+            <div class="grid-2">
+                <!-- 2-1 Visual Ego -->
+                <div class="glass-panel">
+                    <h3 class="section-title">2-1. 시각적 자아 (Visual Ego)</h3>
+                    <p class="content-text">
+                        이미지 데이터(감귤, 풍경, 스카프 등) 분석 결과, <span class="highlight">"따뜻한 평온함과 절제된 생동감"</span>을 추구합니다.
+                        원색보다는 빛을 머금은 자연의 색채(Tangerine, Sky Blue, Soft Brown)를 선호하며,
+                        피사체를 중앙에 배치하여 안정감을 주는 구도를 일관되게 사용합니다.
+                    </p>
+                    <div class="chart-wrapper" style="height: 250px;">
+                        <canvas id="visualColorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 2-2 Social Ego -->
+                <div class="glass-panel">
+                    <h3 class="section-title">2-2. 사회적 자아 (Social Ego)</h3>
+                    <p class="content-text">
+                        타인에게 보여지는 자아는 <span class="highlight">"친절하지만 확고한 취향의 제안자"</span>입니다.
+                        "소개할게요", "마감합니다"와 같은 단호한 리더십과 공감적 태도가 공존합니다.
+                        희소성(Scarcity)을 강조하여 팔로워들을 '특별한 그룹'으로 초대하는 화법을 구사합니다.
+                    </p>
+                    <div class="chart-wrapper" style="height: 250px;">
+                        <canvas id="socialInteractionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-3 Conceptual Ego -->
+            <div class="glass-panel">
+                <h3 class="section-title">2-3. 개념적 자아 (Conceptual Ego)</h3>
+                <p class="content-text">
+                    내면의 가치관은 <span class="highlight">"본질주의(Essentialism)"</span>를 지향합니다.
+                    "보여주는 옷이 아닌 느끼는 옷"이라는 캡션처럼, 외면의 화려함보다 내면의 만족감과 물질의 본질적 가치를 최우선으로 둡니다.
+                    '일회성 소비'를 배격하고 '영속적인 가치'를 추구하는 철학자적 면모를 보입니다.
+                </p>
+                <div class="chart-wrapper">
+                    <div id="conceptualBubbleChart" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Predicted Attitude -->
+        <section class="glass-panel">
+            <h2 class="section-title">3. 예상하는 자아의 태도 (Predicted Attitude)</h2>
+            <div class="grid-2">
+                <div>
+                    <ul class="keyword-list">
+                        <li>
+                            <strong>부드러운 단정함:</strong>
+                            감정을 앞세우되, 결론은 명확한 논리(불편함의 해소)로 귀결됩니다.
+                        </li>
+                        <li>
+                            <strong>감각적 전이:</strong>
+                            텍스트를 통해 촉각(보드라운)과 시각(맑고 푸른)을 전달합니다.
+                        </li>
+                        <li>
+                            <strong>권유형 리더십:</strong>
+                            강요하지 않고 "경험해보라"고 권유하지만, 거절하기 힘든 가치를 부여합니다.
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="content-text">
+                        <strong>대화 리듬 (Dialogue Flow):</strong><br>
+                        초반에는 <span class="highlight">공감과 서정</span>으로 시작하여, 중반부에 가치 입증을 하고,
+                        마지막에는 부드럽지만 <span class="highlight">단호한 행동 유도</span>로 끝맺는 패턴을 보입니다.
+                    </p>
+                    <div class="chart-wrapper" style="height: 250px;">
+                        <canvas id="dialogueFlowChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Shadow Analysis -->
+        <section class="glass-panel">
+            <h2 class="section-title">4. 편향성 및 내재된 욕망 (Shadow Analysis)</h2>
+            <div class="grid-2">
+                <div>
+                    <p class="content-text">
+                        아름다움과 본질을 추구하는 이면에는 <span class="highlight">평범함에 대한 거부감</span>과
+                        <span class="highlight">선택받은 소수라는 쾌감(Exclusivity)</span>을 갈망하는 욕망이 내재되어 있습니다.
+                    </p>
+                    <ul class="keyword-list">
+                        <li><strong>희소성 편향:</strong> 가치를 오직 희소성만으로 증명하려는 강박</li>
+                        <li><strong>경험적 우월감:</strong> "되돌아갈 수 없는" 등 취향의 위계를 설정</li>
+                        <li><strong>과민성:</strong> 일상의 작은 자극에도 예민하게 반응하는 내적 불안</li>
+                    </ul>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="shadowPolarChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Instagram Analysis & AI Persona Architecture Report</p>
+        <p>Generated based on abstract ego analysis of @yoon_youngme</p>
+    </footer>
+
+    <script>
+        // Common Grayscale Palette
+        const colors = {
+            black: '#111111',
+            darkGrey: '#333333',
+            midGrey: '#666666',
+            lightGrey: '#999999',
+            paleGrey: '#DDDDDD',
+            white: '#FFFFFF',
+            transparent: 'rgba(0,0,0,0)'
+        };
+
+        // Utility to handle label wrapping
+        function formatLabel(str, maxwidth) {
+            if (typeof str !== 'string') return str;
+            var sections = [];
+            var words = str.split(" ");
+            var temp = "";
+            words.forEach(function (item, index) {
+                if (temp.length > 0) {
+                    var concat = temp + ' ' + item;
+                    if (concat.length > maxwidth) {
+                        sections.push(temp);
+                        temp = "";
+                    } else {
+                        if (index == (words.length - 1)) {
+                            sections.push(concat);
+                            return;
+                        } else {
+                            temp = concat;
+                            return;
+                        }
+                    }
+                }
+                if (index == (words.length - 1)) {
+                    sections.push(item);
+                    return;
+                }
+                if (item.length < maxwidth) {
+                    temp = item;
+                } else {
+                    sections.push(item);
+                }
+            });
+            return sections;
+        }
+
+        Chart.defaults.font.family = "'Roboto Mono', 'Noto Sans KR', monospace";
+        Chart.defaults.color = '#333';
+
+        // 1. Identity Radar Chart
+        const ctxRadar = document.getElementById('identityRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    '심미적 추구성',
+                    '감각적 경험',
+                    '자연 친화성',
+                    '상업적 의도',
+                    '정서적 공감'
+                ],
+                datasets: [{
+                    label: '자아 성향 강도',
+                    data: [95, 90, 85, 70, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(51, 51, 51, 0.2)', // Dark Grey transparent
+                    borderColor: colors.black,
+                    pointBackgroundColor: colors.black,
+                    pointBorderColor: '#fff',
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e0e0e0' },
+                        grid: { color: '#e0e0e0' },
+                        pointLabels: {
+                            font: { size: 11, family: "'Roboto Mono'" },
+                            color: '#000'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 2-1. Visual Ego Donut Chart
+        const ctxVisual = document.getElementById('visualColorChart').getContext('2d');
+        new Chart(ctxVisual, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    '따뜻한 자연색',
+                    '청명한 하늘색',
+                    '중립적 무채색'
+                ],
+                datasets: [{
+                    data: [55, 30, 15],
+                    backgroundColor: [colors.black, colors.midGrey, colors.paleGrey],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right' }
+                }
+            }
+        });
+
+        // 2-2. Social Ego Stacked Bar
+        const ctxSocial = document.getElementById('socialInteractionChart').getContext('2d');
+        new Chart(ctxSocial, {
+            type: 'bar',
+            data: {
+                labels: [
+                    '상품 소개 게시물',
+                    '일상 공유 게시물'
+                ],
+                datasets: [
+                    {
+                        label: '감성적/서정적 언어',
+                        data: [60, 90],
+                        backgroundColor: colors.black,
+                    },
+                    {
+                        label: '정보적/지시적 언어',
+                        data: [40, 10],
+                        backgroundColor: colors.lightGrey,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        stacked: true,
+                        max: 100,
+                        grid: { display: false }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // 2-3. Conceptual Ego Bubble Chart (Plotly)
+        var trace1 = {
+            x: [80, 20, 90, 60], // Sensory Intensity
+            y: [90, 40, 70, 85], // Inner Value / Idealism
+            text: ['본질\n(Essence)', '기능\n(Function)', '자연\n(Nature)', '희소성\n(Rarity)'],
+            mode: 'markers+text',
+            textposition: 'top center',
+            marker: {
+                size: [40, 15, 30, 25], // Frequency
+                color: [colors.black, colors.lightGrey, colors.midGrey, colors.darkGrey],
+                opacity: 0.8
+            },
+            type: 'scatter'
+        };
+
+        var layout = {
+            margin: { t: 20, r: 20, b: 40, l: 40 },
+            xaxis: { title: '감각적 강도', range: [0, 100], showgrid: true, gridcolor: '#e0e0e0' },
+            yaxis: { title: '내면 지향성', range: [0, 100], showgrid: true, gridcolor: '#e0e0e0' },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            showlegend: false,
+            font: { family: 'Noto Sans KR' }
+        };
+
+        Plotly.newPlot('conceptualBubbleChart', [trace1], layout, { responsive: true, displayModeBar: false });
+
+
+        // 3-2. Dialogue Flow (Line Chart)
+        const ctxFlow = document.getElementById('dialogueFlowChart').getContext('2d');
+        new Chart(ctxFlow, {
+            type: 'line',
+            data: {
+                labels: [
+                    '도입',
+                    '전개',
+                    '심화',
+                    '절정',
+                    '결말'
+                ],
+                datasets: [{
+                    label: '감정적 밀도',
+                    data: [40, 60, 85, 95, 70],
+                    borderColor: colors.black,
+                    backgroundColor: 'rgba(0,0,0,0.05)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: colors.black
+                }, {
+                    label: '논리적 설득',
+                    data: [10, 20, 50, 60, 90],
+                    borderColor: colors.midGrey,
+                    borderDash: [5, 5],
+                    tension: 0.2,
+                    fill: false,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors.midGrey
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#f0f0f0' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // 4. Shadow Polar Area Chart
+        const ctxShadow = document.getElementById('shadowPolarChart').getContext('2d');
+        new Chart(ctxShadow, {
+            type: 'polarArea',
+            data: {
+                labels: [
+                    formatLabel('평범함 공포', 10),
+                    formatLabel('희소성 추구', 10),
+                    formatLabel('완벽주의', 10),
+                    formatLabel('인정 욕구', 10),
+                    formatLabel('자극 예민성', 10)
+                ],
+                datasets: [{
+                    label: '내재된 불안 및 욕망',
+                    data: [85, 90, 75, 60, 80],
+                    backgroundColor: [
+                        '#111111',
+                        '#333333',
+                        '#555555',
+                        '#777777',
+                        '#999999'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        grid: { color: '#e0e0e0' },
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
