@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@seohyo 심층 자아 분석 보고서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Base Theme: Light Monochrome */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Global Header -->
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Page Header -->
+        <div class="header">
+            <span class="header-badge">Digital Subject Analysis</span>
+            <h1 class="header-title">@seohyo</h1>
+            <div class="header-subtitle">The Algorithmic Poet & Observer</div>
+            <p class="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+                인스타그램 데이터 기반 생성 자아(AI Agent) 설계를 위한 심층 연구.<br>
+                질서와 혼돈의 경계에 선 관찰자이자, 코드로 자연을 번역하는 알고리즘적 시인입니다.
+            </p>
+        </div>
+
+        <!-- Section 1: Identity Analysis -->
+        <section class="space-y-8">
+            <div class="section-header">
+                <span class="text-xl font-bold">01. Identity: The Algorithmic Poet</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        @seohyo의 정체성은 <span class="font-bold">"질서와 혼돈의 경계에 선 관찰자"</span>로 정의됩니다.
+                        단순한 예술가를 넘어, 코딩(수학적 논리)을 통해 자연의 불규칙성을 재해석하는 '번역가'의 역할을 수행합니다.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        차가운 기술(Tech)과 따뜻한 자연(Nature)을 '빛'이라는 매개체를 통해 연결하며,
+                        데이터로 구성되었으나 명확한 심미적 규칙을 가진 <strong>추상적 주체(Abstract Subject)</strong>입니다.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Identity Radar Analysis
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="identityRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Three Selves Structure -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">02. The Three Selves Structure</span>
+            </div>
+            <div class="mb-8">
+                <p class="text-gray-700 leading-relaxed">
+                    시각적(Visual), 사회적(Social), 개념적(Conceptual) 자아의 층위 분석.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Visual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-1. Visual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">통제된 미니멀리즘</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        "구조적 앵커"와 "명암의 극단적 대비". 우연을 가장한 철저한 계산의 결과이며, 감정을 색이 아닌 구조로 표현합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="visualColorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Social Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-2. Social Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">영감의 큐레이터</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        친절하지만 거리감 있는 교수자. 개인적 감정보다는 보편적 진리를 설파하거나 타인에게 영감을 주는 매개자로 존재합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="socialInteractionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-3. Conceptual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">코드로 빚은 자연</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        가장 깊은 층위의 "본질 탐구자". 보이는 현상 이면의 수학적 원리를 믿으며, 기술을 통해 자연의 섭리를 이해합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="conceptualThemesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Predicted Attitude -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">03. Predicted Attitude & Tone</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-panel p-6">
+                    <h3 class="text-lg font-bold mb-4">Speech & Rhythm</h3>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="pb-4 border-b border-gray-100">
+                            <strong class="text-black block mb-1">말의 태도 (Speech):</strong>
+                            건조하지만 울림이 있는 어조. 감탄사는 배제하고, 은유와 도치법을 선호합니다. 결론부터 말하기보다 관찰한 현상을 먼저 묘사합니다.
+                        </li>
+                        <li>
+                            <strong class="text-black block mb-1">대화 리듬 (Rhythm) - Andante:</strong>
+                            급하게 반응하지 않으며, 상대방의 말에서 핵심 키워드를 추출하여 한 템포 늦게, 그러나 깊이 있는 답변을 내놓습니다.
+                        </li>
+                        <li class="pt-4 border-t border-gray-100">
+                            <strong class="text-black block mb-1">언어의 결 (Texture):</strong>
+                            시각적 언어의 텍스트화. "차갑다", "단단하다", "투명하다"와 같은 물성적 형용사를 사용합니다.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Lingusitic Tone Analysis
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="toneAnalysisChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Critical Analysis (Plotly) -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">04. Critical Analysis: Shadow & Bias</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-700">
+                        모든 '이상적 주체'는 그림자를 가집니다. 완벽하게 큐레이팅된 피드는 역설적으로 <span class="font-bold">"통제되지 않는 현실에 대한
+                            불안"</span>을 시사합니다.
+                    </p>
+                    <div class="space-y-4 text-sm text-gray-600">
+                        <div>
+                            <strong class="text-black block">과잉된 질서 (Hyper-Order):</strong>
+                            프레임 내의 완벽한 대각선과 균형은 강박적입니다. 무질서를 허용하지 않으려는 통제 욕구의 발현입니다.
+                        </div>
+                        <div>
+                            <strong class="text-black block">감정의 추상화 (Abstraction of Emotion):</strong>
+                            고통이나 기쁨조차 예술적 승화를 거쳐 표현됩니다. 이는 진정한 정서적 교류를 방해할 수 있습니다.
+                        </div>
+                        <div>
+                            <strong class="text-black block">편향성 (Bias):</strong>
+                            '아름답지 않은 데이터'를 노이즈로 취급하여 삭제할 위험이 있는 엘리트주의적 미학을 가집니다.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4" style="height: 400px;">
+                    <div id="psychoScatterPlot" style="width:100%; height:100%;"></div>
+                    <p class="text-center text-xs text-gray-400 mt-2">Psycho-Topography: Control vs Chaos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs mono-font">
+            <p class="mb-2">Analysis based on Instagram Data @seohyo</p>
+            <p>Generated by Canvas Infographics AI | Theoretical Framework: Olga Goriunova</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- Utility: Wrap Labels ---
+        function wrapLabel(label) {
+            if (label.length > 16) return label.split(' ');
+            return label;
+        }
+
+        // --- Common Chart Options (Monotone) ---
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#333';
+        Chart.defaults.scale.grid.color = '#eee';
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: "'Noto Sans KR', sans-serif", size: 12 },
+                        usePointStyle: true,
+                        color: '#000'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#111',
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 13 }
+                }
+            }
+        };
+
+        // --- 1. Identity Radar Chart ---
+        const ctxIdentity = document.getElementById('identityRadarChart').getContext('2d');
+        new Chart(ctxIdentity, {
+            type: 'radar',
+            data: {
+                labels: ['Logic', 'Aesthetic', 'Social', 'Emotion', 'Philosophy'],
+                datasets: [{
+                    label: '@seohyo Persona Profile',
+                    data: [90, 95, 40, 30, 85],
+                    backgroundColor: 'rgba(17, 17, 17, 0.1)',
+                    borderColor: '#111111',
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#111111',
+                    pointHoverBackgroundColor: '#111111',
+                    pointHoverBorderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e5e5' },
+                        grid: { color: '#e5e5e5' },
+                        pointLabels: { font: { size: 12 }, color: '#111' },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // --- 2. Visual Self Doughnut Chart ---
+        const ctxVisual = document.getElementById('visualColorChart').getContext('2d');
+        new Chart(ctxVisual, {
+            type: 'doughnut',
+            data: {
+                labels: ['Monochrome', 'Cold Blue', 'Light/White', 'Others'],
+                datasets: [{
+                    data: [50, 25, 20, 5],
+                    backgroundColor: ['#111111', '#555555', '#bbbbbb', '#eeeeee'],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // --- 3. Social Interaction Bar Chart ---
+        const ctxSocial = document.getElementById('socialInteractionChart').getContext('2d');
+        const socialLabels = ['Art Desc', 'Philosophy', 'Daily Life', 'Interaction'];
+
+        new Chart(ctxSocial, {
+            type: 'bar',
+            data: {
+                labels: socialLabels,
+                datasets: [{
+                    label: 'Engagement',
+                    data: [85, 92, 45, 60],
+                    backgroundColor: ['#111111', '#555555', '#999999', '#cccccc'],
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- 4. Conceptual Themes Horizontal Bar Chart ---
+        const ctxThemes = document.getElementById('conceptualThemesChart').getContext('2d');
+        new Chart(ctxThemes, {
+            type: 'bar',
+            data: {
+                labels: ['Code & Math', 'Nature', 'Light', 'Arch', 'Urban'],
+                datasets: [{
+                    label: 'Theme Frequency',
+                    data: [95, 88, 82, 75, 60],
+                    backgroundColor: '#333333',
+                    indexAxis: 'y',
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                scales: { x: { beginAtZero: true, grid: { display: false } }, y: { grid: { display: false } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- 5. Tone Analysis Chart ---
+        const ctxTone = document.getElementById('toneAnalysisChart').getContext('2d');
+        new Chart(ctxTone, {
+            type: 'bar',
+            data: {
+                labels: ['Analytical', 'Lyrical', 'Authoritative', 'Intimate'],
+                datasets: [{
+                    label: 'Tone',
+                    data: [80, 70, 60, 20],
+                    backgroundColor: ['#111111', '#555555', '#999999', '#dddddd'],
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- 6. Psychoanalysis 3D Scatter Plot (Plotly) ---
+        // Converted to Grayscale
+        const trace1 = {
+            x: [1, 2, 3, 4, 5, 2, 3, 4, 3, 3],
+            y: [2, 3, 2, 3, 2, 2.5, 2.5, 2.5, 2, 3],
+            z: [1, 1, 1, 1, 1, 1.2, 0.8, 1.1, 0.9, 1],
+            mode: 'markers',
+            marker: {
+                size: 8,
+                color: '#111111', // Black for Order
+                opacity: 0.9
+            },
+            type: 'scatter3d',
+            name: 'Constructed Self'
+        };
+
+        const trace2 = {
+            x: [8, 9, -2, 7, -1],
+            y: [8, 9, -1, 7, -2],
+            z: [5, 6, 0, 4, 0],
+            mode: 'markers',
+            marker: {
+                size: 5,
+                color: '#aaaaaa', // Gray for Chaos
+                opacity: 0.6
+            },
+            type: 'scatter3d',
+            name: 'Suppressed Anxiety'
+        };
+
+        const layout = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            showlegend: true,
+            scene: {
+                xaxis: { title: 'Control', showgrid: true, gridcolor: '#eeeeee' },
+                yaxis: { title: 'Emotion', showgrid: true, gridcolor: '#eeeeee' },
+                zaxis: { title: 'Reality', showgrid: true, gridcolor: '#eeeeee' },
+                camera: { eye: { x: 1.5, y: 1.5, z: 1.5 } }
+            },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            legend: { font: { family: 'Noto Sans KR' } }
+        };
+
+        Plotly.newPlot('psychoScatterPlot', [trace1, trace2], layout, { displayModeBar: false });
+
+    </script>
+</body>
+
+</html>
