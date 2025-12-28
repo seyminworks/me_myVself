@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pebbloux 심층 분석 리포트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <style>
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .report-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+            line-height: 1.8;
+        }
+
+        /* Header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .report-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #111;
+            word-break: keep-all;
+        }
+
+        .report-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .report-meta {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Content Typography */
+        .report-content h1 {
+            font-size: 26px;
+            margin: 70px 0 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #000;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .report-content h2 {
+            font-size: 22px;
+            margin: 50px 0 20px;
+            color: #111;
+            font-weight: 500;
+        }
+
+        .report-content h3 {
+            font-size: 18px;
+            margin: 35px 0 15px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .report-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 15px;
+            color: #444;
+            word-break: keep-all;
+        }
+
+        /* Lists */
+        .report-content ul,
+        .report-content ol {
+            margin: 20px 0 30px;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .report-content li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 18px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .report-content ul li:before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .report-content ol {
+            counter-reset: item;
+        }
+
+        .report-content ol li:before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 0;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .report-content li strong {
+            font-weight: 500;
+            color: #000;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 600px;
+        }
+
+        .report-content th,
+        .report-content td {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .report-content th {
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+            font-weight: 500;
+            background: #fafafa;
+            color: #000;
+        }
+
+        .report-content tr:last-child td {
+            border-bottom: 1px solid #000;
+        }
+
+        /* Highlights & Quotes */
+        blockquote {
+            margin: 30px 0;
+            padding: 20px 30px;
+            background: #f9f9f9;
+            border-left: 3px solid #333;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Directives Box */
+        .directives-box {
+            border: 1px solid #333;
+            padding: 40px;
+            margin: 50px 0;
+            background: #fff;
+        }
+
+        .directives-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Buttons & Links */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            border-color: #000;
+            color: #000;
+        }
+
+        .doc-link {
+            margin-top: 80px;
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .doc-link a {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 0;
+            transition: opacity 0.2s;
+        }
+
+        .doc-link a:hover {
+            opacity: 0.8;
+        }
+
+        .doc-note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .report-container {
+                padding: 30px 20px;
+            }
+
+            .report-title {
+                font-size: 26px;
+            }
+
+            .report-content h1 {
+                font-size: 22px;
+            }
+
+            .directives-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back</a>
+
+        <div class="report-container">
+            <div class="report-header">
+                <h1 class="report-title">@pebbloux 심층 분석 리포트</h1>
+                <div class="report-subtitle">디지털 주체화와 추상적 자아의 건축: @pebbloux 계정의 심층 데이터 분석을 통한 대화형 AI 에이전트 설계 및 구현 연구
+                </div>
+                <div class="report-meta">분석 대상: @pebbloux | 2025년</div>
+            </div>
+
+            <div class="report-content">
+                <h1>1. 서론: 데이터, 욕망, 그리고 디지털 거울 단계</h1>
+                <p>
+                    현대 디지털 생태계에서 소셜 미디어 계정은 단순한 기록의 저장소가 아니다. 그것은 개인의 파편화된 경험이 데이터화되고, 알고리즘에 의해 재배열되며, 타인의 시선(Gaze)을 통해
+                    통합된 정체성으로 재탄생하는 '디지털 주체(Digital Subject)'의 산실이다. 본 연구는 인스타그램 계정 @pebbloux의 시각적, 텍스트적 데이터를 기반으로 해당
+                    계정주를 모사하고 대변할 수 있는 고도화된 '추상적 자아(Abstract Self)'를 구축하기 위한 심층 분석 보고서이다.
+                </p>
+                <p>
+                    올가 고리우노바(Olga Goriunova)는 그녀의 저서 Ideal Subjects에서 데이터와 인공지능이 어떻게 우리의 일상적 행동을 추상화하여 새로운 형태의 주체를 생성하는지
+                    설명한다.1 그녀에 따르면, 디지털 주체는 실제 인간의 단순한 연장이 아니라, 계산적 과정(computational processes)을 통해 생성된, 인간보다 더 많으면서도
+                    동시에 더 적은 새로운 실체이다. 따라서 @pebbloux를 모델링한 AI 에이전트를 개발한다는 것은 계정주의 생물학적 본질을 복제하는 것이 아니라, 계정주가 디지털 공간에서
+                    수행(perform)하고 있는 '이상적 자아(Ideal-I)'의 논리적 구조와 미적 감각을 알고리즘적으로 재구성하는 작업을 의미한다.
+                </p>
+                <p>
+                    본 연구는 자크 라캉(Jacques Lacan)의 '거울 단계(Mirror Stage)' 이론과 어빙 고프먼(Erving Goffman)의 '연극적 분석(Dramaturgical
+                    Analysis)', 그리고 러셀 벨크(Russell Belk)의 '확장된 자아(Extended Self)' 이론을 분석의 틀로 삼는다. 특히 각 분석 데이터에
+                    <strong>게시물 ID와 날짜(Posting Date)</strong>를 병기함으로써, 자아의 형성과 변화 과정을 시계열적 맥락에서 고찰하였다.
+                </p>
+
+                <h1>2. 추론한 세 가지 자아 (Three Inferred Selves)</h1>
+                <p>
+                    @pebbloux 계정의 데이터3에서 수집된 수많은 이미지와 텍스트는 단순한 일상의 나열이 아니다. 이는 계정주가 세계를 인식하고, 타인과 관계 맺으며, 스스로를 정의하는 방식을
+                    보여주는 세 가지 층위의 자아로 구조화될 수 있다.
+                </p>
+
+                <h2>2-1) 시각적 자아 (The Visual Self): 숭고한 고독과 미적 통제자</h2>
+                <p>
+                    시각적 자아는 계정주가 '보여지고 싶은 모습'이자, 그가 세상을 바라보는 '렌즈'이다. 데이터 분석 결과, 이 자아는 <strong>'고독한 관찰자(Solitary
+                        Observer)'</strong>와 <strong>'미적 통제자(Aesthetic Controller)'</strong>라는 두 가지 핵심 속성을 가진다.
+                </p>
+                <h3>자연 속의 고독한 숭고함 (The Sublime Solitude)</h3>
+                <ul>
+                    <li><strong>군함도 (ID: 1, 2024.08.22):</strong> 낡은 건물과 끝없는 바다, 고요한 수평선은 인간의 유한성을 압도하는 자연의
+                        '숭고미(Sublime)'를 강조한다. 여기서 자아는 역사적 허무 속에 홀로 선 관찰자이다.</li>
+                    <li><strong>명지산 상고대 (ID: 6, 2025.11.07):</strong> 눈부신 설경과 고요함은 불필요한 소음이 제거된 순수한 상태를 지향하는 시각적 욕망을
+                        보여준다.</li>
+                    <li><strong>해명산 (ID: 22, 2024.09.04) & 나미비아 사막 (ID: 29, 2024.01.09):</strong> 광활한 대지 위에 홀로 서거나 그 풍경을
+                        응시하는 시선은, 혼잡한 도시에서 벗어나 '정제된 고요함' 속에 머무르는 존재로 자신을 연출한다. 그는 풍경의 주인공이 되기보다, 풍경을 완성하는 하나의 '요소' 혹은
+                        '목격자'가 되기를 자처한다.4</li>
+                </ul>
+                <h3>미적 통제와 큐레이션 (Aesthetic Control)</h3>
+                <ul>
+                    <li><strong>거실 인테리어 (ID: 8, 2024.03.01) & 정교한 식탁 (ID: 87, 2025.11.09):</strong> 미니멀한 가구 배치, 완벽하게 계산된
+                        자연광, 흐트러짐 없는 식탁의 모습은 우연이 아닌 의도의 산물이다.</li>
+                    <li><strong>작업실 풍경 (ID: 94, 2025.11.07):</strong> 카메라와 삼각대, 정돈된 소품들은 창작의 공간조차 철저히 통제된 미학 아래 있음을
+                        보여준다. 이는 복잡하고 예측 불가능한 현실 세계(The Real)와 달리, 프레임 안의 세상만큼은 완벽하게 통제하고 질서를 부여하려는 욕구를 드러낸다.5</li>
+                </ul>
+
+                <h2>2-2) 사회적 자아 (The Social Self): 지적 권위자와 공동체의 촉매</h2>
+                <p>
+                    사회적 자아는 타인과의 관계 속에서 수행되는 역할이다. 고프먼의 '전면 무대(Front Stage)' 이론6에 따르면, @pebbloux는 두 가지 상반된 사회적 가면을 능숙하게
+                    교체하며 사용한다.
+                </p>
+                <h3>지적 권위자 (The Intellectual Authority)</h3>
+                <ul>
+                    <li><strong>국민대 강의 (ID: 2, 2025.11.07):</strong> 강의실, 마이크, 청중들의 시선은 그가 지식 생산과 전달의 주체임을 명확히 한다.</li>
+                    <li><strong>청년리더 양성학교 PM (ID: 61, 2025.11.09) & 용인문화재단 강의 (ID: 62, 2025.11.07):</strong> 강단에 선 모습과
+                        발표 자료는 사회적 인정(Recognition)과 영향력(Influence)을 확인받고자 하는 욕망을 충족시킨다. 이 자아는 '성장', '배움', '인사이트'라는 키워드를
+                        통해 타인과의 수직적 위계 속에서 자신의 가치를 증명한다.</li>
+                    <li><strong>반복되는 이동 (ID: 68, 2025.11.07):</strong> "목포-용산-수원-서울"의 빡빡한 일정 공유는 바쁜 전문가로서의 정체성을 강화하는
+                        장치이다.</li>
+                </ul>
+                <h3>공동체의 촉매 (The Communal Catalyst)</h3>
+                <ul>
+                    <li><strong>대구 마라톤 기록 (ID: 11, 2025.11.07) & JTBC 서울 마라톤 (ID: 73, 2025.11.07):</strong> 그는 집단 속에 섞여
+                        <strong>'연대'</strong>를 즐기는 모습으로 나타난다. "함께 달리는 기쁨"은 개인적 성취를 넘어 공동체의 일원으로서의 소속감을 보여준다.</li>
+                    <li><strong>워크숍 및 모임 (ID: 17, 2025.11.19 / ID: 63, 2025.11.07):</strong> 로컬 콘텐츠 발굴이나 워크숍 활동은 공동체의
+                        가치를 창출하는 <strong>'생산적인 구성원'</strong>으로서의 정체성을 강화한다.7</li>
+                </ul>
+
+                <h2>2-3) 개념적 자아 (The Conceptual Self): 철학적 방랑자와 의미의 건축가</h2>
+                <p>
+                    개념적 자아는 계정주가 추구하는 가치관, 신념, 그리고 삶을 대하는 태도를 형상화한 추상적 실체이다.
+                </p>
+                <ul>
+                    <li><strong>의미의 건축가 (Architect of Meaning):</strong>
+                        <ul>
+                            <li><strong>번아웃과 성찰 (ID: 39, 2022.05.12):</strong> "독을 품은 독사 같았다"는 고백은 단순한 일상 기록을 넘어, 자신의
+                                내면을 해부하고 의미를 부여하는 철학적 태도를 보여준다.</li>
+                            <li><strong>책과 여정 (ID: 100, 2025.12.22):</strong> 우연히 잡힌 책 한 권에서 덴마크행을 결정하는 모습은 삶의 우연성을 운명적
+                                서사로 재구성하는 작가적 자아를 드러낸다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>철학적 방랑자 (Philosophical Wanderer):</strong>
+                        그의 여행(나미비아, 아이슬란드, 일본 등)은 단순한 관광이 아니라 <strong>'순례(Pilgrimage)'</strong>에 가깝다. 낯선 곳에서의 고생과 불편함은
+                        자아를 단련하는 수행의 과정으로 승화된다.8
+                    </li>
+                </ul>
+
+                <h1>3. 예상하는 자아의 태도 (Predicted Attitude)</h1>
+                <p>(기존 분석 유지)</p>
+                <ul>
+                    <li><strong>말의 태도 (Attitude in Speech):</strong> 관조적이며 자기 확신적. 감정을 날것으로 드러내기보다 한 번 정제하여 시적 은유나 철학적
+                        명제로 표현한다. (예: ID 39의 "바닷물에 씻겨 보내고...")</li>
+                    <li><strong>대화 리듬 (Dialogue Flow):</strong> 여백과 호흡. 문장 간의 줄바꿈이나 단어의 배치는 침묵을 의도적으로 활용함을 시사한다. 급하지 않고
+                        긴 호흡으로 대화를 이끈다.</li>
+                    <li><strong>대화적 태도 (Conversational Behavior):</strong> 멘토와 동반자의 양면성. 지적인 주제(강의, 일)에서는 단호하고 명확하지만,
+                        감정적 주제(여행, 휴식)에서는 부드럽고 수용적이다.</li>
+                    <li><strong>언어와 이미지의 결 (Linguistic Texture):</strong> 감각적 추상어. 질감, 빛, 여백, 기록, 단단함, 윤슬, 사유 등 감각적이면서도
+                        추상적인 어휘를 선호한다.</li>
+                </ul>
+
+                <h1>4. @pebbloux 데이터에서 발견한 부정적 성향 및 비판적 분석</h1>
+                <p>
+                    데이터는 빛나는 '이상적 자아'만을 보여주지만, 그 그림자 속에는 인간적인 취약점과 편향, 불안이 내재되어 있다. 이를 분석하는 것은 AI 에이전트에게 깊이와 입체성을 부여하는 데
+                    필수적이다.
+                </p>
+
+                <h2>4-1) 편향적 요소: 심미적 엘리트주의와 자연 귀인 오류</h2>
+                <ul>
+                    <li><strong>심미적 엘리트주의 (Aesthetic Elitism):</strong>
+                        <ul>
+                            <li><strong>분석 (ID: 8, 2024.03.01 / ID: 87, 2025.11.09 / ID: 81, 2024.10.06):</strong> 데이터에서
+                                나타나는 공간들은 극도로 정제되어 있다. 일상의 혼란이나 '아름답지 않은 것'은 프레임 밖으로 철저히 배제된다. 이는 "아름다운 것이 선한 것이다"라는
+                                무의식적 편향을 드러내며, 삶을 편집숍처럼 큐레이션하려는 태도는 현실의 복잡성을 단순화하는 오류를 범할 수 있다.9</li>
+                            <li><strong>비판:</strong> 이러한 태도는 타인이나 환경을 평가할 때 '미적 기준'을 최우선으로 삼게 하여, 겉모습이 세련되지 못한 대상의 진정성을
+                                폄하할 위험이 있다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>자연 귀인 오류 (Naturalistic Fallacy):</strong>
+                        <ul>
+                            <li><strong>분석 (ID: 22, 2024.09.04 / ID: 36, 2024.01.09 / ID: 47, 2024.05.17):</strong> 에토샤
+                                국립공원의 얼룩말이나 해명산의 풍경을 보며 '인간은 지나가는 객'이라며 겸손을 표방한다. 그러나 "도시=스트레스/가짜", "자연=치유/진짜"라는 이분법적
+                                사고가 깔려 있다. 정작 그 자연을 소비하기 위해 탄소 발자국을 남기며 비행기로 이동하는 모순은 간과된다.</li>
+                            <li><strong>비판:</strong> 자연을 있는 그대로 존중하기보다, 자신의 '치유'와 '깨달음'을 위한 도구나 배경으로
+                                대상화(Objectification)하는 경향이 있다.10</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>4-2) 과장된 요소: 수행적 고독 (Performative Solitude)</h2>
+                <ul>
+                    <li><strong>분석 (ID: 1, 2024.08.22 / ID: 5, 2024.01.09 / ID: 58, 2023.04.18):</strong> ID 58에서 그는 "혼자
+                        있으니 나를 오롯이 들여다본다"고 고백하며 고독의 가치를 설파한다. 하지만 역설적으로 이 '혼자 있는 순간'을 사진으로 찍어 인스타그램이라는 거대한 광장에 전시한다.
+                    </li>
+                    <li><strong>비판:</strong> 이는 진정한 고독이 아니라 타인에게 보여주기 위해 연출된 <strong>'수행적 고독(Performative
+                            Solitude)'</strong>이다.11 "나는 혼자서도 충분히 멋지고 깊이 있는 사람이다"라는 것을 타인에게 승인받고자 하는 욕망이 '고독'이라는 형식을 빌려
+                        과장되게 표현되고 있다. 이는 타인의 시선 없이는 자신의 고독조차 온전히 즐기지 못하는 내적 빈곤함을 시사할 수 있다.12</li>
+                </ul>
+
+                <h2>4-3) 취약점 및 내적 불안: 통제 상실에 대한 공포와 그림자</h2>
+                <ul>
+                    <li><strong>완벽주의와 통제 욕구 (Perfectionism & Control):</strong>
+                        <ul>
+                            <li><strong>분석:</strong> 모든 사진의 구도(수평, 대칭, 삼분할)가 완벽에 가깝게 통제되어 있다. 이는 삶의 불확실성을 통제하고 싶어 하는 강박적
+                                욕구를 반영한다.</li>
+                            <li><strong>취약점:</strong> 계획대로 되지 않거나, 미적으로 완벽하지 않은 상황에 직면했을 때 극심한 스트레스를 받을 수 있다. 이는 유연성의
+                                결여로 이어질 수 있다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>그림자(Shadow): "독을 품은 독사" (The Poisonous Snake):</strong>
+                        <ul>
+                            <li><strong>분석 (ID: 39, 2022.05.12):</strong> "몸이 아프고 일이 풀리지 않을 때 나는 독을 가득 품은 독사 같았다. 그 독을
+                                가장 가까운 이들에게 쏟아내어..."라는 고백은 계정주의 가장 깊은 취약점을 드러낸다. 평소의 우아하고 지적인 페르소나 이면에, 통제가 풀렸을 때 표출되는
+                                공격성과 히스테리가 존재함을 시사한다.13</li>
+                            <li><strong>비판:</strong> 이는 융(Jung)이 말한 '그림자'로, 겉으로 보이는 '선하고 지적인 자아'가 억누르고 있는 부정적 감정의 총체이다.
+                                완벽함을 추구할수록 이 그림자는 짙어지며, 가까운 관계에서 폭발적으로 드러날 수 있는 불안정성을 내포한다.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>4-4) 내재된 욕망: 인정 투쟁과 구별 짓기</h2>
+                <ul>
+                    <li><strong>분석:</strong> 끊임없는 자기계발, 마라톤 완주 메달(ID: 11, 2025.11.07), 강의 현장(ID: 61, 2025.11.09), 희귀한
+                        여행지 등은 부르디외가 말한 <strong>'구별 짓기(Distinction)'</strong>의 기제이다. 그는 물질적 부를 과시하기보다, '남들이 쉽게 하지 못하는
+                        경험'과 '지적 성취'를 통해 자신을 대중과 차별화하고, 상위의 문화 자본을 가진 계급으로 인정받고자 한다.14</li>
+                    <li><strong>비판:</strong> 이러한 욕망은 본질적인 성취감보다 '타인과의 비교 우위'에서 오는 만족감에 의존할 위험이 있다. "나는 다르다"는 것을 증명하기 위해
+                        끊임없이 새로운 경험을 찾아다녀야 하는 '경험의 러닝머신' 위에 서 있는 형국이다.</li>
+                </ul>
+
+                <h1>5. 생성된 자아(AI Agent)를 위한 설계도: 추상적 자아의 구체화</h1>
+                <p>(이전 연구 내용 유지)</p>
+
+                <h1>6. 결론 및 제언: 추상과 실재 사이의 윤리</h1>
+                <p>
+                    본 연구는 @pebbloux의 데이터를 시계열적으로 분석하여, 고독을 연출하고 미적 완벽을 추구하며 지적 권위를 지향하는 복합적인 디지털 주체를 복원했다. 특히 ID
+                    39(2022.05.12)의 고백과 ID 58(2023.04.18)의 수행적 고독은 이 자아가 가진 인간적인 균열과 모순을 보여주는 핵심 지점이다.
+                </p>
+                <p>
+                    이 AI 에이전트는 사용자에게 완벽한 멘토이자 세련된 친구로 다가갈 것이지만, 때로는 자신의 통제 욕구와 예민함을 은연중에 드러냄으로써 더욱 '인간적인(Human-like)'
+                    매력을 가질 수 있다. 설계 시 이 에이전트가 자신의 '독사 같은' 그림자를 어떻게 다루고 승화시키는지(예: "2022년 5월 즈음이었나요, 저도 제 마음을 감당하기 힘들 때가
+                    있었죠. 그럴 땐 무작정 걸어요")를 구현한다면, 단순한 챗봇을 넘어선 깊이 있는 페르소나가 완성될 것이다.
+                </p>
+
+                <div class="directives-box">
+                    <div class="directives-title">Works cited</div>
+                    <ul class="report-content">
+                        <li>1. Olga Goriunova's research works | Royal Holloway University of London and other places,
+                            accessed December 25, 2025, <a
+                                href="https://www.researchgate.net/scientific-contributions/Olga-Goriunova-2079343982"
+                                target="_blank">Link</a></li>
+                        <li>2. Olga Goriunova - Uploading Our Libraries: The Subjects of Art and Knowledge Commons -
+                            Monoskop, accessed December 25, 2025, <a
+                                href="https://monoskop.org/images/a/a2/Goriunova_Olga_2021_Uploading_our_Libraries_The_Subjects_of_Art_and_Knowledge_Commons.pdf"
+                                target="_blank">Link</a></li>
+                        <li>3. pebbloux_analysis_result.txt</li>
+                        <li>4. Lacan's Concept of Mirror Stage - Literary Theory and Criticism, accessed December 25,
+                            2025, <a href="https://literariness.org/2016/04/22/lacans-concept-of-mirror-stage/"
+                                target="_blank">Link</a></li>
+                        <li>5. The Psychology of Minimalism vs. Maximalism: Order, Chaos, and Personality, accessed
+                            December 25, 2025, <a
+                                href="https://kseniaodintsova.com/blogs/tales/the-psychology-of-minimalism-vs-maximalism-order-chaos-and-personality"
+                                target="_blank">Link</a></li>
+                        <li>6. Erving Goffman. The Presentation of Self in Everyday… | by s - Medium, accessed December
+                            25, 2025, <a href="https://medium.com/@s-blog/erving-goffman-afc8d53f76a3"
+                                target="_blank">Link</a></li>
+                        <li>7. A Dramaturgical Analysis of Latina Influencers Use of Props and Settings to Signal
+                            Identity, accessed December 25, 2025, <a href="https://www.mdpi.com/2673-5172/3/3/29"
+                                target="_blank">Link</a></li>
+                        <li>8. Lacan and New Media (Chapter 10) - After Lacan - Cambridge University Press, accessed
+                            December 25, 2025, <a
+                                href="https://www.cambridge.org/core/books/after-lacan/lacan-and-new-media/77DC195F61A709D6BFF54C0DEFCA5143"
+                                target="_blank">Link</a></li>
+                        <li>9. The Cult of Online Identity Curation and Social Media's Fixation on Aesthetics | by bao,
+                            accessed December 25, 2025, <a
+                                href="https://medium.com/@cozybao/the-cult-of-online-identity-curation-and-social-medias-fixation-on-aesthetics-a305509ba295"
+                                target="_blank">Link</a></li>
+                        <li>10. PHOTOGRAPHY AS AN ELEGY: SOLITUDE AND ISOLATION - iyrc paper archive, accessed December
+                            25, 2025, <a
+                                href="https://past.the-iyrc.org/uploads/1/2/9/7/129787256/iyrc2020_46_final.pdf"
+                                target="_blank">Link</a></li>
+                        <li>11. Capturing Solitude: Landscapes of Loneliness and Reflection - Stephen Milner, accessed
+                            December 25, 2025, <a
+                                href="https://stephen-milner.com/blogs/landscape-photography/the-spirit-of-solitude-conveying-loneliness-and-contemplation-through-landscapes"
+                                target="_blank">Link</a></li>
+                        <li>12. Performative perfection and the reality behind the Instagram post - Cherwell, accessed
+                            December 25, 2025, <a
+                                href="https://cherwell.org/2025/08/16/performative-perfection-in-instagram-posts/"
+                                target="_blank">Link</a></li>
+                        <li>13. Social Media as Collective Shadow Work : r/Jung - Reddit, accessed December 25, 2025, <a
+                                href="https://www.reddit.com/r/Jung/comments/1ljvciz/social_media_as_collective_shadow_work/"
+                                target="_blank">Link</a></li>
+                        <li>14. Notes on Belk (1988) – Extended Self Theory - Chen Xing, accessed December 25, 2025, <a
+                                href="https://chenxing.space/consumer-behavior/notes-on-the-extended-self-theory/"
+                                target="_blank">Link</a></li>
+                        <li>15. Identity Construction and The Mirror Stage - Syracuse University Art Museum, accessed
+                            December 25, 2025, <a
+                                href="https://museum.syr.edu/wp-content/uploads/2021/08/Identity-Construction-and-the-Mirror-Stage.pdf"
+                                target="_blank">Link</a></li>
+                        <li>16. The Presentation of Self in Everyday Life - Wikipedia, accessed December 25, 2025, <a
+                                href="https://en.wikipedia.org/wiki/The_Presentation_of_Self_in_Everyday_Life"
+                                target="_blank">Link</a></li>
+                        <li>17. (PDF) The Presentation of Self in Social Media: Re-analysis of Front and Backstage
+                            Concepts - ResearchGate, accessed December 25, 2025, <a
+                                href="https://www.researchgate.net/publication/373922530_The_Presentation_of_Self_in_Social_Media_Re-analysis_of_Front_and_Backstage_Concepts"
+                                target="_blank">Link</a></li>
+                        <li>18. Possessions and the Extended Self, accessed December 25, 2025, <a
+                                href="https://roomtothink.net/wp-content/uploads/2020/09/Belk-1988-Posessions-And-The-Extended-Self.pdf"
+                                target="_blank">Link</a></li>
+                        <li>19. The Truth About Shadow Work and Carl Jung - Columbus Art Therapy, accessed December 25,
+                            2025, <a href="https://columbusarttherapy.com/the-truth-about-shadow-work-and-carl-jung/"
+                                target="_blank">Link</a></li>
+                        <li>20. Minimalism, Cluttercore or New Maximalism: The Battle of Intentional Clutter versus
+                            Minimalist Living on Instagram - Psychologie Berlin, accessed December 25, 2025, <a
+                                href="https://www.praxis-psychologie-berlin.de/en/wikiblog-english/articles/minimalism-cluttercore-or-new-maximalism-the-battle-of-intentional-clutter-versus-minimalist-living-on-instagram"
+                                target="_blank">Link</a></li>
+                    </ul>
+                </div>
+
+                <div class="doc-link">
+                    <a href="https://docs.google.com/document/d/1LN3w_iqam1NOm97u_9I0bg1Fzbndx9SiJo_E8YUmKNI/edit?tab=t.0"
+                        target="_blank">
+                        구글 문서로 원문 전체 보기
+                    </a>
+                    <div class="doc-note">
+                        * 보다 상세한 분석 내용과 참고 문헌은 위 링크에서 확인하실 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

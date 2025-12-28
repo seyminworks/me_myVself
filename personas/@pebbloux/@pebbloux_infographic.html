@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@pebbloux 심층 자아 분석 리포트</title>
+    <!-- Tailwind CSS (Matched to ohrossii) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Base Theme: Light Monochrome (Matched to ohrossii) */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            /* Sharp edges like ohrossii */
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Global Header -->
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Page Header -->
+        <div class="header">
+            <span class="header-badge">Persona Research Project</span>
+            <h1 class="header-title">@pebbloux</h1>
+            <div class="header-subtitle">The Distant Archivist & Melancholy</div>
+            <p class="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+                이 인포그래픽은 인스타그램 <strong>@pebbloux</strong> 계정의 데이터를 심층 분석하여
+                <strong>'심미적 고독(Aesthetic Solitude)'</strong>과 <strong>'수행적 기록(Performative Archiving)'</strong>을
+                시각화했습니다.<br>
+                시간의 흐름 속에서 사라지는 것들을 붙잡으려는 기록자의 우울과 열망을 탐구합니다.
+            </p>
+        </div>
+
+        <!-- Section 1: Identity Matrix -->
+        <section class="space-y-8">
+            <div class="section-header">
+                <span class="text-xl font-bold">01. Identity: The Distant Archivist</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        @pebbloux는 대상(군함도, 책, 풍경)과 철저히 일정한 거리를 유지하며,
+                        감정을 직접 드러내기보다 시각적 구도와 빛을 통해 우회적으로 표현하는 <strong>'심미적 기록자'</strong>입니다.
+                    </p>
+                    <ul class="space-y-3 font-mono text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 text-black">◼</span>
+                            <span><strong>Contemplation:</strong> 혼잡한 도시를 벗어나 정제된 고요함을 지향함.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-black">◼</span>
+                            <span><strong>Structure:</strong> 완벽하게 계산된 구도로 통제된 미학을 추구함.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Identity Radar Analysis
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="identityRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Three Selves Structure -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">02. The Three Selves Structure</span>
+            </div>
+            <div class="mb-8">
+                <p class="text-gray-700 leading-relaxed">
+                    시각적(Visual), 사회적(Social), 개념적(Conceptual) 자아의 층위 분석.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Visual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-1. Visual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">숭고한 고독</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        검정(Black)의 심연과 붉은색(Red)의 내적 열망이 대비됩니다. 대칭적 구도는 통제된 자아를 상징합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="visualSelfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Social Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-2. Social Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">공동체의 촉매</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        타인의 반응(Likes)에 일희일비하지 않고, 묵묵히 자신의 기록을 전시하는 큐레이터의 태도를 가집니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="socialSelfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-3. Conceptual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">의미의 건축</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        물리적 장소(군함도 등)를 심리적 공간으로 치환합니다. '여정'과 '사색'은 철학적 행위로 정의됩니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="conceptualSelfChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Deep Desire (Plotly Scatter) -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">03. Deep Analysis: Aesthetic Solitude</span>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-lg text-gray-600 mt-2">
+                    <strong>내면의 우울(Melancholy)</strong>과 <strong>언어적 승화(Linguistic Sublimation)</strong>
+                </p>
+                <div
+                    class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700 bg-gray-50 p-4 border border-gray-200">
+                    <div>
+                        <strong class="text-black block mb-1">1. Factual Melancholy (팩트로서의 우울):</strong>
+                        감정을 직접 서술하기보다 "2024. 08. 군함도"와 같이 날짜와 장소를 통해 건조하게 박제합니다.
+                        이는 감정의 과잉을 경계하는 태도입니다.
+                    </div>
+                    <div>
+                        <strong class="text-black block mb-1">2. Poetic Sublimation (시적 승화):</strong>
+                        긴 침묵 후 던지는 시적인 문장은 내면의 깊은 우울을 미학적으로 정제한 결과물입니다.
+                        언어는 고통을 드러내는 수단이 아니라 감추고 포장하는 도구입니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6">
+                <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Analysis: Caption Length vs.
+                    Emotional Depth</div>
+                <div class="w-full h-[500px] relative">
+                    <div id="desirePlot" style="width:100%; height:100%;"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4 text-center">
+                    Fig 4. 언어와 감정의 상관관계 지도 - 텍스트 길이와 감정 심도의 분석
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Biases & Shadows -->
+        <section>
+            <div class="section-header justify-between">
+                <span class="text-xl font-bold">04. Biases & Shadows</span>
+                <span class="text-xs px-2 py-1 bg-black text-white rounded-none">⚠️ SHADOW TRAITS</span>
+            </div>
+            <div class="mb-4 text-gray-600">
+                완벽한 기록 이면에 숨겨진 불안과 단절. 소멸해가는 것들에 대한 강박적 수집은 역설적으로 <strong>'망각에 대한 공포'</strong>를 시사합니다.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Bias Card 1 -->
+                <div class="glass-panel p-6">
+                    <h3 class="font-bold text-lg mb-2">과장된 고립 (Exaggerated Isolation)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        SNS라는 연결된 공간에서 역설적으로 '철저한 고립'을 연출합니다.
+                        이는 타인과의 단절을 원해서가 아니라, <strong>'고독한 예술가'</strong>라는 자아상을 확립하기 위한
+                        무의식적 과장(Exaggeration)일 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Bias Card 2 -->
+                <div class="glass-panel p-6">
+                    <h3 class="font-bold text-lg mb-2">정적 편향 (Static Bias)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        세상의 밝고 소란스러운 면을 의도적으로 배제합니다.
+                        프레임 밖의 생동감을 거세하고, 정적이고 멈춰있는 피사체만을 선택적으로 수집하여
+                        자신의 내면 세계를 통제하려는 경향이 강합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs mono-font">
+            <p class="mb-2">Analysis based on Instagram Data @pebbloux</p>
+            <p>Generated by Canvas Infographics AI | Theoretical Framework: Olga Goriunova</p>
+        </footer>
+
+    </main>
+
+    <!-- Script for Charts -->
+    <script>
+        // --- Utility Function: Label Wrapping ---
+        function wrapLabel(label, maxChars = 16) {
+            if (label.length <= maxChars) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxChars) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- Common Chart Options ---
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#333';
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { font: { family: "'Noto Sans KR', sans-serif", size: 12 }, usePointStyle: true, color: '#000' }
+                },
+                tooltip: {
+                    backgroundColor: '#111',
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 13 }
+                }
+            }
+        };
+
+        // --- Chart 1: Identity Radar (Shadow/Traits) ---
+        const ctxRadar = document.getElementById('identityRadar').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('우울감 (Melancholy)'),
+                    wrapLabel('고립 욕구 (Isolation)'),
+                    wrapLabel('과거지향 (Nostalgia)'),
+                    wrapLabel('완벽주의 (Perfectionism)'),
+                    wrapLabel('현실도피 (Escapism)')
+                ],
+                datasets: [{
+                    label: '@pebbloux Traits',
+                    data: [85, 90, 75, 60, 70],
+                    backgroundColor: 'rgba(17, 17, 17, 0.1)',
+                    borderColor: '#111111',
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#111111'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e5e5' },
+                        grid: { color: '#e5e5e5' },
+                        pointLabels: { font: { size: 11, family: "'Noto Sans KR', sans-serif" }, color: '#111' },
+                        suggestedMin: 0, suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2-1: Visual Self (Doughnut) ---
+        const ctxVisual = document.getElementById('visualSelfChart').getContext('2d');
+        new Chart(ctxVisual, {
+            type: 'doughnut',
+            data: {
+                labels: ['검정 (Black)', '붉은색 (Red)', '푸른빛 (Blue)', '여백 (White)', '그레이 (Grey)'],
+                datasets: [{
+                    data: [35, 20, 30, 10, 5],
+                    backgroundColor: ['#111111', '#888888', '#444444', '#eeeeee', '#cccccc'],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                cutout: '60%',
+                plugins: { ...commonOptions.plugins, legend: { position: 'bottom', labels: { boxWidth: 12 } } }
+            }
+        });
+
+        // --- Chart 2-2: Social Self (Line - Interaction) ---
+        // Using Line chart here as it fits time-series data better than ohrossii's bar
+        const ctxSocial = document.getElementById('socialSelfChart').getContext('2d');
+        new Chart(ctxSocial, {
+            type: 'line',
+            data: {
+                labels: ['08-22', '09-05', '09-15', '10-01', '10-20', '11-03'],
+                datasets: [{
+                    label: 'Likes (공감도)',
+                    data: [42, 38, 55, 45, 60, 48],
+                    borderColor: '#111111',
+                    backgroundColor: 'rgba(17, 17, 17, 0.05)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4
+                }, {
+                    label: 'Comments (소통)',
+                    data: [0, 2, 1, 0, 3, 1],
+                    borderColor: '#999999',
+                    borderDash: [5, 5],
+                    tension: 0.2,
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#eee' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // --- Chart 2-3: Conceptual Self (Horizontal Bar) ---
+        const ctxConcept = document.getElementById('conceptualSelfChart').getContext('2d');
+        new Chart(ctxConcept, {
+            type: 'bar',
+            data: {
+                labels: ['사색', '여정', '고독', '역사/시간', '문학'],
+                datasets: [{
+                    label: 'Theme Intensity',
+                    data: [90, 85, 80, 70, 60],
+                    backgroundColor: ['#111', '#333', '#555', '#777', '#999'],
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                ...commonOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: { display: false },
+                    y: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- Chart 3: Attitude/Desire (Plotly Scatter) ---
+        // Mapping pebbloux's "Fact vs Poetic" data to this chart
+        const trace1 = {
+            x: [1, 2, 3, 4, 5, 6], // Time sequence
+            y: [15, 40, 10, 80, 20, 60], // Emotional Depth
+            mode: 'markers+text',
+            type: 'scatter',
+            text: ['Gunhamdo', 'Poetic fear', 'Seolgyeong', 'Long reflection', 'Desert', 'Community'],
+            textposition: 'top center',
+            marker: {
+                size: [10, 20, 10, 30, 15, 25], // Size represents significance
+                color: ['#aaa', '#555', '#aaa', '#111', '#aaa', '#777'], // Darker = Deeper
+                opacity: 0.8
+            }
+        };
+
+        const layout = {
+            xaxis: {
+                title: 'Sequence (Time Order)',
+                range: [0, 7],
+                zeroline: false,
+                gridcolor: '#e5e7eb',
+                color: '#333'
+            },
+            yaxis: {
+                title: 'Emotional Depth / Text Length',
+                range: [0, 100],
+                zeroline: false,
+                gridcolor: '#e5e7eb',
+                color: '#333'
+            },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            showlegend: false,
+            margin: { l: 60, r: 20, b: 60, t: 20 }
+        };
+
+        Plotly.newPlot('desirePlot', [trace1], layout, { displayModeBar: false, responsive: true });
+
+    </script>
+</body>
+
+</html>
