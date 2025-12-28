@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@hyeen.j 심층 자아 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Base Theme: Light Monochrome */
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: #FFFFFF;
+            color: #111111;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #111;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #000;
+            letter-spacing: -1px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .glass-panel {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #111111;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 0.4rem;
+            font-family: 'Roboto Mono', monospace;
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Global Header -->
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
+        <a href="persona.html"
+            style="display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; font-size: 14px; font-family: 'Roboto Mono';">←
+            Back</a>
+
+        <!-- Page Header -->
+        <div class="header">
+            <span class="header-badge">Persona Research Project</span>
+            <h1 class="header-title">@hyeen.j</h1>
+            <div class="header-subtitle">Aesthetic Curator & Romantic Analyst</div>
+            <p class="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+                이 인포그래픽은 인스타그램 <strong>@hyeen.j</strong> 계정의 데이터를 심층 분석하여
+                <strong>'심미적 관찰자(The Observer)'</strong>와 <strong>'낭만적 분석가'</strong>로서의 자아를 시각화했습니다.<br>
+                현실의 풍경을 작품처럼 재해석하며, 데이터를 통해 구성된 '이상적 예술 자아'를 탐구합니다.
+            </p>
+        </div>
+
+        <!-- Section 1: Identity Analysis -->
+        <section class="space-y-8">
+            <div class="section-header">
+                <span class="text-xl font-bold">01. Identity: Aesthetic Curator</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        @hyeen.j 계정은 단순한 일상 기록을 넘어 <span class="font-bold">"심미적 큐레이터"</span>로서의 정체성을 드러냅니다.
+                        도시의 건축물과 옛 건물의 공존을 포착하는 섬세한 시선과 예술과 과학의 경계를 허무는 융합적 사고가 특징입니다.
+                    </p>
+                    <ul class="space-y-3 font-mono text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 text-black">◼</span>
+                            <span><strong>Observer:</strong> 도시의 이면에 숨겨진 미학을 발견하는 시선.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-black">◼</span>
+                            <span><strong>Fusion:</strong> 예술과 과학(우주, 기계) 테마의 융합.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-black">◼</span>
+                            <span><strong>Contrast:</strong> 빛과 어둠, 도시와 자연의 대비를 통한 강조.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-6">
+                    <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Identity Radar Analysis
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="identityRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Three Selves Structure -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">02. The Three Selves Structure</span>
+            </div>
+            <div class="mb-8">
+                <p class="text-gray-700 leading-relaxed">
+                    시각적(Visual), 사회적(Social), 개념적(Conceptual) 자아의 층위 분석.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Visual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-1. Visual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">대비와 조화</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        "무르익은 가을의 파란 하늘"과 "도시의 회색", "심연의 블랙"과 "은은한 블루"의 대비를 통해 세상을 극적으로 재해석합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="visualSelfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Social Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-2. Social Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">절제된 공유자</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        감정을 폭발적으로 드러내기보다 "ㅇㅅㅇ" 등 짧은 표현으로 압축하며, 세련되고 정제된 이미지를 추구합니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="socialSelfChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conceptual Self -->
+                <div class="glass-panel p-6 hover:border-black transition duration-300">
+                    <div class="text-xs text-gray-400 mono-font uppercase mb-2">2-3. Conceptual Self</div>
+                    <h3 class="text-lg font-bold mb-3 w-full border-b border-gray-100 pb-2">철학적 텍스트</h3>
+                    <p class="text-sm text-gray-500 mb-6 h-12">
+                        현상을 있는 그대로 보지 않고 "우주의 기계적인 면모" 등 의미를 부여하여 세상을 철학적으로 읽어냅니다.
+                    </p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="conceptualSelfChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Predicted Attitude -->
+        <section>
+            <div class="section-header">
+                <span class="text-xl font-bold">03. Predicted Attitude & Shadow</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-panel p-6">
+                    <h3 class="text-lg font-bold mb-4">Speech & Behavior</h3>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="pb-4 border-b border-gray-100">
+                            <strong class="text-black block mb-1">관조적이며 함축적 (Contemplative):</strong>
+                            긴 설명보다는 핵심적인 단어나 감각적인 묘사를 선호합니다. 질문에 즉답하기보다 미적 가치를 평가하거나 감상을 덧붙이는 태도를 보입니다.
+                        </li>
+                        <li>
+                            <strong class="text-black block mb-1">여유롭고 간헐적 (Intermittent):</strong>
+                            빠른 핑퐁 대화보다는 한 번의 대답에 깊이를 담으려 하며, 쉼표(,)나 말줄임표(...)를 사용하여 생각할 시간을 두는 뉘앙스를 풍깁니다.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-6">
+                    <h3 class="text-lg font-bold mb-4">Shadow Aspects</h3>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="pb-4 border-b border-gray-100">
+                            <strong class="text-black block mb-1">평범함에 대한 공포:</strong>
+                            일상을 "초현실적"으로 해석하려는 시도는 평범한 현실을 견디기 힘들어하는 불안의 반증일 수 있습니다.
+                        </li>
+                        <li>
+                            <strong class="text-black block mb-1">과장된 의미 부여:</strong>
+                            단순한 기계나 풍경에 거대 담론을 투영하는 것은 자아의 깊이를 과시하고자 하는 지적 허영(Intellectual Vanity)일 수 있습니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 glass-panel p-6">
+                <div class="text-xs text-center text-gray-400 mono-font uppercase mb-4">Desire Tension: Ideal vs Reality
+                </div>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="shadowChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs mono-font">
+            <p class="mb-2">Analysis based on Instagram Data @hyeen.j</p>
+            <p>Generated by Canvas Infographics AI | Theoretical Framework: Olga Goriunova</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- Utility Function: Label Wrapping for Chart.js ---
+        function wrapLabel(label, maxChars = 16) {
+            if (label.length <= maxChars) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxChars) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- Common Chart Options (Monotone) ---
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#333';
+        Chart.defaults.scale.grid.color = '#eee';
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: "'Noto Sans KR', sans-serif", size: 12 },
+                        usePointStyle: true,
+                        color: '#000'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#111',
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 13 },
+                    callbacks: {
+                        title: function (tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // --- Chart 1: Identity Radar ---
+        const ctxRadar = document.getElementById('identityRadar').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Aesthetics',
+                    'Intellect',
+                    'Social',
+                    'Emotion',
+                    'Uniqueness'
+                ],
+                datasets: [{
+                    label: '@hyeen.j Persona Score',
+                    data: [90, 85, 40, 60, 85],
+                    backgroundColor: 'rgba(17, 17, 17, 0.1)',
+                    borderColor: '#111111',
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#111111',
+                    pointHoverBackgroundColor: '#111111',
+                    pointHoverBorderColor: '#fff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e5e5e5' },
+                        grid: { color: '#e5e5e5' },
+                        pointLabels: {
+                            font: { size: 11, family: "'Noto Sans KR', sans-serif" },
+                            color: '#111'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2-1: Visual Self (Doughnut) ---
+        const ctxVisual = document.getElementById('visualSelfChart').getContext('2d');
+        new Chart(ctxVisual, {
+            type: 'doughnut',
+            data: {
+                labels: ['Deep Black', 'Faint Blue', 'Autumn Blue', 'Urban Grey'],
+                datasets: [{
+                    data: [35, 25, 25, 15],
+                    backgroundColor: ['#111111', '#555555', '#999999', '#cccccc'],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: { position: 'bottom', labels: { boxWidth: 12 } }
+                }
+            }
+        });
+
+        // --- Chart 2-2: Social Self (Bar) ---
+        const ctxSocial = document.getElementById('socialSelfChart').getContext('2d');
+        new Chart(ctxSocial, {
+            type: 'bar',
+            data: {
+                labels: ['Culture/Art', 'Daily Record', 'City/View', 'Selfie'],
+                datasets: [{
+                    label: 'Content Ratio',
+                    data: [50, 20, 25, 5],
+                    backgroundColor: '#333333',
+                    borderRadius: 0
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- Chart 2-3: Conceptual Self (Polar - simulated with Bubble as requested before, but switching to Polar for consistency if desired, keeping Bubble for variety or Polar as per user request to match others? User said "match other pages designs". Ohrossii uses Polar. I will use Polar for consistency.) 
+        // WAIT: The previous hyeen.j infographic had a Bubble chart for Conceptual Self. The user said "contents unchanged". I should probably keep the bubble chart concept BUT visualized in a style consistent with Ohrossii (Grayscale). Or better, stick to the Ohrossii layout which has "3 selves" charts. Ohrossii uses Polar for Conceptual. I will use Polar here too for better consistency with the design system, mapping the bubble data to polar categories.
+        // Bubble Data: Record(12), Cosmos(10), City(9), Light(8), Contrast(6), Mystery(8).
+        // Let's Map to Polar labels: Record, Cosmos, City, Light, Mystery.
+
+        const ctxConcept = document.getElementById('conceptualSelfChart').getContext('2d');
+        new Chart(ctxConcept, {
+            type: 'polarArea',
+            data: {
+                labels: ['Record', 'Cosmos', 'City', 'Light', 'Mystery'],
+                datasets: [{
+                    data: [25, 20, 15, 15, 15], // Normalized slightly for visual balance
+                    backgroundColor: [
+                        'rgba(17, 17, 17, 0.8)',
+                        'rgba(68, 68, 68, 0.8)',
+                        'rgba(119, 119, 119, 0.8)',
+                        'rgba(170, 170, 170, 0.8)',
+                        'rgba(204, 204, 204, 0.8)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: { r: { ticks: { display: false }, grid: { color: '#eee' } } },
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } }
+            }
+        });
+
+        // --- Chart 3: Shadow Line ---
+        const ctxShadow = document.getElementById('shadowChart').getContext('2d');
+        new Chart(ctxShadow, {
+            type: 'line',
+            data: {
+                labels: ['Daily', 'Observe', 'Interpret', 'Publish', 'Reaction'],
+                datasets: [
+                    {
+                        label: 'Ideal Self',
+                        data: [60, 80, 95, 90, 85],
+                        borderColor: '#111111',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Reality',
+                        data: [50, 60, 70, 60, 40],
+                        borderColor: '#999999',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 100, grid: { display: false } }, // Removed labels
+                    x: { grid: { display: false } }
+                },
+                plugins: {
+                    legend: { position: 'top', labels: { boxWidth: 12 } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
