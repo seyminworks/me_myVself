@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/style.css" />
   <link rel="stylesheet" href="persona.css" />
+  <script src="elevenlabs-config.js"></script>
   <!-- ElevenLabs Widget Script -->
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </head>
@@ -167,11 +168,16 @@
 
   <script>
     // Configuration
-    const config = {
-      API_KEY: '', // Provided via backend/env usually
+    const config = window.ELEVENLABS_CONFIG || {
+      API_KEY: 'YOUR_ELEVENLABS_API_KEY',
       BASE_URL: 'https://api.elevenlabs.io/v1',
-      AGENT_ID: 'agent_7101kcxga431efnatr0tpm9eyf5m'
+      CONVERSATION_ID: ''
     };
+
+    const configErrors = window.validateConfig ? window.validateConfig() : [];
+    if (configErrors.length > 0) {
+      console.warn('ElevenLabs 설정 오류:', configErrors);
+    }
 
     let currentAudioUrl = null;
     let currentTranscript = null;
@@ -214,8 +220,12 @@
         loadConversationBtn.textContent = '불러오는 중...';
         loadConversationBtn.disabled = true;
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const audioUrl = getDemoAudioUrl();
+        console.log('오디오 로드 시작...', {
+          apiKey: config.API_KEY ? '설정됨' : '미설정',
+          conversationId: config.CONVERSATION_ID
+        });
+
+        const audioUrl = await fetchConversationAudio();
 
         if (audioUrl) {
           conversationAudio.src = audioUrl;
@@ -223,10 +233,11 @@
           downloadAudioBtn.style.display = 'inline-block';
           loadConversationBtn.textContent = '오디오 불러오기 완료';
           loadConversationBtn.style.background = '#28a745';
+          console.log('오디오 로드 성공:', audioUrl);
         }
       } catch (error) {
         console.error('오디오 로드 실패:', error);
-        alert('오디오를 불러오는 중 오류가 발생했습니다.');
+        alert(`오디오를 불러오는 중 오류가 발생했습니다: ${error.message}`);
         loadConversationBtn.textContent = '대화 불러오기';
         loadConversationBtn.style.background = '#000';
       } finally {
@@ -242,8 +253,7 @@
         transcriptLoading.style.display = 'block';
         transcriptText.style.display = 'none';
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const transcript = getDemoTranscript();
+        const transcript = await fetchTranscript();
 
         if (transcript) {
           currentTranscript = transcript;
@@ -266,25 +276,155 @@
 
     function displayTranscript(transcript) {
       transcriptText.innerHTML = '';
-      transcript.forEach(entry => {
+      let messages = [];
+      if (Array.isArray(transcript)) {
+        messages = transcript;
+      } else if (transcript.messages && Array.isArray(transcript.messages)) {
+        messages = transcript.messages;
+      } else if (transcript.conversation && Array.isArray(transcript.conversation)) {
+        messages = transcript.conversation;
+      }
+
+      console.log('트랜스크립트 표시:', messages.length, '개 메시지');
+
+      messages.forEach(entry => {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message';
+        const role = entry.role || 'unknown';
+        const message = entry.message || entry.text || '';
+        const timestamp = entry.timestamp || entry.created_at || '';
 
-        const roleDisplay = entry.role === 'user' ? '사용자' : '@_always_happy_june';
+        let roleDisplay = role;
+        if (role === 'user') roleDisplay = '사용자';
+        else if (role === 'assistant' || role === 'agent') roleDisplay = '@_always_happy_june';
+        else if (role === 'system') roleDisplay = '시스템';
+
+        const timestampSpan = document.createElement('span');
+        timestampSpan.className = 'timestamp';
+        timestampSpan.textContent = timestamp ? formatTimestamp(timestamp) : '';
 
         const speakerSpan = document.createElement('span');
         speakerSpan.className = 'speaker';
         speakerSpan.textContent = roleDisplay;
 
         const textSpan = document.createElement('span');
-        textSpan.textContent = entry.message;
+        textSpan.textContent = message;
 
+        messageDiv.appendChild(timestampSpan);
         messageDiv.appendChild(speakerSpan);
         messageDiv.appendChild(textSpan);
+
         transcriptText.appendChild(messageDiv);
       });
 
       transcriptText.style.display = 'block';
+      if (transcriptText.scrollHeight > transcriptContent.clientHeight) {
+        transcriptContent.style.borderBottom = '1px solid #e0e0e0';
+      }
+    }
+
+    function formatTimestamp(timestamp) {
+      if (!timestamp) return '';
+      try {
+        const date = new Date(timestamp);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+      } catch (e) {
+        return timestamp;
+      }
+    }
+
+    async function fetchConversationAudio() {
+      if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || !config.CONVERSATION_ID) {
+        console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
+        return getDemoAudioUrl();
+      }
+
+      try {
+        const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+        const endpoint = config.USE_PROXY
+          ? `/convai/conversations/${config.CONVERSATION_ID}/audio`
+          : `/convai/conversations/${config.CONVERSATION_ID}/audio`;
+
+        const url = `${baseUrl}${endpoint}`;
+        console.log('API 호출 URL:', url);
+
+        const headers = {
+          'Accept': 'audio/mpeg'
+        };
+
+        if (config.USE_PROXY) {
+          headers['x-api-key'] = config.API_KEY;
+        } else {
+          headers['xi-api-key'] = config.API_KEY;
+        }
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: headers
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('API 키가 유효하지 않습니다.');
+          } else if (response.status === 404) {
+            throw new Error('대화를 찾을 수 없습니다.');
+          } else {
+            throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+          }
+        }
+
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('오디오 로드 실패:', error);
+        throw error;
+      }
+    }
+
+    async function fetchTranscript() {
+      try {
+        console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+
+        const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
+          method: 'GET',
+          headers: {
+            'xi-api-key': config.API_KEY,
+            'Accept': 'application/json'
+          }
+        });
+
+        console.log('API 응답 상태:', response.status);
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('API 키가 유효하지 않습니다.');
+          } else if (response.status === 404) {
+            throw new Error('대화를 찾을 수 없습니다.');
+          } else {
+            const errorText = await response.text();
+            console.error('API 응답 오류:', errorText);
+            throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+          }
+        }
+
+        const data = await response.json();
+        console.log('API 응답 데이터:', data);
+
+        if (data.transcript && Array.isArray(data.transcript)) {
+          console.log('트랜스크립트 메시지 개수:', data.transcript.length);
+          return data.transcript;
+        }
+
+        console.warn('트랜스크립트 배열을 찾을 수 없습니다:', data);
+        return getDemoTranscript();
+      } catch (error) {
+        console.error('트랜스크립트 로드 실패:', error);
+        console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
+        return getDemoTranscript();
+      }
     }
 
     function toggleTranscript() {
