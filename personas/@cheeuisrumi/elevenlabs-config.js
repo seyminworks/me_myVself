@@ -8,8 +8,11 @@ const ELEVENLABS_CONFIG = {
   // API 기본 URL
   BASE_URL: 'https://api.elevenlabs.io/v1',
 
-  // 대화 ID (실제 ElevenLabs에서 생성한 대화의 ID로 교체)
-  CONVERSATION_ID: 'conv_2501kanb0dn0fyh8jtpbjfyrxe45', // 추후 실제 ElevenLabs 대화 ID로 교체
+  // 대화 ID 목록 (순차적으로 재생/병합될 대화들)
+  CONVERSATION_IDS: [
+    'conv_0601ke49kw11e5c9jz2rmxwq4hyr',
+    'conv_2001ke49ybc4efc9p7mgh9tprv80'
+  ],
 
   // 에이전트 ID (ElevenLabs ConvAI 에이전트)
   AGENT_ID: 'agent_9601kbstgpzjf2jtmsr83sxrz70v',
@@ -50,8 +53,10 @@ function validateConfig() {
     errors.push('API 키를 설정해주세요.');
   }
 
-  if (ELEVENLABS_CONFIG.CONVERSATION_ID === 'YOUR_CONVERSATION_ID' || ELEVENLABS_CONFIG.CONVERSATION_ID === '') {
-    // 대화 ID가 비어있어도 허용 (아직 녹음된 대화가 없는 경우)
+  if ((!ELEVENLABS_CONFIG.CONVERSATION_IDS || ELEVENLABS_CONFIG.CONVERSATION_IDS.length === 0) &&
+    (!ELEVENLABS_CONFIG.CONVERSATION_ID || ELEVENLABS_CONFIG.CONVERSATION_ID === 'YOUR_CONVERSATION_ID')) {
+    // CONVERSATION_IDS 가 없거나 비어있고, CONVERSATION_ID도 설정되지 않은 경우
+    // errors.push('대화 ID를 설정해주세요.'); // 로컬 테스트나 아직 대화가 없는 경우를 위해 경고 생략 가능
   }
 
   return errors;
