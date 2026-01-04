@@ -353,13 +353,94 @@
     }
 
     async function fetchConversationAudio() {
-      // 아직 완성이 안되어 테스트 파일로 연결
-      return getDemoAudioUrl();
+      if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || !config.CONVERSATION_ID) {
+        console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
+        return getDemoAudioUrl();
+      }
+
+      try {
+        const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+        const endpoint = config.USE_PROXY
+          ? `/convai/conversations/${config.CONVERSATION_ID}/audio`
+          : `/convai/conversations/${config.CONVERSATION_ID}/audio`;
+
+        const url = `${baseUrl}${endpoint}`;
+        console.log('API 호출 URL:', url);
+
+        const headers = {
+          'Accept': 'audio/mpeg'
+        };
+
+        if (config.USE_PROXY) {
+          headers['x-api-key'] = config.API_KEY;
+        } else {
+          headers['xi-api-key'] = config.API_KEY;
+        }
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: headers
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('API 키가 유효하지 않습니다.');
+          } else if (response.status === 404) {
+            throw new Error('대화를 찾을 수 없습니다.');
+          } else {
+            throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+          }
+        }
+
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('오디오 로드 실패:', error);
+        throw error;
+      }
     }
 
     async function fetchTranscript() {
-      // 아직 완성이 안되어 테스트 파일로 연결
-      return getDemoTranscript();
+      try {
+        console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+
+        const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
+          method: 'GET',
+          headers: {
+            'xi-api-key': config.API_KEY,
+            'Accept': 'application/json'
+          }
+        });
+
+        console.log('API 응답 상태:', response.status);
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error('API 키가 유효하지 않습니다.');
+          } else if (response.status === 404) {
+            throw new Error('대화를 찾을 수 없습니다.');
+          } else {
+            const errorText = await response.text();
+            console.error('API 응답 오류:', errorText);
+            throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+          }
+        }
+
+        const data = await response.json();
+        console.log('API 응답 데이터:', data);
+
+        if (data.transcript && Array.isArray(data.transcript)) {
+          console.log('트랜스크립트 메시지 개수:', data.transcript.length);
+          return data.transcript;
+        }
+
+        console.warn('트랜스크립트 배열을 찾을 수 없습니다:', data);
+        return getDemoTranscript();
+      } catch (error) {
+        console.error('트랜스크립트 로드 실패:', error);
+        console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
+        return getDemoTranscript();
+      }
     }
 
     function getDemoAudioUrl() {
