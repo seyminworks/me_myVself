@@ -9,7 +9,7 @@ const ELEVENLABS_CONFIG = {
   BASE_URL: 'https://api.elevenlabs.io/v1',
 
   // 대화 ID (실제 ElevenLabs에서 생성한 대화의 ID로 교체)
-  CONVERSATION_ID: 'conv_2501kanb0dn0fyh8jtpbjfyrxe45', // 추후 실제 ElevenLabs 대화 ID로 교체
+  CONVERSATION_ID: 'conv_1601kczw3drgecfsjf5gzr7h272v', // 추후 실제 ElevenLabs 대화 ID로 교체
 
   // 에이전트 ID (ElevenLabs ConvAI 에이전트)
   AGENT_ID: 'agent_9601kbstgpzjf2jtmsr83sxrz70v',
