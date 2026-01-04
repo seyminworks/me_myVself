@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/style.css" />
   <link rel="stylesheet" href="persona.css" />
+  <script src="elevenlabs-config.js?v=20260104"></script>
   <!-- ElevenLabs Widget Script -->
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </head>
@@ -59,6 +60,8 @@
 
         <div class="audio-section-left">
           <h3>녹음된 대화 (Recorded Conversation) / 2025-12-21</h3>
+          <p style="font-size: 0.8em; color: #666; margin-top: 5px; margin-bottom: 10px;">* 계정주의 요청으로, 생성된 자아와 계정주의 대화는
+            작가와의 대화로 전환됩니다.</p>
           <div class="audio-container">
             <div class="audio-player-compact">
               <audio id="conversationAudio" controls preload="metadata">
@@ -78,6 +81,8 @@
       <div class="middle-section">
         <div class="transcript-section-right">
           <h3>대화 내용 (Transcript) / 2025-12-21</h3>
+          <p style="font-size: 0.8em; color: #666; margin-top: 5px; margin-bottom: 10px;">* 계정주의 요청으로, 생성된 자아와 계정주의 대화는
+            작가와의 대화로 전환됩니다.</p>
           <div class="transcript-container">
             <div class="transcript-header">
               <div class="transcript-controls">
@@ -168,11 +173,17 @@
 
   <script>
     // Configuration
-    const config = {
-      API_KEY: '',
+    // Configuration
+    const config = window.ELEVENLABS_CONFIG || {
+      API_KEY: 'YOUR_ELEVENLABS_API_KEY', // Check elevenlabs-config.js
       BASE_URL: 'https://api.elevenlabs.io/v1',
-      AGENT_ID: 'agent_8201kcxvrzf1fcsvd5gjqzww9es4'
+      CONVERSATION_ID: 'conv_3401ke4j0zpkfr5rrvsc7tpz704b'
     };
+
+    const configErrors = window.validateConfig ? window.validateConfig() : [];
+    if (configErrors.length > 0) {
+      console.warn('ElevenLabs 설정 오류:', configErrors);
+    }
 
     let currentAudioUrl = null;
     let currentTranscript = null;
@@ -215,8 +226,7 @@
         loadConversationBtn.textContent = '불러오는 중...';
         loadConversationBtn.disabled = true;
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const audioUrl = getDemoAudioUrl();
+        const audioUrl = await fetchConversationAudio();
 
         if (audioUrl) {
           conversationAudio.src = audioUrl;
@@ -235,6 +245,28 @@
       }
     }
 
+    async function fetchConversationAudio() {
+      const conversationId = config.CONVERSATION_ID;
+      const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+      const endpoint = `/convai/conversations/${conversationId}/audio`;
+      const url = `${baseUrl}${endpoint}`;
+
+      const headers = { 'Accept': 'audio/mpeg' };
+      if (config.USE_PROXY) headers['x-api-key'] = config.API_KEY;
+      else headers['xi-api-key'] = config.API_KEY;
+
+      console.log(`Fetching audio from: ${url}`);
+
+      const response = await fetch(url, { method: 'GET', headers: headers });
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API Error: ${response.status} - ${errorText}`);
+      }
+
+      const blob = await response.blob();
+      return URL.createObjectURL(blob);
+    }
+
     async function loadTranscript() {
       try {
         loadTranscriptBtn.textContent = '불러오는 중...';
@@ -243,8 +275,7 @@
         transcriptLoading.style.display = 'block';
         transcriptText.style.display = 'none';
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const transcript = getDemoTranscript();
+        const transcript = await fetchTranscript();
 
         if (transcript) {
           currentTranscript = transcript;
@@ -265,20 +296,45 @@
       }
     }
 
+    async function fetchTranscript() {
+      const conversationId = config.CONVERSATION_ID;
+      const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+      const endpoint = `/convai/conversations/${conversationId}`;
+      const url = `${baseUrl}${endpoint}`;
+
+      const headers = { 'Accept': 'application/json' };
+      if (config.USE_PROXY) headers['x-api-key'] = config.API_KEY;
+      else headers['xi-api-key'] = config.API_KEY;
+
+      console.log(`Fetching transcript from: ${url}`);
+
+      const response = await fetch(url, { method: 'GET', headers: headers });
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API Error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      return data.transcript;
+    }
+
     function displayTranscript(transcript) {
       transcriptText.innerHTML = '';
       transcript.forEach(entry => {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message';
 
-        const roleDisplay = entry.role === 'user' ? '사용자' : '@cha_jinyeob_________';
+        const role = entry.role || 'unknown';
+        const message = entry.message || entry.text || '';
+
+        const roleDisplay = role === 'user' ? '사용자' : '@cha_jinyeob_________';
 
         const speakerSpan = document.createElement('span');
         speakerSpan.className = 'speaker';
         speakerSpan.textContent = roleDisplay;
 
         const textSpan = document.createElement('span');
-        textSpan.textContent = entry.message;
+        textSpan.textContent = message;
 
         messageDiv.appendChild(speakerSpan);
         messageDiv.appendChild(textSpan);
@@ -311,6 +367,7 @@
     }
 
     function getDemoTranscript() {
+      // Fallback or demo
       return [
         { role: 'user', message: '예술이란 무엇이라고 생각하세요?' },
         { role: 'assistant', message: '예술은... 아마도 일상의 틈새를 비집고 들어오는 낯선 빛과 같지 않을까요? 🌒 우리가 익숙함에 젖어 잊고 있던 감각들을 다시 깨우는 거죠. 무대 위에서, 혹은 이 작은 화면 너머에서 당신의 마음에 어떤 파동을 일으킬 수 있다면, 그게 바로 예술이 아닐까 해요.' },
