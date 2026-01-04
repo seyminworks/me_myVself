@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/style.css" />
   <link rel="stylesheet" href="persona.css" />
+  <script src="elevenlabs-config.js"></script>
   <!-- ElevenLabs Widget Script -->
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </head>
@@ -169,11 +170,17 @@
 
   <script>
     // Configuration
-    const config = {
-      API_KEY: '',
+    // Configuration
+    const config = window.ELEVENLABS_CONFIG || {
+      API_KEY: 'YOUR_ELEVENLABS_API_KEY',
       BASE_URL: 'https://api.elevenlabs.io/v1',
-      AGENT_ID: 'agent_4001kdck8fc3fzcvbefh2gdg6my2'
+      CONVERSATION_ID: ''
     };
+
+    const configErrors = window.validateConfig ? window.validateConfig() : [];
+    if (configErrors.length > 0) {
+      console.warn('ElevenLabs 설정 오류:', configErrors);
+    }
 
     let currentAudioUrl = null;
     let currentTranscript = null;
@@ -216,9 +223,12 @@
         loadConversationBtn.textContent = '불러오는 중...';
         loadConversationBtn.disabled = true;
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        // Placeholder audio URL - simulated
-        const audioUrl = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112762.mp3';
+        console.log('오디오 로드 시작...', {
+          apiKey: config.API_KEY ? '설정됨' : '미설정',
+          conversationId: config.CONVERSATION_ID
+        });
+
+        const audioUrl = await fetchConversationAudio();
 
         if (audioUrl) {
           conversationAudio.src = audioUrl;
@@ -226,10 +236,11 @@
           downloadAudioBtn.style.display = 'inline-block';
           loadConversationBtn.textContent = '오디오 불러오기 완료';
           loadConversationBtn.style.background = '#28a745';
+          console.log('오디오 로드 성공:', audioUrl);
         }
       } catch (error) {
         console.error('오디오 로드 실패:', error);
-        alert('오디오를 불러오는 중 오류가 발생했습니다.');
+        alert(`오디오를 불러오는 중 오류가 발생했습니다: ${error.message}`);
         loadConversationBtn.textContent = '대화 불러오기';
         loadConversationBtn.style.background = '#000';
       } finally {
@@ -245,8 +256,7 @@
         transcriptLoading.style.display = 'block';
         transcriptText.style.display = 'none';
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const transcript = getDemoTranscript();
+        const transcript = await fetchTranscript();
 
         if (transcript) {
           currentTranscript = transcript;
@@ -267,20 +277,111 @@
       }
     }
 
+    async function fetchConversationAudio() {
+      if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || !config.CONVERSATION_ID) {
+        console.warn('ElevenLabs API 설정이 완료되지 않았습니다.');
+        throw new Error('API 키 또는 대화 ID가 설정되지 않았습니다.');
+      }
+
+      try {
+        const baseUrl = config.USE_PROXY ? config.PROXY_URL : config.BASE_URL;
+        const endpoint = config.USE_PROXY
+          ? `/convai/conversations/${config.CONVERSATION_ID}/audio`
+          : `/convai/conversations/${config.CONVERSATION_ID}/audio`;
+
+        const url = `${baseUrl}${endpoint}`;
+        console.log('API 호출 URL:', url);
+
+        const headers = {
+          'Accept': 'audio/mpeg'
+        };
+
+        if (config.USE_PROXY) {
+          headers['x-api-key'] = config.API_KEY;
+        } else {
+          headers['xi-api-key'] = config.API_KEY;
+        }
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: headers
+        });
+
+        if (!response.ok) {
+          throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+        }
+
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error('오디오 로드 실패:', error);
+        throw error;
+      }
+    }
+
+    async function fetchTranscript() {
+      if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || !config.CONVERSATION_ID) {
+        console.warn('ElevenLabs API 설정이 완료되지 않았습니다.');
+        return getDemoTranscript();
+      }
+
+      try {
+        console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
+
+        const response = await fetch(`${config.BASE_URL}/convai/conversations/${config.CONVERSATION_ID}`, {
+          method: 'GET',
+          headers: {
+            'xi-api-key': config.API_KEY,
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`API 호출 실패: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.transcript || [];
+      } catch (error) {
+        console.error('트랜스크립트 로드 실패:', error);
+        return null;
+      }
+    }
+
     function displayTranscript(transcript) {
       transcriptText.innerHTML = '';
-      transcript.forEach(entry => {
+      let messages = [];
+      if (Array.isArray(transcript)) {
+        messages = transcript;
+      } else if (transcript.messages && Array.isArray(transcript.messages)) {
+        messages = transcript.messages;
+      } else if (transcript.conversation && Array.isArray(transcript.conversation)) {
+        messages = transcript.conversation;
+      }
+
+      messages.sort((a, b) => {
+        const tA = a.timestamp || a.created_at || 0;
+        const tB = b.timestamp || b.created_at || 0;
+        return tA < tB ? -1 : (tA > tB ? 1 : 0);
+      });
+
+      messages.forEach(entry => {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message';
 
-        const roleDisplay = entry.role === 'user' ? '사용자' : '@ohrossii';
+        const role = entry.role || 'unknown';
+        const message = entry.message || entry.text || '';
+
+        let roleDisplay = role;
+        if (role === 'user') roleDisplay = '사용자';
+        else if (role === 'assistant' || role === 'agent') roleDisplay = '@ohrossii';
 
         const speakerSpan = document.createElement('span');
         speakerSpan.className = 'speaker';
         speakerSpan.textContent = roleDisplay;
 
         const textSpan = document.createElement('span');
-        textSpan.textContent = entry.message;
+        textSpan.textContent = message;
 
         messageDiv.appendChild(speakerSpan);
         messageDiv.appendChild(textSpan);
@@ -308,6 +409,7 @@
     }
 
     function getDemoTranscript() {
+      // Fallback only
       return [
         { role: 'user', message: '예술과 기술의 융합이 왜 중요한가요?' },
         { role: 'assistant', message: '기술은 차갑지만, 예술을 만나면 비로소 온기를 갖게 되더라구요. 낯선 기술이 우리의 상상력을 자극하고, 그 안에서 새로운 감각을 깨우는 경험! 그것이 바로 우리가 꿈꾸는 \'미래의 풍경\'이 아닐까요? 👀' },
