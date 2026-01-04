@@ -352,10 +352,6 @@
     }
 
     async function fetchConversationAudio() {
-      // 아직 완성이 안되어 테스트 파일로 연결
-      return getDemoAudioUrl();
-
-      /*
       if (config.API_KEY === 'YOUR_ELEVENLABS_API_KEY' || !config.CONVERSATION_ID) {
         console.warn('ElevenLabs API 설정이 완료되지 않았습니다. 데모 모드로 실행됩니다.');
         return getDemoAudioUrl();
@@ -401,14 +397,9 @@
         console.error('오디오 로드 실패:', error);
         throw error;
       }
-      */
     }
 
     async function fetchTranscript() {
-      // 아직 완성이 안되어 테스트 파일로 연결
-      return getDemoTranscript();
-
-      /*
       try {
         console.log('트랜스크립트 API 호출 시작:', config.CONVERSATION_ID);
 
@@ -449,7 +440,6 @@
         console.warn('API 호출 실패로 데모 트랜스크립트를 사용합니다.');
         return getDemoTranscript();
       }
-      */
     }
 
     function getDemoAudioUrl() {
