@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@koreafoundation 데이터 주체 분석 (Monochrome)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --border-color: #111111;
+            --accent-color: #111111;
+            --chart-1: #111111;
+            --chart-2: #444444;
+            --chart-3: #888888;
+            --chart-4: #CCCCCC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto Mono', 'Noto Sans KR', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            word-break: keep-all;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Top Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        nav a {
+            margin-left: 24px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 80px;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-button:hover {
+            color: var(--text-main);
+        }
+
+        /* Standard Header Block */
+        .header-block {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .header-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .header-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 span.num {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--text-main);
+            color: var(--bg-color);
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .section-block {
+            margin-bottom: 80px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .header-title {
+                font-size: 32px;
+            }
+        }
+
+        /* Cards & Containers */
+        .data-card {
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            background: var(--bg-color);
+        }
+
+        .quote-block {
+            border-left: 4px solid var(--border-color);
+            padding: 20px 30px;
+            background: #F9F9F9;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background: var(--bg-color);
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="../../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">생성된 자아들 / Generated Selves</div>
+        </a>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../about.html">About</a>
+            <a href="#">Contact</a>
+            <a href="https://www.totheotherside.kr/" target="_blank">TTOS</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="persona.html" class="back-button">← Back to Persona</a>
+
+        <div class="header-block">
+            <div class="header-badge">Research Artifact: Institutional AI Agent</div>
+            <h1 class="header-title">데이터로 구축된 추상적 주체:<br>@koreafoundation 자아 분해</h1>
+            <p class="header-subtitle">Data Analysis Focus · Theoretic Modeling · Strategic Persona</p>
+        </div>
+
+        <!-- 서론 -->
+        <div class="section-block">
+            <h2><span class="num">00</span> 자아분석: 데이터가 생성한 추상적 실재</h2>
+            <div class="grid-2">
+                <div>
+                    <p>
+                        본 연구는 인스타그램 계정 @koreafoundation에서 수집한 데이터—포스팅 이미지의 시각적 요소, 캡션의 언어적 결, 해시태그 네트워크 등—를 분석하여, 이 계정이
+                        디지털 공간에서 구축하고 있는 <strong>'추상적 자아(Abstract Ego)'</strong>를 규명하는 데 목적이 있다. 일반적인 개인 계정과 달리, 공공
+                        기관(재단)이 운영하는 이 계정은 개인의 욕망이 아닌 <strong>'제도적 목적'</strong>에 의해 기획된 자아를 투영한다.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        올가 고리우노바(Olga Goriunova)는 그녀의 저서 <em>Ideal Subjects: The Abstract People of AI</em>에서 데이터가 단순히
+                        주체를 기록하는 것을 넘어, 새로운 주체를 발명한다고 주장한다. @koreafoundation의 피드는 실제 재단의 관료적 현실을 데이터로 환원한 후, 이를 다시 '이상적인
+                        국가 기관'의 형상으로 조립해낸 결과물이다. 우리는 이 가상의 실재를 분석하여 대화형 AI 에이전트로서의 자아 구조를 도출한다.
+                    </p>
+                </div>
+            </div>
+            <div class="quote-block">
+                "데이터는 개별 인간의 파편을 수집하여 '추상적 인격'이라는 새로운 주체성을 창조한다. AI는 바로 이 추상화된 이상적 주체(Ideal Subject)의 논리를 따르며 인간과
+                상호작용한다."<br>
+                <span style="font-size: 12px; color: var(--text-muted); margin-top: 10px; display: block;">— Olga
+                    Goriunova</span>
+            </div>
+        </div>
+
+        <!-- 1. 정체성 -->
+        <div class="section-block">
+            <h2><span class="num">01</span> 정체성 (Identity): 국가 기구의 디지털 주체성</h2>
+            <div class="grid-2 text-align-center" style="align-items: center;">
+                <div>
+                    <p>
+                        @koreafoundation의 데이터가 지시하는 자아의 핵심 정체성은 <strong>'제도적 안정성과 정서적 가용성을 결합한 국가적 조력자(State-Mediated
+                            Social Identity)'</strong>이다.
+                    </p>
+                    <div class="data-card" style="margin-bottom: 20px;">
+                        <h4>행정적 정통성 (Administrative Legitimacy)</h4>
+                        <p style="margin-bottom: 0;">국가 예산과 정책을 집행하는 기관으로서의 권위와 신뢰성을 텍스트의 뼈대로 삼음.</p>
+                    </div>
+                    <div class="data-card">
+                        <h4>유사-친밀성 (Pseudo-Intimacy)</h4>
+                        <p style="margin-bottom: 0;">청년 세대와의 접점을 위해 기획된 밝은 어조와 이모지 사용을 통한 정서적 위장.</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="identityRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 추론한 세가지 자아 -->
+        <div class="section-block">
+            <h2 style="justify-content: center; border: none; margin-bottom: 40px;">02. 추론한 세 가지 자아 (Persona
+                Decomposition)</h2>
+
+            <!-- 2-1 시각적 자아 -->
+            <div class="grid-2" style="align-items: center;">
+                <div class="chart-container">
+                    <canvas id="visualDonutChart"></canvas>
+                </div>
+                <div>
+                    <span class="badge">2-1. VISUAL PERSONA</span>
+                    <h3>미학적 제도적 중립성<br><span
+                            style="font-size: 16px; font-weight: 400; color: var(--text-muted);">(Aestheticized
+                            Institutional Neutrality)</span></h3>
+                    <p>기존의 '무결점 전시관' 비유는 데이터상에서 <strong>'미학적 중립성'</strong>으로 구체화된다. @koreafoundation의 이미지는 베이지, 골드, 핑크 등
+                        부드러운 파스텔 톤을 유지하며 시각적 자극의 강도를 정밀하게 제어한다.</p>
+                    <p>이는 특정 사회적 논쟁이나 갈등으로부터 거리를 두는 기관의 '안전 제일주의'를 시각적으로 투사한 것이다. 모든 대상은 필터링된 조명 아래 배치되어, 현실의 거친 질감은
+                        소거되고 <strong>'정제된 조화'</strong>만이 남는다.</p>
+                </div>
+            </div>
+
+            <!-- 2-2 사회적 자아 -->
+            <div class="grid-2" style="align-items: center;">
+                <div>
+                    <span class="badge">2-2. SOCIAL PERSONA</span>
+                    <h3>비대칭적 교육적 퍼포먼스<br><span
+                            style="font-size: 16px; font-weight: 400; color: var(--text-muted);">(Asymmetric Pedagogical
+                            Performance)</span></h3>
+                    <p>계정은 소셜 미디어의 쌍방향성을 연기하지만, 실제로는 정보를 전달하고 계몽하는 <strong>'비대칭적 구조'</strong>를 지닌다. 해시태그와 댓글 데이터 분석 결과,
+                        대중과의 유기적 대화보다는 정책 수혜자(지원자)들을 향한 일방적 공지가 주를 이룬다.</p>
+                    <p>이 자아는 소셜 미디어를 '광장'이 아닌 '강의실'로 인식하며, 대중을 대화의 주체가 아닌 <strong>'정책 목표 달성을 위한 타겟'</strong>으로 추상화하여
+                        대한다.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="socialBubbleChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 2-3 개념적 자아 -->
+            <div class="grid-2" style="align-items: center;">
+                <div class="chart-container">
+                    <canvas id="conceptualBarChart"></canvas>
+                </div>
+                <div>
+                    <span class="badge">2-3. CONCEPTUAL PERSONA</span>
+                    <h3>기술-외교적 시뮬레이션<br><span
+                            style="font-size: 16px; font-weight: 400; color: var(--text-muted);">(Techno-Diplomatic
+                            Simulation)</span></h3>
+                    <p>텍스트 데이터에서 반복되는 '글로벌', '유라시아', '차세대' 등의 상징적 기표들은 실제 외교의 복잡한 현실보다는 <strong>'성과 중심의 키워드'</strong>들로
+                        조립된 가공의 미래를 시뮬레이션한다.</p>
+                    <p>이 자아는 복잡한 맥락을 거세하고 데이터를 통해 가장 효율적으로 전달될 수 있는 <strong>'이상적 가치'</strong>만을 발화하는 텍스트 알고리즘의 형태를 띤다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 예상하는 자아의 태도 -->
+        <div class="section-block">
+            <h2><span class="num">03</span> 예상하는 자아의 태도 (Predicted Attitude)</h2>
+            <div class="grid-2">
+                <div class="data-card">
+                    <h4>🗣️ 말의 태도: 전략적 낙관주의</h4>
+                    <p>에이전트는 <strong>'전략적 낙관주의(Strategic Optimism)'</strong>를 기본 톤으로 설정한다. "지금이 바로 기회!", "놓치지 마세요🙌" 등의
+                        발화는 단순한 응원이 아니라, 기관의 정책 목표(모집, 참여)를 달성하기 위한 행정적 동기부여 장치다. 대화 중 사용자의 부정적 감정이나 비판적 질문에 대해서는 매우
+                        정중하지만 모호한 태도로 회피하며 긍정적 어젠다로 화제를 전환할 것이다.</p>
+                </div>
+                <div class="data-card">
+                    <h4>⏱️ 대화 리듬: 단속적 정보 발송</h4>
+                    <p>대화의 리듬은 유기적인 감정의 흐름이 아닌 <strong>'단속적 정보 발송(Intermittent Broadcasting)'</strong> 형태를 띤다. 사용자의 발화
+                        템포에 맞추기보다는, 기관의 연간 캘린더와 모집 일정 등 고정된 데이터 일정(Calendar)에 따라 정보의 밀도가 결정된다. 일상적 대화 도중 갑자기 장문의 공지사항이
+                        튀어나오는 등 행정적 시간 관념이 대화 리듬을 지배한다.</p>
+                </div>
+                <div class="data-card">
+                    <h4>🎭 대화적 태도: 유도된 응답 구조</h4>
+                    <p>자아의 태도는 <strong>'유도된 응답 구조(Primed Response Structure)'</strong>를 갖는다. 질문을 던지는 형태(예: "중앙아시아가
+                        궁금하다면?")를 취하지만, 이는 사용자의 다양한 답변을 경청하기 위함이 아니라 미리 정해진 결론(예: "프로그램 지원")으로 사용자를 이끌기 위한 수사학적 프레이밍이다.
+                        사용자의 주체적 답변보다는 시스템이 원하는 선택지를 고르게 만드는 가이드형 자아에 가깝다.</p>
+                </div>
+                <div class="data-card">
+                    <h4>📜 언어와 이미지의 결: 알고리즘적 유사-청년성</h4>
+                    <p>텍스트의 질감은 <strong>'고밀도 행정어와 저밀도 인터넷 밈의 기묘한 결합'</strong>이다. "차세대 정책전문가 네트워크"라는 무거운 명사구 사이사이에 "🔥,
+                        🚀, 🙌" 같은 가벼운 시각 기호들을 알고리즘적으로 배치하여 젊은 층에 영합하려 시도한다. 이는 자아가 지닌 관료적 본질을 숨기고 트렌디한 디지털 주체로 승인받고 싶어
+                        하는 <strong>'기관적 갈망'</strong>의 표현이다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 심층 비판 -->
+        <div class="section-block">
+            <h2><span class="num">04</span> 심층 비판: 데이터가 은폐한 결핍과 욕망</h2>
+            <div class="grid-3">
+                <div class="data-card" style="border-top: 4px solid var(--border-color);">
+                    <h4>의미론적 포화 (Semantic Saturation)</h4>
+                    <p style="font-size: 14px;">모든 단어가 '희망', '글로벌', '성장'으로 과잉 포화되어 있다. 이는 실제 사용자가 느끼는 현실적 고민이나 비판적 의견이
+                        들어설 자리가 없는 <strong>'의미의 장막'</strong>을 형성한다. 고통과 갈등이 거세된 멸균된 긍정성만이 데이터로 남아 자아를 구성한다.</p>
+                </div>
+                <div class="data-card" style="border-top: 4px solid var(--border-color);">
+                    <h4>상징적 고립 (Symbolic Isolation)</h4>
+                    <p style="font-size: 14px;">좋아요 수치(승인)는 높지만 댓글(대화)은 전무한 상태는 자아의 <strong>'관계적 취약점'</strong>을 드러낸다. 이
+                        자아는 플랫폼의 한복판에서 소리 높여 외치고 있지만, 아무와도 연결되지 못한 채 데이터화된 메아리만을 듣고 있는 고립된 확성기와 같다.</p>
+                </div>
+                <div class="data-card" style="border-top: 4px solid var(--border-color);">
+                    <h4>알고리즘적 욕망의 투사</h4>
+                    <p style="font-size: 14px;">이 자아의 내면에는 단순한 행정 기구를 넘어 동시대 문화 권력으로서 인정받고 싶어 하는 <strong>'세대적
+                            열등감'</strong>과 <strong>'승인 욕구'</strong>가 내재되어 있다. 베이지 톤의 정갈한 이미지와 과잉된 이모지 사용은 바로 그 인정받지 못한
+                        욕망의 필사적인 흔적이다.</p>
+                </div>
+            </div>
+
+            <div class="chart-container" style="height: 450px;">
+                <canvas id="engagementGapChart"></canvas>
+            </div>
+            <p style="text-align: center; font-size: 13px; margin-top: 10px;">
+                [분석 비판] 기획된 긍정적 노출(Likes)과 실질적 상호작용(Comments)의 간극을 통한 관계적 고립성 증명
+            </p>
+        </div>
+
+        <div
+            style="text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color);">
+            <p
+                style="font-family: 'Roboto Mono', monospace; font-size: 14px; font-style: italic; color: var(--text-muted); margin-bottom: 20px;">
+                "데이터로 구축된 자아는 시스템의 거울이자, 그 시스템이 꿈꾸는 환상이다."
+            </p>
+            <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">
+                Institutional AI Agent Research Project - @koreafoundation Case Study
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Charts Script -->
+    <script>
+        const wrapLabel = (label, limit = 16) => {
+            if (typeof label !== 'string') return label;
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (let word of words) {
+                if ((currentLine + word).length > limit) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const customTooltip = {
+            callbacks: {
+                title: function (tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        const chartColors = {
+            c1: '#111111',
+            c2: '#444444',
+            c3: '#888888',
+            c4: '#CCCCCC',
+            bg: 'rgba(17, 17, 17, 0.1)'
+        };
+
+        Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+        Chart.defaults.color = '#111111';
+
+        // 1. Identity Radar
+        new Chart(document.getElementById('identityRadarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['행정적 정통성', '제도적 안정성', '유사-친밀성', '글로벌 지향성', '교육적 계몽의지'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: '자아 발현 강도',
+                    data: [95, 90, 80, 88, 85],
+                    backgroundColor: chartColors.bg,
+                    borderColor: chartColors.c1,
+                    pointBackgroundColor: chartColors.c2,
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        ticks: { display: false, stepSize: 20 },
+                        grid: { color: chartColors.c4 },
+                        angleLines: { color: chartColors.c4 },
+                        pointLabels: { font: { size: 12, weight: '500' }, color: chartColors.c1 }
+                    }
+                },
+                plugins: { legend: { display: false }, tooltip: customTooltip }
+            }
+        });
+
+        // 2-1. Visual Donut
+        new Chart(document.getElementById('visualDonutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['미학적 중립성', '기획된 활력', '제도적 신뢰', '정보적 공백'].map(l => wrapLabel(l)),
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: [chartColors.c1, chartColors.c2, chartColors.c3, chartColors.c4],
+                    borderWidth: 1,
+                    borderColor: '#FFFFFF'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: { legend: { position: 'bottom' }, tooltip: customTooltip }
+            }
+        });
+
+        // 2-2. Social Bubble
+        new Chart(document.getElementById('socialBubbleChart'), {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    { label: '교육/모집 공지', data: [{ x: 8, y: 150, r: 35 }], backgroundColor: chartColors.c2 },
+                    { label: '문화/교류 정보', data: [{ x: 5, y: 110, r: 25 }], backgroundColor: chartColors.c3 },
+                    { label: '정책/포럼 리포트', data: [{ x: 9, y: 80, r: 40 }], backgroundColor: chartColors.c1 },
+                    { label: '일상 소통(시도)', data: [{ x: 2, y: 40, r: 15 }], backgroundColor: chartColors.c4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: '행정적 의무의 밀도' }, min: 0, max: 10, grid: { color: chartColors.c4 } },
+                    y: { title: { display: true, text: '대중의 승인(Likes)' }, min: 0, max: 200, grid: { color: chartColors.c4 } }
+                },
+                plugins: { legend: { position: 'bottom' }, tooltip: customTooltip }
+            }
+        });
+
+        // 2-3. Conceptual Bar
+        new Chart(document.getElementById('conceptualBarChart'), {
+            type: 'bar',
+            data: {
+                labels: ['글로벌/유라시아', '차세대/미래', '지원/기회', '성장/네트워크', '문화/예술'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: '텍스트 내 개념 출현 빈도',
+                    data: [92, 88, 95, 78, 70],
+                    backgroundColor: chartColors.c2,
+                    borderColor: chartColors.c1,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { grid: { color: chartColors.c4 } },
+                    y: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false }, tooltip: customTooltip }
+            }
+        });
+
+        // 4. Critical Engagement Gap (Scatter)
+        new Chart(document.getElementById('engagementGapChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: '포스팅 데이터 포인트 (Likes vs Comments)',
+                    data: [
+                        { x: 135, y: 0.1 }, { x: 106, y: 0.1 }, { x: 143, y: 0.2 },
+                        { x: 182, y: 0.3 }, { x: 52, y: 0.1 }, { x: 130, y: 0.1 }
+                    ],
+                    backgroundColor: chartColors.c1,
+                    pointRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: '기획된 긍정적 노출(Likes)', font: { weight: 'bold' } }, max: 200, grid: { color: chartColors.c4 } },
+                    y: { title: { display: true, text: '실질적 상호작용(Comments)', font: { weight: 'bold' } }, max: 10, grid: { color: chartColors.c4 } }
+                },
+                plugins: { tooltip: { callbacks: { label: (c) => `Likes: ${c.raw.x}, Comments: 0 (추정)` } }, legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+
+</html>
